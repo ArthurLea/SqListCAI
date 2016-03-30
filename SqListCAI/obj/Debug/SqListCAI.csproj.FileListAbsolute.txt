@@ -1,29 +1,20 @@
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\bin\Debug\SqListCAI.exe.config
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\bin\Debug\SqListCAI.exe
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\bin\Debug\SqListCAI.pdb
-F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Base Content\BaseContentWindow.baml
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\MainWindow.baml
-F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Base Content\BaseContentWindow.g.cs
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Styles\TabControlStyle.baml
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\App.baml
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\MainWindow.g.cs
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\App.g.cs
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\GeneratedInternalTypeHelper.g.cs
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI_MarkupCompile.cache
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI_MarkupCompile.lref
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Styles\DatePicker.baml
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.g.resources
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.Properties.Resources.resources
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.csproj.GenerateResource.Cache
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.exe
 F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.pdb
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\bin\Debug\SqListCAI.exe.config
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.exe
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.pdb
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\bin\Debug\SqListCAI.exe
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\bin\Debug\SqListCAI.pdb
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.csprojResolveAssemblyReference.cache
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\Base Content\BaseContentWindow.baml
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\MainWindow.baml
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\Base Content\BaseContentWindow.g.cs
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\MainWindow.g.cs
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\App.g.cs
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI_MarkupCompile.cache
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.g.resources
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.Properties.Resources.resources
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\SqListCAI.csproj.GenerateResource.Cache
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\SqListCAI.csprojResolveAssemblyReference.cache
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Pages\BaseContent\SqListBaseContent.baml
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\Pages\BaseContent\SqListBaseContent.g.cs

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\obj\Debug\
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\obj\Debug\
 SqListCAI
 none
 false
 DEBUG;TRACE
-F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\App.xaml
-21241748711
+F:\visual studio 2013\Projects\SqListCAI\SqListCAI\App.xaml
+4-1147367574
 
-11686487483
+12-287354065
 12-1401562060
-Base Content\BaseContentWindow.xaml;MainWindow.xaml;
+MainWindow.xaml;Pages\BaseContent\SqListBaseContent.xaml;Styles\DatePicker.xaml;Styles\TabControlStyle.xaml;
 
 False
 

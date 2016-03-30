@@ -1,0 +1,17 @@
+线性表的基本操作:
+       1）MakeEmpty(L) 这是一个将L变为空表的方法
+       2）Length（L） 返回表L的长度，即表中元素个数
+       3）Get（L，i） 这是一个函数，函数值为L中位置i处的元素（1≤i≤n）
+       4）Prior（L，i） 取i的前驱元素
+       5）Next（L，i） 取i的后继元素
+       6）Locate（L，x） 这是一个函数，函数值为元素x在L中的位置
+       7）Insert（L，i，x）在表L的位置i处插入元素x，将原占据位置i的元素及后面的元素都向后推一个位置
+       8）Delete（L，p） 从表L中删除位置p处的元素
+       9）IsEmpty(L) 如果表L为空表(长度为0)则返回true，否则返回false
+       10）Clear（L）清除所有元素
+       11）Init（L）同第一个，初始化线性表为空
+       12）Traverse（L）遍历输出所有元素
+       13）Find（L，x）查找并返回元素
+       14）Update（L，x）修改元素
+       15）Sort（L）对所有元素重新按给定的条件排序
+       16) strstr(string1,string2)用于字符数组的求string1中出现string2的首地址

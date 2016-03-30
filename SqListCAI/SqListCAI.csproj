@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{898EDC1C-4884-4EB7-B2A5-E4EA69EE3461}</ProjectGuid>
+    <ProjectGuid>{AD38FC9A-5C97-4276-9D30-08F10762D5BF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SqListCAI</RootNamespace>
@@ -54,10 +54,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\Files.cs" />
-    <Page Include="Base Content\BaseContentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,15 +62,28 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base Content\BaseContentWindow.xaml.cs">
-      <DependentUpon>BaseContentWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converter\CalendarConveter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BaseContent\SqListBaseContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\BaseContent\SqListBaseContent.xaml.cs">
+      <DependentUpon>SqListBaseContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,11 +111,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="sqListDefine.txt" />
-    <Resource Include="sqListFeature.txt" />
-    <Resource Include="sqListOperator.txt" />
-    <Resource Include="sqListStructure.txt" />
+    <Resource Include="Images\arrow.png" />
+    <Resource Include="Images\calendaricon.png" />
+    <Resource Include="Images\dropdownbtn.png" />
+    <Resource Include="Images\email.png" />
+    <Resource Include="Images\graphicon.png" />
+    <Resource Include="Images\homeicon.png" />
+    <Resource Include="Images\hoverbutton.png" />
+    <Resource Include="Images\line.png" />
+    <Resource Include="Images\logout.PNG" />
+    <Resource Include="Images\notify.png" />
+    <Resource Include="Images\panelexpand.png" />
+    <Resource Include="Images\projects.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\taskicon.png" />
+    <Resource Include="Images\textBg.jpg" />
+    <Resource Include="Images\toggleButton.jpg" />
+    <Resource Include="Images\toolbarbg.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+/*
+ * 访问文件的工具类
+ */
 namespace SqListCAI.Utils
 {
     class Files
@@ -36,7 +39,7 @@ namespace SqListCAI.Utils
             }
             catch (IOException e)
             {
-                Console.WriteLine("an IOexception has been thrown!");
+                Console.WriteLine(e.StackTrace);
             }
             return data;
         }
