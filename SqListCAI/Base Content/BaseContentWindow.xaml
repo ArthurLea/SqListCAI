@@ -1,0 +1,54 @@
+﻿<Window x:Class="SqListCAI.Base_Content.BaseContentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        Title="线性表的基本内容" Height="560" Width="720">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0"
+                    Content="线性表定义"
+                    FontSize="24" Margin="12,31,12,33"
+                    Click="sqListDefine"
+                    />
+
+            <Button Grid.Row="1"
+                    Content="线性表特征"
+                    FontSize="24" Margin="12,31,12,33"
+                    Click="sqListFeature"
+                    />
+            <Button Grid.Row="2"
+                    Content="线性表结构"
+                    FontSize="24" Margin="12,31,012,33"
+                    Click="sqListStructure"
+                    />
+
+            <Button Grid.Row="3"
+                    Content="线性表基本操作"
+                    FontSize="24" Margin="012,31,012,33"
+                    Click="sqListOperator"
+                    />
+        </Grid>
+
+        <TextBox 
+            Grid.Column="1"
+            Name="tb_showContent"
+            FontSize="19" TextWrapping="Wrap"
+            input:InputMethod.IsInputMethodEnabled="False"
+            IsHitTestVisible="False" 
+            Text="" Margin="0,10,10,10" FontFamily="Microsoft YaHei" 
+            />
+    </Grid>
+
+
+
+</Window>
