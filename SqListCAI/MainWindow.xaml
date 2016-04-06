@@ -76,7 +76,7 @@
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="线性表特征" Foreground="White" Margin="0,6,0,6" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListFeature" HorizontalAlignment="Center"/>
+                            <Label Content="线性表特征" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListFeature" />
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
@@ -93,13 +93,13 @@
 
                     </TabItem>
                     <!-- Margin="0,0,-3,0" 中的-3为了消除右边的边框-->
-                    <TabItem Header="Projects" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                    <TabItem Header="映射方式" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
                             <ImageBrush ImageSource="images/projects.png" />
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Content="CSS Design" Foreground="White" Margin="0,6,0,6"/>
+                            <Label Content="顺序插入" Foreground="White" HorizontalAlignment="Center" Margin="0,6,0,6" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderInsert"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
@@ -149,7 +149,7 @@
 
                     </TabItem>
 
-                    <TabItem Header="Tasks" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                    <TabItem Header="查找排序" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
                             <ImageBrush ImageSource="images/taskicon.png" />
                         </TabItem.Background>
@@ -204,7 +204,7 @@
                         <!--end 内容区-->
                     </TabItem>
 
-                    <TabItem Header="Calendar" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                    <TabItem Header="举例说明" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
                             <ImageBrush ImageSource="images/calendaricon.png" />
                         </TabItem.Background>
@@ -259,66 +259,10 @@
                         <!--end 内容区-->
                     </TabItem>
 
-                    <TabItem Header="Statistics" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
-                        <TabItem.Background>
-                            <ImageBrush ImageSource="images/graphicon.png" />
-                        </TabItem.Background>
-                        <!--内容区-->
-                        <StackPanel Margin="2,6,2,2" >
-                            <Label Content="JD Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                        </StackPanel>
-
-                        <!--end 内容区-->
-                    </TabItem>
-
-
                 </TabControl>
             </StackPanel>
             <!--end tab-->
-            <StackPanel  Grid.Column="1" Grid.Row="1" Background="White" Margin="0,0,1,0" Orientation="Horizontal">
+            <StackPanel  Grid.Column="1" Grid.Row="1" Background="White" Margin="0,5,1,-5" Orientation="Horizontal">
                 <!-- Expand button-->
                 <Border x:Name="spliter" Width="32" Height="64" Margin="-10" Cursor="Hand" MouseLeftButtonDown="spliter_MouseLeftButtonDown">
                     <Border.Background>
