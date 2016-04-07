@@ -34,6 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -53,7 +61,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\InsertWindow.xaml.cs">
+      <DependentUpon>InsertWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\MianDemon.xaml.cs">
+      <DependentUpon>MianDemon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Files.cs" />
+    <Page Include="Dialogs\InsertWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,6 +88,10 @@
     <Page Include="Pages\BaseContent\SqListBaseContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage\MianDemon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +123,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -120,16 +143,47 @@
     <Resource Include="Images\hoverbutton.png" />
     <Resource Include="Images\line.png" />
     <Resource Include="Images\logout.PNG" />
-    <Resource Include="Images\notify.png" />
+    <Resource Include="Images\toolbar_point.png" />
     <Resource Include="Images\panelexpand.png" />
     <Resource Include="Images\projects.png" />
-    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\toolbar_settings.png" />
     <Resource Include="Images\taskicon.png" />
     <Resource Include="Images\textBg.jpg" />
     <Resource Include="Images\toggleButton.jpg" />
     <Resource Include="Images\toolbarbg.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\lineblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_onestep.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_trace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_resume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_runto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu_down.png" />
+    <Resource Include="Images\menu_drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu_star.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

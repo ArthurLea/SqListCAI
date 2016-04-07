@@ -33,7 +33,6 @@ namespace SqListCAI.Utils
                     // C#读取文件之增加偏移量  
                     offset += read;
                 }
-                Console.WriteLine(data + "123");
                 fs.Close();
                 return data;
             }
