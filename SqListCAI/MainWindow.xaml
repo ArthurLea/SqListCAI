@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d"
     x:Class="SqListCAI.MainWindow"
-    Title="MainWindow" Height="710" MaxHeight="710" MinHeight="710" Width="980" MaxWidth="980" MinWidth="980"
+    Title="MainWindow" Height="710" MaxHeight="710" Width="980" MaxWidth="980" 
     Name="mainForm"
     AllowsTransparency="True" WindowStyle="None" ResizeMode = "NoResize"
     Background="{x:Null}" MouseLeftButtonDown="Window_MouseLeftButtonDown"  >
@@ -247,7 +247,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Grid.Column="0">
-                        <Border Margin="0,0,1,0" Height="35">
+                        <Border Margin="0,0,1,0" Name="border_currentOperator" Height="35">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="DimGray"  Opacity="1" />
                             </Border.BorderBrush>

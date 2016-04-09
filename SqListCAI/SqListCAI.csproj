@@ -64,9 +64,13 @@
     <Compile Include="Dialogs\InsertWindow.xaml.cs">
       <DependentUpon>InsertWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage\MianDemon.xaml.cs">
-      <DependentUpon>MianDemon.xaml</DependentUpon>
+    <Compile Include="Entities\SqList.cs" />
+    <Compile Include="Events\PassValuesEventArgs.cs" />
+    <Compile Include="AlgorithmThread\Ex.cs" />
+    <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
+      <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AlgorithmThread\Thread.cs" />
     <Compile Include="Utils\Files.cs" />
     <Page Include="Dialogs\InsertWindow.xaml">
       <SubType>Designer</SubType>
@@ -89,7 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MainPage\MianDemon.xaml">
+    <Page Include="Pages\MainPage\MainDemon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +102,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\TabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlgorithmThread\Thread.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

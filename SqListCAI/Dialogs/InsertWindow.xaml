@@ -7,17 +7,17 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Background="DarkGray"
-        Title="线性表插入" Height="200" Width="300" WindowStyle="ToolWindow">
+        Title="线性表插入" Height="250" Width="400" WindowStartupLocation="Manual" WindowStyle="ToolWindow">
     <Grid>
-        <Label x:Name="label" Content="建立数据：" HorizontalAlignment="Left" Margin="22,20,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="插入数据：" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="插入位置：" HorizontalAlignment="Left" Margin="22,100,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="97,20,0,0" TextWrapping="Wrap" Text="147258369AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="187" TabIndex="1"/>
-        <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="97,60,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="187" TabIndex="2"/>
-        <TextBox x:Name="insertPosition" HorizontalAlignment="Left" Height="25" Margin="97,100,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="187" TabIndex="3"/>
-        <Button x:Name="button_ok" Content="确认" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="18,140,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="114,140,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="button_cancle" Content="取消" Click="button_cancle_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="210,140,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Label x:Name="label" Content="建立数据：" HorizontalAlignment="Left" Margin="52,28,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="插入数据：" HorizontalAlignment="Left" Margin="52,68,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="插入位置：" HorizontalAlignment="Left" Margin="52,108,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="127,28,0,0" TextWrapping="Wrap" Text="147258369AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="214" TabIndex="1"/>
+        <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="127,68,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="214" TabIndex="2"/>
+        <TextBox x:Name="insertPosition" HorizontalAlignment="Left" Height="25" Margin="127,108,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="214" TabIndex="3"/>
+        <Button x:Name="button_ok" Content="确认生成" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="48,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="156,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button x:Name="button_cancle" Content="重置" Click="button_reset_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="266,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
 
     </Grid>
 </Window>
