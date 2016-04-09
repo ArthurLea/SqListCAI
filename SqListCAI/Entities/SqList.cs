@@ -12,6 +12,9 @@ namespace SqListCAI.Entities
         string srcData;
         char insertData;
         int insertPosition;
+        int deletePosition;
+
+        int length;
         public SqList()
         { }
         public SqList(string srcData,char instData,int position)//初始化插入操作数据
@@ -19,14 +22,21 @@ namespace SqListCAI.Entities
             this.srcData = srcData;
             this.insertData = instData;
             this.insertPosition = position;
+            this.length = srcData.Length;
         }
-        public SqList(string srcData,char position)//初始化删除操作数据
+        public SqList(string srcData,int position)//初始化删除操作数据
         {
-
+            this.srcData = srcData;
+            this.deletePosition = position;
+            this.length = srcData.Length;
         }
-        public void ins_SqList(SqList l,char insData,int position)
+        public void ins_SqList(SqList sq,char insData,int position)
         {
+            StringBuilder sb = new StringBuilder(sq.srcData.Length + 1);
+            for(int i=0;i<sq.srcData.Length;i++)
+            {
 
+            }
         }
         public void del_SqList(SqList l,int position)
         {

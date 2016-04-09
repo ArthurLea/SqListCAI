@@ -1,4 +1,4 @@
-﻿<Window x:Class="SqListCAI.AlgorithmThread.ThreadWindow"
+﻿<Window x:Class="SqListCAI.Algorithm.ThreadWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ThreadWindow" Height="350" Width="525" Background="BlanchedAlmond" ResizeMode="NoResize" WindowStyle="ToolWindow">

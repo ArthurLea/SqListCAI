@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 //引入线程命名空间
 using System.Windows.Threading;
 
-namespace SqListCAI.AlgorithmThread
+namespace SqListCAI.Algorithm
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

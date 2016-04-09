@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,7 +16,7 @@ using System.Windows.Shapes;
 using SqListCAI.Dialogs;
 using SqListCAI.Events;
 using SqListCAI.Entities;
-using SqListCAI.AlgorithmThread;
+using SqListCAI.Algorithm;
 namespace SqListCAI.Pages.MainPage
 {
     /// <summary>
@@ -31,14 +32,31 @@ namespace SqListCAI.Pages.MainPage
         public MainDemon(string demon_name)
         {
             InitializeComponent();
-            this.demon_lable_name.Content = demon_name;//初始化当前操作内容
+            this.demon_lable_name.Content = demon_name;
         }
-        public MainDemon(string demon_name,string srcData, char insertData,int pisition)
+        public MainDemon(string demon_name,string srcData, char insertData,int position)//顺序表插入
         {
             InitializeComponent();
             this.demon_lable_name.Content = demon_name;//初始化当前操作内容
-            //initUI();
+            startAlgorThread();
         }
+        public static ManualResetEvent allDone = new ManualResetEvent(false);//当前线程的信号
+        public delegate void DelegateStep(int s);
+        private void Step(int s) { this.listBox_code.SelectedIndex = s; }
+
+        public void startAlgorThread()
+        {
+            Thread m_thread = new Thread(new ThreadStart(this.THreadFun));//创建线程实例
+            m_thread.Start();//启动线程，即调用ThreadFun线程函数
+        }
+
+        private void THreadFun()
+        {
+            AlgorThread algroThread = new AlgorThread(allDone, allDone,this);
+            algroThread.Run();//调用AlgorThread的run函数，执行线程体  
+        }
+        
+
         //该窗体是否被改变
         public void changeUI(bool isMax)
         {
@@ -90,11 +108,19 @@ namespace SqListCAI.Pages.MainPage
         private void RecieveOrderInsert(object sender, PassValuesEventArgs e)
         {
             this.demon_lable_name.Content = "SqListInsert";
-            string srcData = e.srcData;
-            char insData = e.insertData;
-            int position = e.insertPosition;
-            this.algorithm_lable_name.Content = srcData + "-" + insData + "-" + position;
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void explain_Click(object sender, RoutedEventArgs e)
         {
@@ -150,12 +176,12 @@ namespace SqListCAI.Pages.MainPage
 
         }
         //显示当前代码
-        public void showCode()
+        public void showCode(string code)
         {
 
         }
         //显示当前变量
-        public void showValue()
+        public void showValue(string value)
         {
 
         }

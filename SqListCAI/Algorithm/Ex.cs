@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Threading;
 using System.Windows;
 
-namespace SqListCAI.AlgorithmThread
+namespace SqListCAI.Algorithm
 {
     public static class Ex
     {

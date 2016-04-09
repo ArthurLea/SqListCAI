@@ -61,16 +61,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Algorithm\AlgorThread.cs" />
     <Compile Include="Dialogs\InsertWindow.xaml.cs">
       <DependentUpon>InsertWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entities\LinkedList.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
-    <Compile Include="AlgorithmThread\Ex.cs" />
+    <Compile Include="Algorithm\Ex.cs" />
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
       <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AlgorithmThread\Thread.cs" />
+    <Compile Include="Algorithm\Thread.cs" />
     <Compile Include="Utils\Files.cs" />
     <Page Include="Dialogs\InsertWindow.xaml">
       <SubType>Designer</SubType>
@@ -105,7 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AlgorithmThread\Thread.xaml">
+    <Page Include="Algorithm\Thread.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
