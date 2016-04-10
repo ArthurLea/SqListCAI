@@ -17,11 +17,11 @@ namespace SqListCAI.Dialogs
     /// <summary>
     /// InsertWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class InsertWindow : Window
+    public partial class ListDialog : Window
     {
         public delegate void PassValuesHandler(object sender, PassValuesEventArgs e);
         public event PassValuesHandler PassValuesEvent;
-        public InsertWindow()
+        public ListDialog()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//窗口居中

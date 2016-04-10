@@ -28,7 +28,7 @@ namespace SqListCAI.Entities
             this.srcData = srcData;
             this.deletePosition = position;
         }
-        public void createLinkedList(LinkedList list)
+        public void createLinkedList(LinkedList list,int n)
         {
 
         }

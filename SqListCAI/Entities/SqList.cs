@@ -30,6 +30,10 @@ namespace SqListCAI.Entities
             this.deletePosition = position;
             this.length = srcData.Length;
         }
+        public void transfer(SqList L,string str)
+        {
+
+        }
         public void ins_SqList(SqList sq,char insData,int position)
         {
             StringBuilder sb = new StringBuilder(sq.srcData.Length + 1);

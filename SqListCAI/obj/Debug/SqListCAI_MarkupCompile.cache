@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\Code\Virtual Studio Projects\C#\SqListCAI\SqListCAI\App.xaml
-7-1317371539
+856023401
 
-16803521268
-141089230378
-Dialogs\InsertWindow.xaml;MainWindow.xaml;Pages\BaseContent\SqListBaseContent.xaml;Pages\MainPage\MainDemon.xaml;Styles\DatePicker.xaml;Styles\TabControlStyle.xaml;Algorithm\Thread.xaml;
+19-639881706
+17956730529
+Dialogs\ListDialog.xaml;MainWindow.xaml;Pages\BaseContent\SqListBaseContent.xaml;Pages\MainPage\MainDemon.xaml;Styles\DatePicker.xaml;Styles\ListBoxStyle.xaml;Styles\TabControlStyle.xaml;Algorithm\Thread.xaml;
 
 False
 

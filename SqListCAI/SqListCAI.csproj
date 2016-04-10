@@ -44,6 +44,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.TreeListView, Version=1.0.1336.34694, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\System.Windows.Forms.TreeListView.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +60,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -62,9 +68,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Algorithm\AlgorThread.cs" />
-    <Compile Include="Dialogs\InsertWindow.xaml.cs">
-      <DependentUpon>InsertWindow.xaml</DependentUpon>
+    <Compile Include="Demonstration.cs" />
+    <Compile Include="Dialogs\ListDialog.xaml.cs">
+      <DependentUpon>ListDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Explain.cs" />
     <Compile Include="Entities\LinkedList.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
@@ -74,7 +82,8 @@
     </Compile>
     <Compile Include="Algorithm\Thread.cs" />
     <Compile Include="Utils\Files.cs" />
-    <Page Include="Dialogs\InsertWindow.xaml">
+    <Compile Include="Utils\SourceCodes\SqListCodes.cs" />
+    <Page Include="Dialogs\ListDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +111,10 @@
     <Page Include="Styles\DatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TabControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -162,7 +175,9 @@
     <Resource Include="Images\toggleButton.jpg" />
     <Resource Include="Images\toolbarbg.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="readme.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\lineblue.png" />
   </ItemGroup>

@@ -56,7 +56,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_data.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="数据" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="说明" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Image Source="/Images/lineblue.png" Grid.Column="2" Margin="0" Height="60" Stretch="UniformToFill" ></Image>
                 <Grid Grid.Column="3" Name="toolbar_pause">
@@ -158,7 +158,7 @@
                 </Grid>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0">
+        <StackPanel Name="Demon_Code_Value" Grid.Row="1" Orientation="Horizontal" Margin="0">
             <Grid Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="250"></RowDefinition>
@@ -182,7 +182,7 @@
                             <Image Source="/images/menu_drop.png" Name="demo_drop" Margin="548,0,0,0"/>
                         </Menu>
                         <Canvas Name="canse_demon" Grid.Row="1" ClipToBounds="False" Margin="0,1,0,0">
-
+                            
                         </Canvas>
                     </Grid>
                 </Border>
@@ -200,15 +200,46 @@
                         </Border.BorderThickness>
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="25"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Menu Grid.Row="0" ClipToBounds="False">
                                 <Image Source="/images/menu_star.png" Margin="0"></Image>
                                 <Label x:Name="algorithm_lable_name" Content="算法代码" Foreground="Blue" MaxWidth="100" FontStyle="Italic" Width="185"/>
-                                <Image Source="/images/menu_drop.png" Name="code_drop" Margin="250,0,0,0"/>
+                                <Image Source="/images/menu_drop.png" Name="code_drop" Margin="258,0,0,0"/>
                             </Menu>
-                            <ListBox Name="listBox_code" Grid.Row="1" ClipToBounds="False" Margin="1,1,1,1"/>
+                            <ListBox Name="listBox_code" Grid.Row="1" SelectionMode="Single" ClipToBounds="False" Margin="1,1,1,1">
+
+                                <!-- 设置ListBoxItem样式 -->
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <!-- 设置控件模板 -->
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                 TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <!-- 设置触发器 -->
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="true">
+                                                <Setter Property="Background" Value="Red"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" Value="LightGreen"/>
+                                                <Setter Property="Foreground" Value="#FF555591"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
                         </Grid>
                     </Border>
                     <Border Name="value_border" Grid.Column="1" Margin="0,0,-1,1" MaxWidth="400">

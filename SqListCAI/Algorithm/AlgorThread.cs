@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SqListCAI.Pages.MainPage;
+﻿using SqListCAI.Pages.MainPage;
 using System.Threading;
+using SqListCAI.Utils.SourceCodes;
 namespace SqListCAI.Algorithm
 {
     public partial class AlgorThread
@@ -18,14 +14,21 @@ namespace SqListCAI.Algorithm
             this.m_EvnentStopped = evnentStopped;
             this.m_mainDemon = mainDemon;
         }
-        public void Run()
+        public delegate void outputDelegate(int i);
+        public void Run(int flag)
         {
-            string str;
-            for(int i=0;i<=10;i++)
+            switch(flag)
             {
-                str = "Step number " + i.ToString() + " executed.";
-                System.Threading.Thread.Sleep(500);
-                m_mainDemon.Invoke(demon_lable_name.Content = str;
+                case 1://顺序表插入
+                    for (int i = 0; i < SqListCodes.INSERT_CODE.Length; i++)
+                    {
+                        Thread.Sleep(200);
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, i);
+                    }
+                    break;
+                default:
+                    break;
+                   
             }
         }
     }
