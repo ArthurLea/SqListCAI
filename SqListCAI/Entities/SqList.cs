@@ -9,40 +9,42 @@ namespace SqListCAI.Entities
     #region 线性表实体的基本操作，插入，删除
     public partial class SqList
     {
-        string srcData;
-        char insertData;
-        int insertPosition;
-        int deletePosition;
+        public static char[] srcData;
+        public static int length;
+        public static int MAXSIZE = 14;
 
-        int length;
+        public static char insertData;
+        public static int insPosition;
+        public static int delPosition;
         public SqList()
-        { }
-        public SqList(string srcData,char instData,int position)//初始化插入操作数据
-        {
-            this.srcData = srcData;
-            this.insertData = instData;
-            this.insertPosition = position;
-            this.length = srcData.Length;
-        }
-        public SqList(string srcData,int position)//初始化删除操作数据
-        {
-            this.srcData = srcData;
-            this.deletePosition = position;
-            this.length = srcData.Length;
-        }
-        public void transfer(SqList L,string str)
         {
 
+            MAXSIZE = 14;
+            srcData = new char[MAXSIZE];
         }
-        public void ins_SqList(SqList sq,char insData,int position)
+        //初始化插入操作
+        public static void init_SqList(string data, char instData, int position)
         {
-            StringBuilder sb = new StringBuilder(sq.srcData.Length + 1);
-            for(int i=0;i<sq.srcData.Length;i++)
-            {
-
-            }
+            srcData = new char[data.Length+1];
+            for (int i = 0; i < data.Length; i++)
+                srcData[i] = data[i];
+            insertData = instData;
+            insPosition = position;
+            length = data.Length;
         }
-        public void del_SqList(SqList l,int position)
+        public static int Inset_SqList(int i,char insData)
+        {
+            int j = 0;
+            if(length == MAXSIZE-1)//表空间已满
+            { return -1; }
+            if(i<1 || i>length+2)
+            { return 0; }
+            for (j = length; j >= i - 1; j--) srcData[j + 1] = srcData[j];
+            srcData[i - 1] = insData;
+            length++;
+            return 1;
+        }
+        public static void del_SqList(SqList l,int position)
         {
 
         }

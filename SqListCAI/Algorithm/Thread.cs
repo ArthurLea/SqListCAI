@@ -25,6 +25,7 @@ namespace SqListCAI.Algorithm
         public ThreadWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;//窗口居中
         }
         //方式一
         DispatcherTimer tm = new DispatcherTimer();//实例化一个DispatcherTimer对象
