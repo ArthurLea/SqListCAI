@@ -103,10 +103,6 @@
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="顺序结构合并" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderMerge"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
                             <Label Content="链表结构创建" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedCreate"/>
                             <Border >
                                 <Image Source="images/line.png"/>
@@ -116,10 +112,6 @@
                                 <Image Source="images/line.png"/>
                             </Border>
                             <Label Content="链表结构删除" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedDelete"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="链表结构合并" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedMerge"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
@@ -145,10 +137,6 @@
                                 <Image Source="images/line.png"/>
                             </Border>
                             <Label Content="折半查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="插值查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
@@ -183,27 +171,7 @@
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Content="DOC Design" Foreground="White" Margin="0,6,0,6"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="DOC Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>

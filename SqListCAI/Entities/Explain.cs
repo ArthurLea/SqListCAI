@@ -16,7 +16,11 @@ namespace SqListCAI.Entities
             "n-i+1个元素依次向后移动一个位置。";
         public static string OrderDelExplain =
             "和顺序表插入相反，从顺序表中删除第i（1<i<n）个\n"+
-            "元素时，需将从第i+1至第n个，共n-1个元素依次向前移动一个位置";
+            "元素时，需将从第i+1至第n个，共n-1个元素依次向后移动一个位置";
+
+        public static string LinkedCreExplain = "";
+        public static string LinkedInsExplain = "";
+        public static string LinkedDelExplain = "";
 
     }
 }

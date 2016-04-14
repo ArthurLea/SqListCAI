@@ -7,17 +7,57 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Background="DarkGray"
-        Title="线性表插入" Height="250" Width="400" WindowStartupLocation="Manual" WindowStyle="ToolWindow">
+        Name="listDialog"
+        Title="current operator" Height="350" Width="350" WindowStartupLocation="Manual" WindowStyle="ToolWindow">
     <Grid>
-        <Label x:Name="label" Content="建立数据：" HorizontalAlignment="Left" Margin="52,28,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="插入数据：" HorizontalAlignment="Left" Margin="52,68,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="插入位置：" HorizontalAlignment="Left" Margin="52,108,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="127,28,0,0" TextWrapping="Wrap" Text="147258369AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="214" TabIndex="1"/>
-        <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="127,68,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="214" TabIndex="2"/>
-        <TextBox x:Name="insertPosition" HorizontalAlignment="Left" Height="25" Margin="127,108,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="214" TabIndex="3"/>
-        <Button x:Name="button_ok" Content="确认生成" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="48,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="156,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="button_cancle" Content="重置" Click="button_reset_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="266,159,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="113*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="67*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="2,2,2,0">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="SkyBlue"  Opacity="2" />
+            </Border.BorderBrush>
+            <Border.BorderThickness >
+                <Thickness>1</Thickness>
+            </Border.BorderThickness>
+            <Grid>
+                <RadioButton x:Name="radioButton_orderIns" Content="线性表插入" HorizontalAlignment="Left" Margin="30,15,0,0" VerticalAlignment="Top" GroupName="SqList" RenderTransformOrigin="-0.152,0.286" IsChecked="True"/>
+                <RadioButton x:Name="radioButton_orderDel" Content="线性表删除" HorizontalAlignment="Left" Margin="240,15,0,0" VerticalAlignment="Top" GroupName="SqList" IsChecked="True"/>
+                <RadioButton x:Name="radioButton_linkedDel" Content="链表删除" HorizontalAlignment="Left" Margin="240,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
+                <RadioButton x:Name="radioButton_linkedIns" Content="链表插入" HorizontalAlignment="Left" Margin="140,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
+                <RadioButton x:Name="radioButton_linkedCre" Content="链表创建" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Margin="2,2,2,0">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="SkyBlue"  Opacity="2"/>
+            </Border.BorderBrush>
+            <Border.BorderThickness >
+                <Thickness>1</Thickness>
+            </Border.BorderThickness>
+            <Grid>
+                <Label x:Name="lable_srcdata" Content="建立数据：" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lable_insertData" Content="插入数据：" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lable_place" Content="插入位置：" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="102,15,0,0" TextWrapping="Wrap" Text="147258369AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="1"/>
+                <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="102,55,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="210" TabIndex="2"/>
+                <TextBox x:Name="position" HorizontalAlignment="Left" Height="25" Margin="102,95,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="3"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" Margin="2,2,2,0">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="SkyBlue"  Opacity="2"/>
+            </Border.BorderBrush>
+            <Border.BorderThickness >
+                <Thickness>1</Thickness>
+            </Border.BorderThickness>
+            <Grid>
+                <Button x:Name="button_ok" Content="确认生成" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
+                <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
+                <Button x:Name="button_cancle" Content="重置" Click="button_reset_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="253,16,0,0" VerticalAlignment="Top" Width="71" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

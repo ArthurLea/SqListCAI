@@ -10,12 +10,18 @@ namespace SqListCAI.Events
     {
         public string srcData;
         public char insertData;
-        public int insertPosition;
+        public int position;
+        
         public PassValuesEventArgs(string srcData, char insertData,int position)
         {
             this.srcData = srcData;
             this.insertData = insertData;
-            this.insertPosition = position;
+            this.position = position;
+        }
+        public PassValuesEventArgs(string srcData, int position)
+        {
+            this.srcData = srcData;
+            this.position = position;
         }
     }
 }

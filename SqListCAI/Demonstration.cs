@@ -5,6 +5,9 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Data;
 using SqListCAI.Entities;
+using SqListCAI.Dialogs;
+using SqListCAI.Events;
+
 namespace SqListCAI
 {
     public partial class Demonstration
@@ -21,7 +24,11 @@ namespace SqListCAI
         {
             this.m_maindemon.listBox_code.Items.Clear();
             for (int i = 0; i < str.Length; i++)
+            {
+                this.m_maindemon.listBox_currentRow.Items.Insert(i, i);
                 this.m_maindemon.listBox_code.Items.Insert(i, str[i]);
+            }
+                
 
             //修改ListBox中某行，先移除，然后插入
             //TextBlock tb = new TextBlock();
@@ -32,6 +39,9 @@ namespace SqListCAI
             //this.m_maindemon.listBox_code.Items.Add("1234567887946516316");//在末尾增加一行显示
 
         }
+        /// <summary>
+        /// 显示当前动画
+        /// </summary>
         public void ShowDemon()
         {
             m_maindemon.canse_demon.Children.Clear();
@@ -72,7 +82,7 @@ namespace SqListCAI
                             if(i==length)
                                 lable[i].Content = '?';
                             else
-                                lable[i].Content = SqList.srcData[i];
+                                lable[i].Content = SqList.srcData_ins[i];
                             double lable_margin_left = rc_margin_left + (rc[i].Width - lable[i].Width) / 2;
                             Thickness lable_src_margin = new Thickness(lable_margin_left, margin_top, 0,0);
                             lable[i].Margin = lable_src_margin;
@@ -97,7 +107,30 @@ namespace SqListCAI
                         index[index.Length-1] = m_maindemon.canse_demon.Children.IndexOf(rc[rc.Length-1]);//存储插入数据矩形位置
                         break;
                     }
-                    
+                case 2://顺序表的删除
+                    {
+                break;
+            }
+                case 3://链表的创建
+                    {
+                break;
+            }
+                case 4://链表的插入
+                    {
+                break;
+            }
+                case 5://链表的删除
+                    {
+                break;
+            }
+                case 6://直接查找
+                    {
+                break;
+            }
+                case 7://二分查找
+                    {
+                break;
+            }
                 default:
                     break;
             }
@@ -129,7 +162,7 @@ namespace SqListCAI
             if(updateFlag == 0)//修改移动的值
             {
                 data.Rows[movePosition+1]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = movePosition;
+                m_maindemon.listView_value.SelectedIndex = movePosition + 1;
             }
             if(updateFlag == 1)//修改P
             {
@@ -151,7 +184,7 @@ namespace SqListCAI
                     if (i == length)
                         value = '?'.ToString();
                     else
-                        value = SqList.srcData[i] + "";
+                        value = SqList.srcData_ins[i] + "";
                     data.Rows.Add(name, value);
                 }
                 data.Rows.Add(str[0] + ".length", SqList.length);
@@ -161,6 +194,35 @@ namespace SqListCAI
                 data.Rows.Add(str[4], "未知");
             }
             return data;
+        }
+        public void SetData()
+        {
+            Demonstration.data.Clear();
+            m_maindemon.canse_demon.Children.Clear();
+            m_maindemon.listBox_currentRow.Items.Clear();
+            m_maindemon.listBox_code.Items.Clear();
+            m_maindemon.listView_value.DataContext = null;
+            switch (flag)
+            {
+                case 1:
+                    {
+                        ListDialog insertWindow = new ListDialog(flag);
+                        //订阅事件
+                        insertWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveOrderInsert);
+                        insertWindow.ShowDialog();
+                        break;
+                    }
+                default:
+                    break;
+
+            }
+        }
+        private void RecieveOrderInsert(object sender, PassValuesEventArgs e)
+        {
+            m_maindemon.srcData_ins = e.srcData;
+            m_maindemon.insertData_ins = e.insertData;
+            m_maindemon.position_ins = e.position;
+            m_maindemon.initUI(flag);
         }
         public void ShowExplain()
         {
@@ -199,14 +261,6 @@ namespace SqListCAI
                 default:
                     break;
             }
-        }
-        public void SetData(string str)
-        {
-
-        }
-        public void ReStart()
-        {
-
         }
     }
 }
