@@ -533,7 +533,7 @@ namespace SqListCAI.Pages.MainPage
         /// <param name="e"></param>
         private void runTo_Click(object sender, RoutedEventArgs e)
         {
-            if (wherePoint != null)
+            if ((wherePoint!=null) && (wherePoint.Length!=0))
             {
                 if (fisrst_enter_runTo_click_flag)
                 {
@@ -564,6 +564,11 @@ namespace SqListCAI.Pages.MainPage
             AlgorThread algroThread = new AlgorThread(allDone, allDone, this);
             algroThread.Run(flag, 3);//调用AlgorThread的run函数，执行线程体  
         }
+        /// <summary>
+        /// 恢复最开始的状态
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resume_Click(object sender, RoutedEventArgs e)
         {
             //if (m_thread != null)
@@ -586,8 +591,14 @@ namespace SqListCAI.Pages.MainPage
             this.button_run.IsEnabled = true;
             this.button_run.Background = getImageSrc("/Images/toolbar_run.png");
             this.lable_pause.Content = "暂停";
+            clearAllPoint();
         }
         public int[] wherePoint;
+        /// <summary>
+        /// 设置断点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void breakPoint_Click(object sender, RoutedEventArgs e)
         {
             //得到算法区选中的代码行数
@@ -604,16 +615,18 @@ namespace SqListCAI.Pages.MainPage
             MessageBox.Show("已设置断点 " + count + " 处\n可以电机断点执行按钮", "提示", MessageBoxButton.OK);
         }
 
-        //清除所有断点
+        /// <summary>
+        /// 清除所有断点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearAllPoint_Click(object sender, RoutedEventArgs e)
         {
             //testThreadAsyn();
-            //if (this.wherePoint != null)
-            //{
-            //    for (int i = 0; i < this.wherePoint.Length; i++)
-            //        //通过再次选中实现
-            //        this.listBox_code.SelectedIndex = i;
-            //}
+            clearAllPoint();
+        }
+        private void clearAllPoint()
+        {
             this.listBox_code.SelectedIndex = -1;
             this.listBox_currentRow.SelectedIndex = -1;
             if (wherePoint == null)
@@ -624,7 +637,11 @@ namespace SqListCAI.Pages.MainPage
                 MessageBox.Show("断点清除成功", "提示", MessageBoxButton.OK);
             }
         }
-        //显示当前断点
+        /// <summary>
+        /// 显示当前断点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void currentPoint_Click(object sender, RoutedEventArgs e)
         {
             if (wherePoint != null)
@@ -745,41 +762,7 @@ namespace SqListCAI.Pages.MainPage
         public void ShowValue()
         {
             Demonstration dempnstration = new Demonstration(flag, this);
-            switch (flag)
-            {
-                case 1://顺序表的插入
-                    {
-                        dempnstration.ShowValue(SqListCodes.INSERT_VALUE);
-                        break;
-                    }
-                case 2://顺序表的删除
-                    {
-                        dempnstration.ShowValue(SqListCodes.DELETE_VALUE);
-                        break;
-                    }
-                case 3://链表的创建
-                    {
-                        break;
-                    }
-                case 4://链表的插入
-                    {
-                        break;
-                    }
-                case 5://链表的删除
-                    {
-                        break;
-                    }
-                case 6://直接查找
-                    {
-                        break;
-                    }
-                case 7://二分查找
-                    {
-                        break;
-                    }
-                default:
-                    break;
-            }
+            dempnstration.ShowValue();
         }
     }
     public static class DispatcherHelper

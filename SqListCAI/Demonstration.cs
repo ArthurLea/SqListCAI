@@ -8,6 +8,7 @@ using SqListCAI.Entities;
 using SqListCAI.Dialogs;
 using SqListCAI.Events;
 using System;
+using SqListCAI.Utils.SourceCodes;
 
 namespace SqListCAI
 {
@@ -201,7 +202,7 @@ namespace SqListCAI
         /// 显示变量区中的变量
         /// </summary>
         /// <param name="str"></param>
-        public void ShowValue(string[] str)
+        public void ShowValue()
         {
             switch (flag)
             {
@@ -211,7 +212,7 @@ namespace SqListCAI
                         data_ins.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
                         data_ins.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
-                    m_maindemon.listView_value.DataContext = GetDataTable_Ins(str,3,null,0).DefaultView;
+                    m_maindemon.listView_value.DataContext = GetDataTable_Ins(SqListCodes.INSERT_VALUE, 3,null,0).DefaultView;
                     break;
                 case 2:
                     if(data_del.Columns.Count == 0)
@@ -219,7 +220,7 @@ namespace SqListCAI
                         data_del.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
                         data_del.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
-                    m_maindemon.listView_value.DataContext = GetDataTable_Del(str, 4, null, 0).DefaultView;
+                    m_maindemon.listView_value.DataContext = GetDataTable_Del(SqListCodes.DELETE_VALUE, 4, null, 0).DefaultView;
                     break;
             }
         }
