@@ -30,19 +30,23 @@ namespace SqListCAI.Pages.MainPage
         /// </summary>
         public static ManualResetEvent allDone = new ManualResetEvent(false);//当前线程的信号
         /// <summary>
-        /// 说明当前操作的算法
+        /// 说明当前操作的算法的标识
         /// </summary>
         int flag = 0;//说明当前操作的算法
         public MainDemon()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// 公用的主窗口初始化构造
+        /// </summary>
+        /// <param name="demon_name"></param>
         public MainDemon(string demon_name)
         {
             InitializeComponent();
             this.demon_lable_name.Content = demon_name;
         }
-        public delegate void DelegateStep(int currentRow,bool moveFlag,int movePosition,object changeValue);
+        public delegate void DelegateStep(int currentRow,bool changeFlag, int movePosition,object changeValue);
         public DelegateStep m_DelegateStep;
 
         public delegate void DelegateExeFinish(int flag);
@@ -54,6 +58,13 @@ namespace SqListCAI.Pages.MainPage
         //顺序表删除
         public string srcData_del;
         public int position_del;
+        /// <summary>
+        /// 线性表插入的主窗口初始化
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="insertData"></param>
+        /// <param name="position"></param>
         public MainDemon(string demon_name,string srcData, char insertData,int position)//线性表插入
         {
             InitializeComponent();
@@ -64,6 +75,12 @@ namespace SqListCAI.Pages.MainPage
             flag = 1;
             initUI(flag);
         }
+        /// <summary>
+        /// 线性表删除的主窗口初始化
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="position"></param>
         public MainDemon(string demon_name, string srcData, int position) : this(demon_name)//线性表删除
         {
             InitializeComponent();
@@ -79,7 +96,6 @@ namespace SqListCAI.Pages.MainPage
         /// <param name="flag"></param>
         public void initUI(int flag)
         {
-            Demonstration.data.Clear();
             this.canse_demon.Children.Clear();
             this.listBox_currentRow.Items.Clear();
             this.listBox_code.Items.Clear();
@@ -88,21 +104,26 @@ namespace SqListCAI.Pages.MainPage
             {
                 case 1://线性表插入
                     {
+                        Demonstration.data_ins.Clear();
                         SqList.init_SqList(srcData_ins, insertData_ins, position_ins);
                         ShowDemon();
                         ShowCode();
                         ShowValue();
                         m_DelegateStep = Step_orderIns;
                         m_delegateExeFinish = ExeFinish;
-                        //this.listBox_code.SelectedIndex = 3;
                         getCanseContent();
                         break;
                     }
                 case 2:
                     {
+                        Demonstration.data_del.Clear();
                         SqList.init_SqList(srcData_del,position_del);
                         ShowDemon();
                         ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_orderDel;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContent();
                         break;
                     }
                 default:
@@ -122,50 +143,109 @@ namespace SqListCAI.Pages.MainPage
             this.button_clearAllPoint.Background = getImageSrc("/Images/toolbar_point.png");
             this.button_currentPoint.IsEnabled = true;
             this.button_currentPoint.Background = getImageSrc("/Images/toolbar_point.png");
-
-
             this.button_resume.IsEnabled = true;
             this.button_resume.Background = getImageSrc("/Images/toolbar_resume.png");
-
 
             first_enter_oneStep_flag = true;//重置单步操作标志
             fisrst_enter_runTo_click_flag = true;//重置断点执行标志
-        }
 
-        private void ExeFinish(int flag)
+
+            order_del_return_value_flag = false;//重置顺序表删除值返回标志
+        }
+        public bool order_del_return_value_flag = false;
+        /// <summary>
+        /// 线程顺序表删除算法执行过程中主线程同步的委托方法
+        /// </summary>
+        /// <param name="currentRow"></param>
+        /// <param name="moveFlag"></param>
+        /// <param name="movePosition"></param>
+        /// <param name="changeValue"></param>
+        private void Step_orderDel(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
-            switch(flag)
+            //显示执行的当前行
+            this.listBox_code.SelectedIndex = currentRow;
+            //显示动画操作
+            if(changeFlag)
             {
-                case 1:
-                    MessageBox.Show("顺序表插入算法执行完毕", "提示", MessageBoxButton.OK);
-                    break;
-            }
+                int margin_left = 20;
+                int margin_top = 90;
 
-            this.button_pause.IsEnabled = false;
-            this.button_pause.Background = Brushes.DimGray;
-            this.button_resume.IsEnabled = true;
-            this.button_resume.Background = getImageSrc("/Images/toolbar_resume.png");
-        }
+                Rectangle rc = new Rectangle();//矩形
+                Label lable = new Label();//标签，放原始内容
 
-        public Rectangle[] rec_ins;
-        public Label[] lab_ins;
-        public void getCanseContent()//获取动画显示画布中的所有组件
-        {
-            int i = 1;
-            int rc_num = 0;
-            int lable_num = 0;
-            rec_ins = new Rectangle[this.canse_demon.Children.Count / 2];
-            lab_ins = new Label[this.canse_demon.Children.Count / 2];
-            IEnumerator ie = this.canse_demon.Children.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                if (i % 2 == 1)//单数为矩形
-                    rec_ins[rc_num++] = (Rectangle)ie.Current;
-                else if (i % 2 == 0)//双数为lable
-                    lab_ins[lable_num++] = (Label)ie.Current;
-                i++;
+                //初始化需要画的数组矩形和标签元素的相同属性
+                rc.Stroke = Brushes.Yellow;
+                rc.Fill = Brushes.Red;
+                rc.Width = 50;
+                rc.Height = 35;
+
+                lable.Width = 25;
+                lable.Height = 35;
+                lable.FontSize = 15;
+                lable.VerticalContentAlignment = VerticalAlignment.Center;
+                double rc_margin_left;
+                double lable_margin_left;
+                //变量区源数据开始改变
+                if(currentRow == 7)//返回的删除值e,开始左移
+                {
+                    if (!order_del_return_value_flag)//表示删除的数据没有修改，第一次进来就添加返回值，因为删除的值先于左移执行
+                    {
+                        //将返回的数据显示在canse上的
+                        rc = rec[rec.Length - 1];
+                        lable = lab[lab.Length - 1];
+                        lable.Content = changeValue;
+                        this.canse_demon.Children.Remove(rec[rec.Length - 1]);
+                        this.canse_demon.Children.Remove(lab[lab.Length - 1]);
+                        this.canse_demon.Children.Add(rc);
+                        this.canse_demon.Children.Add(lable);
+                        order_del_return_value_flag = true;//表示删除的数据已经返回
+
+                        Demonstration dempnstration = new Demonstration(flag, this);
+                        this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 0, changeValue.ToString(), 0);
+                    }
+                    else
+                    {
+                        this.canse_demon.Children.Remove(rec[movePosition-1]);
+                        this.canse_demon.Children.Remove(lab[movePosition - 1]);
+                        rc_margin_left = (movePosition - 1) * rc.Width + margin_left;
+                        rc.Margin = new Thickness(rc_margin_left, margin_top, 0, 0);
+
+                        lable.Content = SqList.srcData_del[movePosition];
+                        lable_margin_left = rc_margin_left + (rc.Width - lable.Width) / 2;
+                        lable.Margin = new Thickness(lable_margin_left, margin_top, 0, 0);
+                        this.canse_demon.Children.Add(rc);
+                        this.canse_demon.Children.Add(lable);
+
+                        Demonstration dempnstration = new Demonstration(flag, this);
+                        this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 1, SqList.srcData_del[movePosition].ToString(), movePosition);
+                    }
+                }
+                if (currentRow == 8)//改变p值
+                {
+                    Demonstration dempnstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 2, changeValue.ToString(), 0);
+                }
+                if (currentRow == 10)//改变length长度
+                {
+                    Demonstration dempnstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 3, changeValue.ToString(), 0);
+
+                    this.canse_demon.Children.Remove(rec[rec.Length - 2]);
+                    this.canse_demon.Children.Remove(lab[lab.Length - 2]);
+                }
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+                if (order_del_return_value_flag)
+                    rc.Fill = Brushes.SkyBlue;
             }
         }
+        /// <summary>
+        /// 线程顺序表插入算法执行过程中主线程同步的委托方法
+        /// </summary>
+        /// <param name="currentRow"></param>
+        /// <param name="changeFlag"></param>
+        /// <param name="movePosition"></param>
+        /// <param name="changeValue"></param>
         private void Step_orderIns(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
             //显示执行的当前行
@@ -194,7 +274,7 @@ namespace SqListCAI.Pages.MainPage
                 //变量区源数据开始改变
                 if (currentRow == 8)
                 {
-                    this.canse_demon.Children.Remove(rec_ins[movePosition]);
+                    this.canse_demon.Children.Remove(rec[movePosition]);
                     //this.canse_demon.Children.Remove(lab[movePosition]);
                     rc_margin_left = (movePosition + 1) * rc.Width + margin_left;
                     rc.Margin = new Thickness(rc_margin_left, margin_top, 0, 0);
@@ -206,20 +286,20 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Add(lable);
 
                     Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable(SqListCodes.INSERT_VALUE, 0, SqList.srcData_ins[movePosition].ToString(), movePosition);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.srcData_ins[movePosition].ToString(), movePosition);
                 }
                 //变量区，P值改变
                 if (currentRow == 9)
                 {
                     Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable(SqListCodes.INSERT_VALUE, 1, changeValue.ToString(),0);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 1, changeValue.ToString(),0);
                 }
                 if (currentRow == 11)
                 {
                     //移除上方需要插入的元素后在插入
                     //index = Demonstration.index[Demonstration.index.Length - 1];
-                    this.canse_demon.Children.Remove(rec_ins[rec_ins.Length-1]);
-                    this.canse_demon.Children.Remove(lab_ins[lab_ins.Length-1]);
+                    this.canse_demon.Children.Remove(rec[rec.Length-1]);
+                    this.canse_demon.Children.Remove(lab[lab.Length-1]);
                     
                     rc_margin_left = (SqList.insPosition - 1) * rc.Width + margin_left;
                     rc.Margin = new Thickness(rc_margin_left, margin_top, 0, 0);
@@ -231,22 +311,67 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Add(lable);
 
                     Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 1);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 1);
                 }
-                //改变变量区长度
+                //改变变量区中变量长度
                 if (currentRow == 12)
                 {
                     Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable(SqListCodes.INSERT_VALUE, 2, changeValue.ToString(),0);
+                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 2, changeValue.ToString(),0);
                 }
                 DispatcherHelper.DoEvents();
                 System.Threading.Thread.Sleep(300);
                 if (currentRow != 11)
                     rc.Fill = Brushes.SkyBlue;
-
             }
         }
 
+        /// <summary>
+        /// 线程算法执行完毕后主线程弹窗提示
+        /// </summary>
+        /// <param name="flag"></param>
+        private void ExeFinish(int flag)
+        {
+            switch (flag)
+            {
+                case 1:
+                    MessageBox.Show("顺序表插入算法执行完毕", "提示", MessageBoxButton.OK);
+                    break;
+                case 2:
+                    MessageBox.Show("顺序表删除算法执行完毕", "提示", MessageBoxButton.OK);
+                    break;
+            }
+
+            this.button_pause.IsEnabled = false;
+            this.button_pause.Background = Brushes.DimGray;
+            this.button_resume.IsEnabled = true;
+            this.button_resume.Background = getImageSrc("/Images/toolbar_resume.png");
+        }
+
+        public Rectangle[] rec = null;
+        public Label[] lab = null;
+        /// <summary>
+        /// 获取动画显示画布中的所有组件
+        /// </summary>
+        public void getCanseContent()//获取动画显示画布中的所有组件
+        {
+            int i = 1;
+            int rc_num = 0;
+            int lable_num = 0;
+            if (rec != null) rec = null;
+            if (lab != null) lab = null;
+            rec = new Rectangle[this.canse_demon.Children.Count / 2];
+            lab = new Label[this.canse_demon.Children.Count / 2];
+            IEnumerator ie = this.canse_demon.Children.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                if (i % 2 == 1)//单数为矩形
+                    rec[rc_num++] = (Rectangle)ie.Current;
+                else if (i % 2 == 0)//双数为lable
+                    lab[lable_num++] = (Label)ie.Current;
+                i++;
+            }
+        }
         //该窗体是否被改变
         public void changeUI(bool isMax)
         {
@@ -282,7 +407,6 @@ namespace SqListCAI.Pages.MainPage
         {
             if((m_thread==null) || !m_thread.IsAlive)//当未初始化线程或者线程不在执行状态时
             {
-
                 Demonstration demonstration = new Demonstration(flag, this);
                 demonstration.SetData();
             }
@@ -323,7 +447,11 @@ namespace SqListCAI.Pages.MainPage
             im.Stretch = Stretch.None;
             return im;
         }
-
+        /// <summary>
+        /// 全速执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void run_Click(object sender, RoutedEventArgs e)
         {
             this.button_pause.IsEnabled = true;
@@ -356,6 +484,11 @@ namespace SqListCAI.Pages.MainPage
             algroThread.Run(flag,1);//调用AlgorThread的run函数，执行线程体，实现全速执行
         }
         public bool first_enter_oneStep_flag = true;
+        /// <summary>
+        /// 单步执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void oneStep_Click(object sender, RoutedEventArgs e)
         {
             if (first_enter_oneStep_flag)
@@ -393,6 +526,11 @@ namespace SqListCAI.Pages.MainPage
             algroThread.Run(flag, 2);//调用AlgorThread的run函数，执行线程体，实现单步执行
         }
         public bool fisrst_enter_runTo_click_flag = true;
+        /// <summary>
+        /// 断点执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void runTo_Click(object sender, RoutedEventArgs e)
         {
             if (wherePoint != null)
@@ -616,6 +754,7 @@ namespace SqListCAI.Pages.MainPage
                     }
                 case 2://顺序表的删除
                     {
+                        dempnstration.ShowValue(SqListCodes.DELETE_VALUE);
                         break;
                     }
                 case 3://链表的创建

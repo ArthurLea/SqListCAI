@@ -7,6 +7,7 @@ using System.Data;
 using SqListCAI.Entities;
 using SqListCAI.Dialogs;
 using SqListCAI.Events;
+using System;
 
 namespace SqListCAI
 {
@@ -29,7 +30,6 @@ namespace SqListCAI
                 this.m_maindemon.listBox_code.Items.Insert(i, str[i]);
             }
                 
-
             //修改ListBox中某行，先移除，然后插入
             //TextBlock tb = new TextBlock();
             //tb.Text = str[1];
@@ -56,7 +56,7 @@ namespace SqListCAI
                         Rectangle[] rc = new Rectangle[length + 2];//矩形
                         Label[] lable = new Label[length + 2];//标签，放原始内容
                         index = new int[rc.Length];
-                        for(int i=0;i<length+2;i++)//初始化需要画的数组矩形和标签元素的相同属性
+                        for(int i=0;i<rc.Length;i++)//初始化需要画的数组矩形和标签元素的相同属性
                         {
                             rc[i] = new Rectangle();
                             rc[i].Stroke = Brushes.Yellow;
@@ -73,7 +73,7 @@ namespace SqListCAI
                             index[i] = 0;//初始化位置索引
                         }
                         //绘制原始数据
-                        for (int i=0;i<length+1;i++)
+                        for (int i=0;i< rc.Length - 1; i++)
                         {
                             double rc_margin_left = i * rc[i].Width + margin_left;
                             Thickness rc_src_margin = new Thickness(rc_margin_left, margin_top, 0, 0);
@@ -99,7 +99,9 @@ namespace SqListCAI
                         }
                         //绘制插入数据
                         rc[rc.Length-1].Margin = new Thickness(ins_margin_left, margin_top - 60, 0, 0);
+                        rc[rc.Length - 1].Fill = Brushes.DarkGray;
                         lable[rc.Length-1].Content = SqList.insertData;
+                        lable[rc.Length - 1].Foreground = Brushes.Red;
                         lable[rc.Length-1].Margin = new Thickness(ins_margin_left + (rc[rc.Length-1].Width - lable[lable.Length-1].Width) / 2, margin_top - 60, 0, 0);
                         
                         m_maindemon.canse_demon.Children.Add(rc[rc.Length-1]);
@@ -109,8 +111,64 @@ namespace SqListCAI
                     }
                 case 2://顺序表的删除
                     {
-                break;
-            }
+                        int margin_left = 20;
+                        int margin_top = 90;
+                        double ins_margin_left = 0.0d;
+                        int length = SqList.length;
+                        Rectangle[] rc = new Rectangle[length + 1];//矩形
+                        Label[] lable = new Label[length + 1];//标签，放原始内容
+                        index = new int[rc.Length];//存储矩形在canse中的索引
+                        for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
+                        {
+                            rc[i] = new Rectangle();
+                            rc[i].Stroke = Brushes.Yellow;
+                            rc[i].Fill = Brushes.SkyBlue;
+                            rc[i].Width = 50;
+                            rc[i].Height = 35;
+
+                            lable[i] = new Label();
+                            lable[i].Width = 25;
+                            lable[i].Height = 35;
+                            lable[i].FontSize = 15;
+                            lable[i].VerticalContentAlignment = VerticalAlignment.Center;
+
+                            index[i] = 0;//初始化位置索引
+                        }
+                        //绘制原始数据
+                        for (int i = 0; i < rc.Length - 1; i++)
+                        {
+                            double rc_margin_left = i * rc[i].Width + margin_left;
+                            Thickness rc_src_margin = new Thickness(rc_margin_left, margin_top, 0, 0);
+                            rc[i].Margin = rc_src_margin;
+                            
+                            lable[i].Content = SqList.srcData_del[i];
+                            double lable_margin_left = rc_margin_left + (rc[i].Width - lable[i].Width) / 2;
+                            Thickness lable_src_margin = new Thickness(lable_margin_left, margin_top, 0, 0);
+                            lable[i].Margin = lable_src_margin;
+
+                            m_maindemon.canse_demon.Children.Add(rc[i]);
+                            m_maindemon.canse_demon.Children.Add(lable[i]);
+
+                            index[i] = m_maindemon.canse_demon.Children.IndexOf(rc[i]);//存储矩形在canse_demon中的位置
+                                                                                       //相应lable位置在其后
+                                                                                       //保存插入位置的矩形
+                            if (SqList.delPosition == (i + 1))
+                            {
+                                ins_margin_left = rc_margin_left;
+                            }
+                        }
+                        //绘制删除位置
+                        rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 60, 0, 0);
+                        rc[rc.Length - 1].Fill = Brushes.DarkGray;
+                        lable[rc.Length - 1].Content = SqList.delPosition;
+                        lable[rc.Length - 1].Foreground = Brushes.Red;
+                        lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 60, 0, 0);
+
+                        m_maindemon.canse_demon.Children.Add(rc[rc.Length - 1]);
+                        m_maindemon.canse_demon.Children.Add(lable[lable.Length - 1]);
+                        index[index.Length - 1] = m_maindemon.canse_demon.Children.IndexOf(rc[rc.Length - 1]);//存储插入数据矩形位置
+                        break;
+                    }
                 case 3://链表的创建
                     {
                 break;
@@ -136,45 +194,100 @@ namespace SqListCAI
             }
         }
 
+
+        public static DataTable data_ins = new DataTable("DataTable_Ins");
+        public static DataTable data_del = new DataTable("DataTable_Del");
+        /// <summary>
+        /// 显示变量区中的变量
+        /// </summary>
+        /// <param name="str"></param>
         public void ShowValue(string[] str)
         {
-            m_maindemon.listView_value.DataContext = null;
             switch (flag)
             {
                 case 1://顺序表的插入
-                    if(data.Columns.Count == 0)
+                    if(data_ins.Columns.Count == 0)
                     {
-                        data.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
-                        data.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                        data_ins.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                        data_ins.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
-                    m_maindemon.listView_value.DataContext = GetDataTable(str,4,null,0).DefaultView;
+                    m_maindemon.listView_value.DataContext = GetDataTable_Ins(str,3,null,0).DefaultView;
+                    break;
+                case 2:
+                    if(data_del.Columns.Count == 0)
+                    {
+                        data_del.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                        data_del.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                    }
+                    m_maindemon.listView_value.DataContext = GetDataTable_Del(str, 4, null, 0).DefaultView;
                     break;
             }
         }
-        public static DataTable data = new DataTable("DataTable");
-        public DataTable GetDataTable(string[] str,int updateFlag,string updateValue,int movePosition)
+
+        public DataTable GetDataTable_Del(string[] str, int updateFlag, string updateValue, int movePosition)
+        {
+            if(updateFlag == 0)//返回值
+            {
+                data_del.Rows[SqList.length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = SqList.length + 2;
+            }
+            if(updateFlag == 1)//左移
+            {
+                data_del.Rows[movePosition-1]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition-1;
+            }
+            if(updateFlag == 2)//p值
+            {
+                data_del.Rows[SqList.length + 4]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = SqList.length + 4;
+            }
+            if(updateFlag == 3)//长度
+            {
+                data_del.Rows[SqList.length]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = SqList.length;
+
+                data_del.Rows[SqList.length]["VALUE"] = "已删除";
+            }
+            if (updateFlag == 4)//显示最开始的数据
+            {
+                int length = SqList.length;
+                for (int i = 0; i < length; i++)//添加源数据
+                {
+                    string name = str[0] + ".srcData[" + i + "]";
+                    string value = value = SqList.srcData_del[i] + "";
+                    data_del.Rows.Add(name, value);
+                }
+                data_del.Rows.Add(str[0] + ".length", SqList.length);//长度
+                data_del.Rows.Add(str[1], SqList.delPosition);
+                data_del.Rows.Add(str[2], "未知");
+                data_del.Rows.Add(str[3], SqList.MAXSIZE);
+                data_del.Rows.Add(str[4], "未知");
+            }
+            return data_del;
+        }
+        public DataTable GetDataTable_Ins(string[] str,int updateFlag,string updateValue,int movePosition)
         {
             //设置主键
             //ID.AutoIncrement = true; //自动递增ID号 
             //DataColumn[] keys = new DataColumn[1];
             //keys[0] = NAME;
             //data.PrimaryKey = keys;
-            if(updateFlag == 0)//修改移动的值
+            if(updateFlag == 0)//右移
             {
-                data.Rows[movePosition+1]["VALUE"] = updateValue;
+                data_ins.Rows[movePosition+1]["VALUE"] = updateValue;
                 m_maindemon.listView_value.SelectedIndex = movePosition + 1;
             }
             if(updateFlag == 1)//修改P
             {
-                data.Rows[SqList.length+5]["VALUE"] = updateValue;
+                data_ins.Rows[SqList.length+5]["VALUE"] = updateValue;
                 m_maindemon.listView_value.SelectedIndex = SqList.length + 5;
             }
             if(updateFlag == 2)//修改长度
             {
-                data.Rows[SqList.length]["VALUE"] = updateValue;
+                data_ins.Rows[SqList.length]["VALUE"] = updateValue;
                 m_maindemon.listView_value.SelectedIndex = SqList.length;
             }
-            if(updateFlag == 4)//显示最开始的数据
+            if(updateFlag == 3)//显示最开始的数据
             {
                 int length = SqList.length;
                 for (int i = 0; i < length + 1; i++)//添加源数据
@@ -185,31 +298,40 @@ namespace SqListCAI
                         value = '?'.ToString();
                     else
                         value = SqList.srcData_ins[i] + "";
-                    data.Rows.Add(name, value);
+                    data_ins.Rows.Add(name, value);
                 }
-                data.Rows.Add(str[0] + ".length", SqList.length);
-                data.Rows.Add(str[1], SqList.insPosition);
-                data.Rows.Add(str[2], SqList.insertData);
-                data.Rows.Add(str[3], SqList.MAXSIZE);
-                data.Rows.Add(str[4], "未知");
+                data_ins.Rows.Add(str[0] + ".length", SqList.length);
+                data_ins.Rows.Add(str[1], SqList.insPosition);
+                data_ins.Rows.Add(str[2], SqList.insertData);
+                data_ins.Rows.Add(str[3], SqList.MAXSIZE);
+                data_ins.Rows.Add(str[4], "未知");
             }
-            return data;
+            return data_ins;
         }
         public void SetData()
         {
-            Demonstration.data.Clear();
             m_maindemon.canse_demon.Children.Clear();
             m_maindemon.listBox_currentRow.Items.Clear();
             m_maindemon.listBox_code.Items.Clear();
             m_maindemon.listView_value.DataContext = null;
             switch (flag)
             {
-                case 1:
+                case 1://顺序表插入
                     {
+                        Demonstration.data_ins.Clear();
                         ListDialog insertWindow = new ListDialog(flag);
                         //订阅事件
                         insertWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveOrderInsert);
                         insertWindow.ShowDialog();
+                        break;
+                    }
+                case 2://顺序表删除
+                    {
+                        Demonstration.data_ins.Clear();
+                        ListDialog deleteWindow = new ListDialog(flag);
+                        //订阅事件
+                        deleteWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveOrderDelete);
+                        deleteWindow.ShowDialog();
                         break;
                     }
                 default:
@@ -217,6 +339,14 @@ namespace SqListCAI
 
             }
         }
+
+        private void RecieveOrderDelete(object sender, PassValuesEventArgs e)
+        {
+            m_maindemon.srcData_ins = e.srcData;
+            m_maindemon.position_del = e.position;
+            m_maindemon.initUI(flag);
+        }
+
         private void RecieveOrderInsert(object sender, PassValuesEventArgs e)
         {
             m_maindemon.srcData_ins = e.srcData;

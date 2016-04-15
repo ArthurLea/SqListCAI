@@ -9,6 +9,8 @@ namespace SqListCAI.Entities
     #region 线性表实体的基本操作，插入，删除
     public partial class SqList
     {
+        public static int ERROR = -1;
+        public static int OK = 1;
         public static int length;
         public static int MAXSIZE = 14;
 
@@ -37,16 +39,16 @@ namespace SqListCAI.Entities
 
         public static int Inset_SqList(int i,char insData)
         {
-            int j = 0;
-            if(length == MAXSIZE-1)//表空间已满
+            int p = 0;
+            if(length == SqList.MAXSIZE-1)//表空间已满
             { return -1; }
-            if(i<1 || i>length+2)
-            { return 0; }
-            for (j = length; j >= i - 1; j--)
-                srcData_ins[j + 1] = srcData_ins[j];
-            srcData_ins[i - 1] = insData;
-            length++;
-            return 1;
+            if(i<1 || i> SqList.length)
+            { return ERROR; }
+            for (p = SqList.length; p >= i - 1; p--)
+                SqList.srcData_ins[p + 1] = SqList.srcData_ins[p];
+            SqList.srcData_ins[i - 1] = SqList.insertData;
+            SqList.length++;
+            return OK;
         }
 
         public static void init_SqList(string data, int position)
@@ -57,9 +59,16 @@ namespace SqListCAI.Entities
             delPosition = position;
             length = data.Length;
         }
-        public static void del_SqList(SqList l, int position)
+        public static int del_SqList(int i,string e)
         {
-
+            int p = 0;
+            if (SqList.delPosition < 1 || SqList.delPosition > SqList.length)//检查空表及删除位置的合理性
+            { return ERROR; }
+            e = SqList.srcData_del[SqList.delPosition - 1].ToString();//被删除元素的值赋给e
+            for (p = SqList.delPosition; p < SqList.length; p++)
+                SqList.srcData_del[p - 1] = SqList.srcData_del[p];//向左移动
+            SqList.length--;
+            return OK;
         }
     }
     #endregion
