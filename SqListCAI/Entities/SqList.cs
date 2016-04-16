@@ -20,12 +20,6 @@ namespace SqListCAI.Entities
 
         public static char[] srcData_del;
         public static int delPosition;
-        public SqList()
-        {
-
-            MAXSIZE = 14;
-            srcData_ins = new char[MAXSIZE];
-        }
         //初始化插入操作
         public static void init_SqList(string data, char instData, int position)
         {
@@ -50,7 +44,11 @@ namespace SqListCAI.Entities
             SqList.length++;
             return OK;
         }
-
+        /// <summary>
+        /// 初始化删除操作
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="position"></param>
         public static void init_SqList(string data, int position)
         {
             srcData_del = new char[data.Length + 1];

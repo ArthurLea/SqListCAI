@@ -198,6 +198,7 @@ namespace SqListCAI
 
         public static DataTable data_ins = new DataTable("DataTable_Ins");
         public static DataTable data_del = new DataTable("DataTable_Del");
+        public static DataTable data_linkCre = new DataTable("DataTable_LinkCre");
         /// <summary>
         /// 显示变量区中的变量
         /// </summary>
@@ -222,7 +223,52 @@ namespace SqListCAI
                     }
                     m_maindemon.listView_value.DataContext = GetDataTable_Del(SqListCodes.DELETE_VALUE, 4, null, 0).DefaultView;
                     break;
+                case 3:
+                    {
+                        if(data_linkCre.Columns.Count == 0)
+                        {
+                            data_linkCre.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                            data_linkCre.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                        }
+                    }
+                    m_maindemon.listView_value.DataContext = GetDataTable_LinkCre(LinkedListCodes.CREATE_VALUE, 4, null, 0).DefaultView;
+                    break;
+                default:
+                    break;
             }
+        }
+        public DataTable GetDataTable_LinkCre(string[] str, int updateFlag, string updateValue, int movePosition)
+        {
+            if(updateFlag == 0)//改变La(指向头结点)
+            {
+                data_linkCre.Rows[0]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = 0;
+            }
+            if(updateFlag == 1)//改变p的指向
+            {
+                data_linkCre.Rows[LinkedList.length + 2]["VALUE"] = "当前指向值为"+updateValue+"的结点";
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 2;
+            }
+            if(updateFlag == 2)//改变索引值i
+            {
+                data_linkCre.Rows[LinkedList.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 3;
+            }
+            if (updateFlag == 4)//显示最开始的数据
+            {
+                data_linkCre.Rows.Add(str[0], "未知");    //添加头结点
+                int length = LinkedList.length;
+                for (int i = 0; i < length; i++)          //添加源数据
+                {
+                    string name = str[1] + "[" + i + "]";
+                    string value = value = LinkedList.srcData[i] + "";
+                    data_linkCre.Rows.Add(name, value);
+                }
+                data_linkCre.Rows.Add(str[2], length);     //添加长度
+                data_linkCre.Rows.Add(str[3], "当前指向？");//添加指向值为？的结点（是当前插入的结点）
+                data_linkCre.Rows.Add(str[4], "未知");     //添加索引变量
+            }
+            return data_linkCre;
         }
 
         public DataTable GetDataTable_Del(string[] str, int updateFlag, string updateValue, int movePosition)
@@ -328,11 +374,20 @@ namespace SqListCAI
                     }
                 case 2://顺序表删除
                     {
-                        Demonstration.data_ins.Clear();
+                        Demonstration.data_del.Clear();
                         ListDialog deleteWindow = new ListDialog(flag);
                         //订阅事件
                         deleteWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveOrderDelete);
                         deleteWindow.ShowDialog();
+                        break;
+                    }
+                case 3://链表的创建
+                    {
+                        Demonstration.data_linkCre.Clear();
+                        ListDialog linkCreWindow = new ListDialog(flag);
+                        //订阅事件
+                        linkCreWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveLinkCre);
+                        linkCreWindow.ShowDialog();
                         break;
                     }
                 default:
@@ -341,9 +396,15 @@ namespace SqListCAI
             }
         }
 
+        private void RecieveLinkCre(object sender, PassValuesEventArgs e)
+        {
+            m_maindemon.srcData_linkedListCreate = e.srcData;
+            m_maindemon.initUI(flag);
+        }
+
         private void RecieveOrderDelete(object sender, PassValuesEventArgs e)
         {
-            m_maindemon.srcData_ins = e.srcData;
+            m_maindemon.srcData_del = e.srcData;
             m_maindemon.position_del = e.position;
             m_maindemon.initUI(flag);
         }
@@ -371,6 +432,8 @@ namespace SqListCAI
                     }
                 case 3://链表的创建
                     {
+                        MessageBox.Show(Explain.LinkedCreExplain, "链表创建", MessageBoxButton.OK);
+                        break;
                         break;
                     }
                 case 4://链表的插入

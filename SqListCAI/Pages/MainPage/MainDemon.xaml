@@ -181,10 +181,21 @@
                         </Grid.RowDefinitions>
                         <Menu Grid.Row="0" ClipToBounds="True" Margin="2,0,0,0">
                             <Image Source="/images/menu_star.png" Margin="0"></Image>
-                            <Label x:Name="demon_lable_name" Content="当前操作类名" MaxWidth="100" Foreground="Blue" FontStyle="Italic" Width="100"/>
-                            <Image Source="/images/menu_drop.png" Name="demo_drop" Margin="558,0,0,0"/>
+                            <Label x:Name="demon_lable_name" Content="当前操作类名" MaxWidth="150" Foreground="Blue" FontStyle="Italic" Width="150"/>
+                            <Image Source="/images/menu_drop.png" Name="demo_drop" Margin="508,0,0,0"/>
                         </Menu>
                         <Canvas Name="canse_demon" Grid.Row="1" ClipToBounds="False" Margin="0,1,0,0">
+                            <Rectangle Height="50" Width="60" Margin="20,120,0,0" Stroke="Yellow" Fill="SkyBlue"/>
+                            <Label x:Name="head_point" Content="La" HorizontalContentAlignment="Center" Canvas.Left="20" Canvas.Top="98" Height="22" Width="60" Foreground="Green"/>
+                            <Label x:Name="data" Content="" FontSize="30" Background="DarkGray" Canvas.Left="20" Canvas.Top="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Height="50" Width="40"/>
+
+                            <Line x:Name="connect_line" X1="70" Y1="145" X2="140" Y2="145" Stroke="Black"/>
+                            <Line x:Name="arrowUp_line" X1="140" Y1="145" X2="130" Y2="135" Stroke="Black"/>
+                            <Line x:Name="arrowDown_line" X1="140" Y1="145" X2="130" Y2="155" Stroke="Black"/>
+
+                            <Rectangle Height="50" Width="60" Stroke="Yellow" Fill="SkyBlue" Canvas.Left="140" Canvas.Top="120"/>
+                            <Label x:Name="new_point" Content="P" HorizontalContentAlignment="Center" Canvas.Left="140" Canvas.Top="98" Height="22" Width="60" Foreground="DarkBlue"/>
+                            <Label x:Name="data_Copy" Content="x" FontSize="30" Background="DarkGray" Canvas.Left="140" Canvas.Top="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="50" Width="40"/>
                         </Canvas>
                     </Grid>
                 </Border>
@@ -207,7 +218,7 @@
                             </Grid.RowDefinitions>
                             <Menu Grid.Row="0" ClipToBounds="False">
                                 <Image Source="/images/menu_star.png" Margin="0"></Image>
-                                <Label x:Name="algorithm_lable_name" Content="算法代码" Foreground="Blue" MaxWidth="100" FontStyle="Italic" Width="185"/>
+                                <Label x:Name="algorithm_lable_name" Content="算法代码" Foreground="Blue" MaxWidth="100" FontStyle="Italic" Width="100"/>
                                 <Image Source="/images/menu_drop.png" Name="code_drop" Margin="258,0,0,0"/>
                             </Menu>
                             <Grid Grid.Row="1">

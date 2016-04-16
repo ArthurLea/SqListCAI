@@ -45,10 +45,11 @@ namespace SqListCAI.Dialogs
                 case 3://链表创建
                     radioButton_linkedCre.IsChecked = true;
                     this.listDialog.Title = "链表创建";
+                    this.srcData.Text = "【?9bD";
                     this.lable_insertData.Background = Brushes.DarkBlue;
                     this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
                     this.lable_place.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
                     break;
                 case 4://链表插入
                     radioButton_linkedIns.IsChecked = true;
@@ -81,7 +82,6 @@ namespace SqListCAI.Dialogs
                     orderInsert();
                     break;
                 case 2:
-
                     if (radioButton_orderDel.IsChecked == false)
                     {
                         MessageBox.Show("请选中线性表删除！", "警告", MessageBoxButton.OK);
@@ -89,7 +89,28 @@ namespace SqListCAI.Dialogs
                     }
                     orderDelete();
                     break;
+                case 3:
+                    if (radioButton_linkedCre.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中链表创建！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    linkedListCre();
+                    break;
             }
+        }
+
+        private void linkedListCre()
+        {
+            if ((this.srcData.Text == String.Empty))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            string src = this.srcData.Text;
+            PassValuesEventArgs args = new PassValuesEventArgs(src);
+            PassValuesEvent(this, args);
+            this.Close();
         }
 
         private void orderDelete()

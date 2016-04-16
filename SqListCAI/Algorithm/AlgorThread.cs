@@ -25,15 +25,58 @@ namespace SqListCAI.Algorithm
             switch(aldoTypeFlag)
             {
                 case 1://顺序表插入
-                        orderInsert(operatorFlag);
-                        break;
+                    orderInsert(operatorFlag);
+                    break;
                 case 2://顺序表删除
-                        orderDelete(operatorFlag);
+                    orderDelete(operatorFlag);
+                    break;
+                case 3://链表创建
+                    linkedCreate(operatorFlag);    
                     break;
                 default:
                     break;
                    
             }
+        }
+
+        private void linkedCreate(int operatorFlag)
+        {
+            LinkedList.head = new LinkedNode(null);//定义一个空链表的头结点
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, null);       //2
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, true, 10000, null);    //3
+            Thread.Sleep(WAITTIME);
+            LinkedNode p;
+            LinkedNode r = LinkedList.head.next;
+            for (int i = 0;i< LinkedList.srcData.Length; i++)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, i);   //4
+                Thread.Sleep(WAITTIME);
+
+                p = new LinkedNode(null);
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, i, null);   //5
+                Thread.Sleep(WAITTIME);
+
+                p.data = LinkedList.srcData[i];
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, i, LinkedList.srcData[i]);   //6
+                Thread.Sleep(WAITTIME);
+
+                p.next = r;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, false, 0, null);   //7
+                Thread.Sleep(WAITTIME);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, false, 0, null);      //8
+                Thread.Sleep(WAITTIME);
+
+                r = p;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, true, i, null);   //3
+                Thread.Sleep(WAITTIME);
+            }
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, null);      //9
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish,3);   //4
         }
 
         private void orderDelete(int operatorFlag)
@@ -68,7 +111,7 @@ namespace SqListCAI.Algorithm
             Thread.Sleep(WAITTIME);
             judgeIsPoint(6);
 
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 0, e);           //7
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 10000, e);           //7
             Thread.Sleep(WAITTIME);
             judgeIsPoint(7);
 
@@ -128,7 +171,7 @@ namespace SqListCAI.Algorithm
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
 
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 0, e);           //7
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 10000, e);           //7
             Thread.Sleep(WAITTIME);
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
@@ -187,7 +230,7 @@ namespace SqListCAI.Algorithm
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, null);           //6
             Thread.Sleep(WAITTIME);
 
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 0, e);           //7
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, 10000, e);           //7
             Thread.Sleep(WAITTIME);
 
             for (p = SqList.delPosition; p < SqList.length; p++)

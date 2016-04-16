@@ -46,8 +46,7 @@ namespace SqListCAI.Utils.SourceCodes
             "       *(p-1) = *p;     // 被删除元素之后的元素左移",
             "   --L.length;                           // 表长减1",
             "   return OK;",
-            "} // ListDelete_Sq ",
-
+            "} // ListDelete_Sq "
         };
         public static string[] DELETE_VALUE = new string[]
         {

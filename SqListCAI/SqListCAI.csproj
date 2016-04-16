@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Algorithm\Thread.cs" />
     <Compile Include="Utils\Files.cs" />
+    <Compile Include="Utils\SourceCodes\LinkedListCodes.cs" />
     <Compile Include="Utils\SourceCodes\SqListCodes.cs" />
     <Page Include="Dialogs\ListDialog.xaml">
       <SubType>Designer</SubType>
@@ -204,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\menu_star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minimize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

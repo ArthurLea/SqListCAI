@@ -18,7 +18,11 @@ namespace SqListCAI.Entities
             "和顺序表插入相反，从顺序表中删除第i（1<i<n）个\n"+
             "元素时，需将从第i+1至第n个，共n-1个元素依次向后移动一个位置";
 
-        public static string LinkedCreExplain = "";
+        public static string LinkedCreExplain =
+            "这是一个从表尾到表头逆行建立线性表的算法（头插法）。每生成\n" +
+            "一个新的结点，都插入在第一个结点之前，也即表头结点之后，因此，\n" +
+            "只需要修改表头结点中的指针域的值，但在这之前，必须先将其值赋给\n" +
+            "新结点的指针域";
         public static string LinkedInsExplain = "";
         public static string LinkedDelExplain = "";
 
