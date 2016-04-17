@@ -37,17 +37,92 @@ namespace SqListCAI.Algorithm
                 case 4://链表插入
                     linkedInsert(operatorFlag);
                     break;
+                case 5://链表删除
+                    linkedDelete(operatorFlag);
+                    break;
                 default:
                     break;
                    
             }
         }
 
+        private void linkedDelete(int operatorFlag)
+        {
+            if (operatorFlag == 1) linkedDeleteRun();//链表删除全速执行
+            //if (operatorFlag == 2) linkedDeleteStep();//链表删除单步执行
+            //if (operatorFlag == 3) linkedDeleteRunTo();//链表删除断点执行到
+        }
+
+        private void linkedDeleteRun()
+        {
+            LinkedNode p, s = null;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);       //2
+            Thread.Sleep(WAITTIME);
+
+            p = LinkedList.head;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);        //3
+            Thread.Sleep(WAITTIME);
+
+            int j = 0;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, j);       //4//p指向头结点
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 0, 0);       //5//j==0
+            Thread.Sleep(WAITTIME);
+
+            while ((p.next != null) && j < LinkedList.insertPosition - 1)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);  //6
+                Thread.Sleep(WAITTIME);
+
+                p = p.next;
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, j, j);  //7//p结点改变指向
+                Thread.Sleep(WAITTIME);
+
+                j++;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, 0, j);  //8//j值开始改变
+                Thread.Sleep(WAITTIME);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //5
+                Thread.Sleep(WAITTIME);
+
+            }
+            if ((p == null) || (j > LinkedList.insertPosition - 1)) { }//return ERROR; //i小于1或者大于表长
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
+            Thread.Sleep(WAITTIME);
+
+            s = new LinkedNode(null);//生成新结点
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+            Thread.Sleep(WAITTIME);
+
+            s.data = LinkedList.insertData;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, 0, 0);  //11//生成新的结点
+            Thread.Sleep(WAITTIME);
+
+            s.next = p.next;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 12, true, 0, LinkedList.insertData);  //12//新的结点赋值
+            Thread.Sleep(WAITTIME);
+
+            p.next = s;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, 0);  //13//右边连接 
+            Thread.Sleep(WAITTIME);
+
+            //return OK;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, 0);  //14//左边连接 
+            Thread.Sleep(WAITTIME);
+            //"}//ListInsert_L"
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 15, false, 0, 0);  //15//程序结束 
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 4);//通知主线程算法执行完毕
+        }
+
         private void linkedInsert(int operatorFlag)
         {
-            if (operatorFlag == 1) linkedInsertRun();//链表创建全速执行
-            if (operatorFlag == 2) linkedInsertStep();//链表创建单步执行
-            if (operatorFlag == 3) linkedInsertRunTo();//链表创建断点执行到
+            if (operatorFlag == 1) linkedInsertRun();//链表插入全速执行
+            if (operatorFlag == 2) linkedInsertStep();//链表插入单步执行
+            if (operatorFlag == 3) linkedInsertRunTo();//链表插入断点执行到
         }
 
         private void linkedInsertRunTo()

@@ -107,14 +107,68 @@ namespace SqListCAI.Dialogs
                     }
                     linkedListIns();
                     break;
+                case 5:
+                    if (radioButton_linkedDel.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中链表删除！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    linkedListDel();
+                    break;
                 default:
                     break;
             }
         }
 
+        private void linkedListDel()
+        {
+            if ((this.srcData.Text == String.Empty) || (this.position.Text == String.Empty))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            try
+            {
+                string src = this.srcData.Text;
+                int position = Convert.ToInt32(this.position.Text);
+                PassValuesEventArgs args = new PassValuesEventArgs(src, position);
+                PassValuesEvent(this, args);
+                this.Close();
+            }
+            catch (FormatException fe)
+            {
+                MessageBox.Show("插入位置必须为数字！" + fe.StackTrace, "警告", MessageBoxButton.OK);
+                return;
+            }
+        }
+
         private void linkedListIns()
         {
-            insert_Order_Linked();
+            if ((this.srcData.Text == String.Empty) || insertData.Text.Equals("") || (this.position.Text == String.Empty))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            try
+            {
+                string src = this.srcData.Text;
+                if (this.insertData.Text.Length > 1)
+                {
+                    MessageBox.Show("插入内容为一个字符！", "警告", MessageBoxButton.OK);
+                    return;
+                }
+                char insert = this.insertData.Text[0];
+
+                int position = Convert.ToInt32(this.position.Text);
+                PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
+                PassValuesEvent(this, args);
+                this.Close();
+            }
+            catch (FormatException fe)
+            {
+                MessageBox.Show("插入位置必须为数字！" + fe.StackTrace, "警告", MessageBoxButton.OK);
+                return;
+            }
         }
 
         private void linkedListCre()
@@ -153,11 +207,6 @@ namespace SqListCAI.Dialogs
         }
 
         private void orderInsert()
-        {
-            insert_Order_Linked();
-        }
-
-        private void insert_Order_Linked()
         {
             if ((this.srcData.Text == String.Empty) || insertData.Text.Equals("") || (this.position.Text == String.Empty))
             {

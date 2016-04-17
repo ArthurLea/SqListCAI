@@ -128,8 +128,26 @@ namespace SqListCAI.Pages.MainPage
             this.demon_lable_name.Content = demon_name;
             this.flag = 4;
             initUI(this.flag);
+        }        
+        //链表插入
+        public string srcData_LinkedDel;
+        public int position_LinkedDel;
+        /// <summary>
+        /// 链表的删除
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="position"></param>
+        /// <param name="temp"></param>
+        public MainDemon(string demon_name, string srcData, int position, int temp) : this(demon_name)
+        {
+            InitializeComponent();
+            this.srcData_LinkedDel = srcData;
+            this.position_LinkedDel = position;
+            this.demon_lable_name.Content = demon_name;
+            this.flag = 5;
+            initUI(this.flag);
         }
-
         /// <summary>
         /// UI的初始化
         /// </summary>
@@ -191,6 +209,19 @@ namespace SqListCAI.Pages.MainPage
                         getCanseContent_linked();
                         break;
                     }
+                case 5:
+                    {
+                        Demonstration.data_linkDel.Clear();
+                        LinkedList.init_LinkedList(srcData_LinkedDel, position_LinkedDel);//初始化链表,已建立带头结点的链表
+                        //LinkedNode p = LinkedList.head.next;for (int i = 0; i < LinkedList.length; i++){Trace.WriteLine(p.data);p = p.next; }
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_linkedListDelete;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContent_linked();
+                        break;
+                    }
                 default:
                     break;
             }
@@ -215,6 +246,11 @@ namespace SqListCAI.Pages.MainPage
             fisrst_enter_runTo_click_flag = true;//重置断点执行标志
 
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
+        }
+
+        private void Step_linkedListDelete(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            
         }
 
         private void Step_linkedListInsert(int currentRow, bool changeFlag, int movePosition, object changeValue)
@@ -1121,6 +1157,7 @@ namespace SqListCAI.Pages.MainPage
                     }
                 case 5://链表的删除
                     {
+                        dempnstration.ShowCode(LinkedListCodes.DELETE_CODE);
                         break;
                     }
                 case 6://直接查找

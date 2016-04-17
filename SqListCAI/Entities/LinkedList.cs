@@ -31,7 +31,10 @@ namespace SqListCAI.Entities
         public static char insertData;
         public static int insertPosition;
         public static int deletePosition;
-
+        /// <summary>
+        /// 演示链表创建动画时的初始化
+        /// </summary>
+        /// <param name="data"></param>
         //初始化源数据
         public static void init_LinkedList(string data)
         {
@@ -41,6 +44,9 @@ namespace SqListCAI.Entities
                 srcData[i] = data[i];
             length = data.Length;
         }
+        /// <summary>
+        /// 链表的创建函数（尾插法）
+        /// </summary>
         private static void Create_LinkedList()
         {
             LinkedList.head = new LinkedNode(null); ;//定义一个空链表的头结点
@@ -72,23 +78,22 @@ namespace SqListCAI.Entities
 
             Create_LinkedList();
         }
-        //public void init_LinkedList(string data)
-        //{
-        //    //获取源数据
-        //    srcData = new char[data.Length];
-        //    for (int i = 0; i < data.Length; i++)
-        //        srcData[i] = data[i];
-
-        //    //建立链表表头
-        //    head = new LinkedNode(null);
-        //}
         /// <summary>
-        /// 链表创建的初始化函数
+        /// 链表的删除初始化函数
         /// </summary>
-        /// <param name="data"></param>
-        public LinkedList(string data)
+        /// <param name="srcData_LinkedIns"></param>
+        /// <param name="insertData_LinkedIns"></param>
+        /// <param name="position_LinkedIns"></param>
+        internal static void init_LinkedList(string srcData_LinkedDel, int position_LinkedDel)
         {
-            init_LinkedList(data);
+            //获取源数据
+            srcData = new char[srcData_LinkedDel.Length];
+            for (int i = 0; i < srcData_LinkedDel.Length; i++)
+                srcData[i] = srcData_LinkedDel[i];
+            length = srcData_LinkedDel.Length;
+            deletePosition = position_LinkedDel;
+
+            Create_LinkedList();
         }
     }
     
