@@ -54,10 +54,12 @@ namespace SqListCAI.Dialogs
                 case 4://链表插入
                     radioButton_linkedIns.IsChecked = true;
                     this.listDialog.Title = "链表插入";
+                    this.srcData.Text = "【?9bD";
                     break;
                 case 5://链表删除
                     radioButton_linkedDel.IsChecked = true;
                     this.listDialog.Title = "链表删除";
+                    this.srcData.Text = "【?9bD";
                     this.lable_insertData.Background = Brushes.DarkBlue;
                     this.insertData.IsEnabled = false;
                     this.insertData.Background = Brushes.DarkBlue;
@@ -97,7 +99,22 @@ namespace SqListCAI.Dialogs
                     }
                     linkedListCre();
                     break;
+                case 4:
+                    if(radioButton_linkedIns.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中链表插入！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    linkedListIns();
+                    break;
+                default:
+                    break;
             }
+        }
+
+        private void linkedListIns()
+        {
+            insert_Order_Linked();
         }
 
         private void linkedListCre()
@@ -137,7 +154,11 @@ namespace SqListCAI.Dialogs
 
         private void orderInsert()
         {
+            insert_Order_Linked();
+        }
 
+        private void insert_Order_Linked()
+        {
             if ((this.srcData.Text == String.Empty) || insertData.Text.Equals("") || (this.position.Text == String.Empty))
             {
                 MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);

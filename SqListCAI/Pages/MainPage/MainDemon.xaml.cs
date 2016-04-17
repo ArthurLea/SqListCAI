@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Text;
+using System.Diagnostics;
 
 namespace SqListCAI.Pages.MainPage
 {
@@ -62,7 +63,7 @@ namespace SqListCAI.Pages.MainPage
         /// <param name="srcData"></param>
         /// <param name="insertData"></param>
         /// <param name="position"></param>
-        public MainDemon(string demon_name,string srcData, char insertData,int position)//线性表插入
+        public MainDemon(string demon_name,string srcData, char insertData,int position)
         {
             InitializeComponent();
             this.srcData_ins = srcData;
@@ -70,7 +71,7 @@ namespace SqListCAI.Pages.MainPage
             this.position_ins = position;
             this.demon_lable_name.Content = demon_name;//初始化当前操作内容
             flag = 1;
-            initUI(flag);
+            initUI(this.flag);
         }
         //顺序表删除
         public string srcData_del;
@@ -88,11 +89,11 @@ namespace SqListCAI.Pages.MainPage
             this.position_del = position;
             this.demon_lable_name.Content = demon_name;
             flag = 2;
-            initUI(flag);
+            initUI(this.flag);
         }
         //链表的创建
-        public LinkedList linkedList = null;
-        public string srcData_linkedListCreate;
+        //public LinkedList linkedList;
+        public string srcData_linkedCre;
         /// <summary>
         /// /链表的创建
         /// </summary>
@@ -101,10 +102,32 @@ namespace SqListCAI.Pages.MainPage
         public MainDemon(string demon_name, string srcData) : this(demon_name)
         {
             InitializeComponent();
-            this.srcData_linkedListCreate = srcData;
+            this.srcData_linkedCre = srcData;
             this.demon_lable_name.Content = demon_name;
             flag = 3;
-            initUI(flag);
+            initUI(this.flag);
+        }
+        //链表插入
+        public string srcData_LinkedIns;
+        public char insertData_LinkedIns;
+        public int position_LinkedIns;
+        /// <summary>
+        /// 链表的插入
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="insertData"></param>
+        /// <param name="position"></param>
+        /// <param name="v"></param>
+        public MainDemon(string demon_name, string srcData, char insertData, int position, int temp) : this(demon_name)
+        {
+            InitializeComponent();
+            this.srcData_LinkedIns = srcData;
+            this.insertData_LinkedIns = insertData;
+            this.position_LinkedIns = position;
+            this.demon_lable_name.Content = demon_name;
+            this.flag = 4;
+            initUI(this.flag);
         }
 
         /// <summary>
@@ -134,7 +157,7 @@ namespace SqListCAI.Pages.MainPage
                 case 2:
                     {
                         Demonstration.data_del.Clear();
-                        SqList.init_SqList(srcData_del,position_del);
+                        SqList.init_SqList(srcData_del, position_del);
                         ShowDemon();
                         ShowCode();
                         ShowValue();
@@ -146,13 +169,26 @@ namespace SqListCAI.Pages.MainPage
                 case 3:
                     {
                         Demonstration.data_linkCre.Clear();
-                        LinkedList.init_LinkedList(srcData_linkedListCreate);//初始化链表,已建立带头结点的链表
+                        LinkedList.init_LinkedList(srcData_linkedCre);//初始化链表,已建立带头结点的链表
                         //ShowDemon();
                         ShowCode();
                         ShowValue();
                         m_DelegateStep = Step_linkedListCreate;
                         m_delegateExeFinish = ExeFinish;
                         //getCanseContent();
+                        break;
+                    }
+                case 4:
+                    {
+                        Demonstration.data_linkIns.Clear();
+                        LinkedList.init_LinkedList(srcData_LinkedIns, insertData_LinkedIns, position_LinkedIns);//初始化链表,已建立带头结点的链表
+                        //LinkedNode p = LinkedList.head.next;for (int i = 0; i < LinkedList.length; i++){Trace.WriteLine(p.data);p = p.next; }
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_linkedListInsert;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContent_linked();
                         break;
                     }
                 default:
@@ -179,6 +215,190 @@ namespace SqListCAI.Pages.MainPage
             fisrst_enter_runTo_click_flag = true;//重置断点执行标志
 
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
+        }
+
+        private void Step_linkedListInsert(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if (currentRow==4)//最开始P指向头结点
+                {
+                    //动画显示
+                    Label label_node_head =  (Label)head_node[0];
+                    Label label_data_head =  (Label)head_node[2];
+                    label_node_head.Content = "La ** P";
+                    label_data_head.Background = Brushes.Green;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 0, "指向头结点La", 0).DefaultView;
+                }
+                if (currentRow == 5)//第一次进入代表修改变量区j值，这里不用设置标志，因为changeFlag的原因
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 1, changeValue+"", 0).DefaultView;
+                if (currentRow == 7)//P结点指向下一个位置
+                {
+                    if(movePosition == 0)//清除指向头结点的显示
+                    {
+                        ((Label)head_node[0]).Content = "La";
+                        ((Label)head_node[2]).Background = Brushes.DarkGray;
+                    }
+                    else
+                    {
+                        ((Label)label_node[movePosition-1]).Content = "";
+                        ((Label)label_data[movePosition - 1]).Background = Brushes.DarkGray;
+                    }
+
+                    ((Label)label_node[movePosition]).Content = "P";
+                    ((Label)label_node[movePosition]).Foreground = Brushes.Red;
+                    ((Label)label_data[movePosition]).Background = Brushes.Red;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 0, "当前指向值为"+LinkedList.srcData[movePosition]+"的结点", 0).DefaultView;
+                }
+                if (currentRow == 8)//j值开始改变
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 1, changeValue.ToString(), 0).DefaultView;
+                if (currentRow == 11)//生成新的结点，画结点
+                {
+                    double canse_left = (2 * LinkedList.insertPosition - 1)*60 + 20;
+                    init_labe_node(new_label_node);
+                    new_label_node.Background = Brushes.Green;
+                    new_label_node.Foreground = Brushes.Red;
+                    new_label_node.Content = "S";
+                    new_label_node.Margin = new Thickness(canse_left, (98-22-50-10), 0, 0);
+
+                    init_rec_lab_node_data(new_rec_node, new_label_data);
+                    new_rec_node.Margin = new Thickness(canse_left, (98 - 50 - 10), 0, 0);
+                    new_label_data.Margin = new Thickness(canse_left, (98 - 50 - 10), 0, 0);
+
+                    this.canse_demon.Children.Add(new_label_node);
+                    this.canse_demon.Children.Add(new_rec_node);
+                    this.canse_demon.Children.Add(new_label_data);
+
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 2, "插入结点值未知？", 0).DefaultView;
+                }
+                if(currentRow == 12)//新的结点赋值
+                {
+                    new_label_data.Content = LinkedList.insertData;
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 2, "插入结点值为" + changeValue, 0).DefaultView;
+                }
+                if (currentRow == 13)//右边连接
+                {
+                    double canse_left1 = (2 * LinkedList.insertPosition - 1) * 60 + 50 + 20;
+                    double canse_top1 = 98 - 25 - 10;
+                    Line[] line = new Line[4]; 
+                    for(int i=0;i<line.Length;i++)
+                    { line[i] = new Line(); line[i].Stroke = Brushes.Black; }
+                    line[0].X1 = canse_left1;                                line[0].Y1 = canse_top1;
+                    line[0].X2 = line[0].X1+40;                              line[0].Y2 = canse_top1;
+
+                    line[1].X1 = line[0].X2;                                 line[1].Y1 = line[0].Y2;
+                    line[1].X2 = line[1].X1;                                 line[1].Y2 = 98;
+                    //left
+                    line[2].X1 = line[1].X2;                                 line[2].Y1 = 98;
+                    line[2].X2 = line[2].X1-10;                              line[2].Y2 = 98-10;
+                    //right
+                    line[3].X1 = line[1].X2;                                 line[3].Y1 = 98;
+                    line[3].X2 = line[2].X1+10;                              line[3].Y2 = 98-10;
+
+
+                    this.canse_demon.Children.Add(line[0]);
+                    this.canse_demon.Children.Add(line[1]);
+                    this.canse_demon.Children.Add(line[2]);
+                    this.canse_demon.Children.Add(line[3]);
+                }
+                if(currentRow ==14)//左边连接
+                {
+                    //移除原先连接线
+                    this.canse_demon.Children.Remove(line1[LinkedList.insertPosition - 1]);
+                    this.canse_demon.Children.Remove(line2[LinkedList.insertPosition - 1]);
+                    this.canse_demon.Children.Remove(line3[LinkedList.insertPosition - 1]);
+
+                    double canse_left1 = (2 * LinkedList.insertPosition - 1) * 60 - 30 + 20;
+                    double canse_top1 = 98;
+                    Line[] line = new Line[4];
+                    for (int i = 0; i < line.Length; i++)
+                    { line[i] = new Line(); line[i].Stroke = Brushes.Black; }
+                    line[0].X1 = canse_left1;                                   line[0].Y1 = canse_top1;
+                    line[0].X2 = line[0].X1;                                    line[0].Y2 = canse_top1 -25 -10;
+
+                    line[1].X1 = line[0].X2;                                    line[1].Y1 = line[0].Y2;
+                    line[1].X2 = line[1].X1 + 30;                               line[1].Y2 = line[1].Y1;
+                    //top
+                    line[2].X1 = line[1].X2;                                    line[2].Y1 = line[1].Y2;
+                    line[2].X2 = line[2].X1 - 10;                               line[2].Y2 = line[2].Y1-10;
+                    //bottom
+                    line[3].X1 = line[1].X2;                                    line[3].Y1 = line[1].Y2;
+                    line[3].X2 = line[2].X1 - 10;                               line[3].Y2 = line[3].Y1+10;
+
+                    this.canse_demon.Children.Add(line[0]);
+                    this.canse_demon.Children.Add(line[1]);
+                    this.canse_demon.Children.Add(line[2]);
+                    this.canse_demon.Children.Add(line[3]);
+                }
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+            }
+        }
+        Label new_label_node = new Label();
+        Rectangle new_rec_node = new Rectangle();
+        Label new_label_data = new Label();
+                    
+
+        public object[] head_node = new object[3];//存储头结点
+        public Label[] label_node = null;
+        public Rectangle[] Rec_node = null;
+        public Label[] label_data = null;
+        public Line[] line1 = null;
+        public Line[] line2 = null;
+        public Line[] line3 = null;
+        public void getCanseContent_linked()//获取动画显示中画布中的所有组件
+        {
+            int i = 0;
+            int label_node_num = 0;
+            int rc_node_num = 0;
+            int label_data_num = 0;
+            int line1_num = 0;
+            int line2_num = 0;
+            int line3_num = 0;
+            if (label_node != null) label_node = null;
+            if (Rec_node != null) Rec_node = null;
+            if (label_data != null) label_data = null;
+            if (line1 != null) line1 = null;
+            if (line2 != null) line2 = null;
+            if (line3 != null) line3 = null;
+            int count = (this.canse_demon.Children.Count-3-1)/6;
+            label_node = new Label[count];
+            Rec_node = new Rectangle[count];
+            label_data = new Label[count];
+            line1 = new Line[count];
+            line2 = new Line[count];//bottom
+            line3 = new Line[count];//top
+            IEnumerator ie = this.canse_demon.Children.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                if (i == 0 || i == 1 || i == 2)//不存储头结点的组件（一个矩形和两个label）
+                {
+                    head_node[i] = ie.Current;//存储头结点组件（依次为label_node、rec_node、label_data）
+                    i++;
+                    continue;
+                }
+                if (i == (this.canse_demon.Children.Count - 1)) continue;
+                if (i % 6 == 3)
+                    label_node[label_node_num++] = (Label)ie.Current;
+                if (i % 6 == 4)
+                    Rec_node[rc_node_num++] = (Rectangle)ie.Current;
+                if (i % 6 == 5)
+                    label_data[label_data_num++] = (Label)ie.Current;
+                if (i % 6 == 0)
+                    line1[line1_num++] = (Line)ie.Current;
+                if (i % 6 == 1)
+                    line2[line2_num++] = (Line)ie.Current;
+                if (i % 6 == 2)
+                    line3[line3_num++] = (Line)ie.Current;
+                i++;
+            }
         }
         public bool first_draw_new_node_flag = true;
         //public int[] index_label = new int[2];//记录新节点label_node和label_data在canse中的位置
@@ -300,39 +520,7 @@ namespace SqListCAI.Pages.MainPage
                     rec_node.Fill = Brushes.SkyBlue;
             }
         }
-        public Rectangle[] Rec_node = null;
-        public Label[] label = null;
-        public Line[] line = null;
-        public void getCanseContent_linked()//获取动画显示画布中的所有组件
-        {
-            int i = 0;
-            int rc_num = 0;
-            int lable_num = 0;
-            int line_num = 0;
-            if (Rec_node != null) Rec_node = null;
-            if (label != null) label = null;
-            if (line != null) line = null;
-            Rec_node = new Rectangle[this.canse_demon.Children.Count];
-            label = new Label[this.canse_demon.Children.Count];
-            line = new Line[this.canse_demon.Children.Count];
-            IEnumerator ie = this.canse_demon.Children.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                if (i == 0 || i == 1 || i == 2)//不存储头结点的组件（一个矩形和两个label）
-                {
-                    i++;
-                    continue;
-                }
-                if (i % 6 == 3)//单数为矩形
-                    Rec_node[rc_num++] = (Rectangle)ie.Current;
-                if ((i % 6 == 4) || (i%6==5))//双数为lable
-                    label[lable_num++] = (Label)ie.Current;
-                if ((i % 6 == 0) || (i % 6 == 1) || (i % 6 == 2))
-                    line[line_num++] = (Line)ie.Current;
-                i++;
-            }
-        }
-        private void init_rec_lab_node_data(Rectangle rec_node, Label label_data)
+        public void init_rec_lab_node_data(Rectangle rec_node, Label label_data)
         {
             rec_node.Width = 60;
             rec_node.Height = 50;
@@ -347,7 +535,7 @@ namespace SqListCAI.Pages.MainPage
             label_data.VerticalContentAlignment = VerticalAlignment.Center;
         }
 
-        private void init_labe_node(Label label_node)
+        public void init_labe_node(Label label_node)
         {
             label_node.HorizontalContentAlignment = HorizontalAlignment.Center;
             label_node.Height = 22;
@@ -541,6 +729,9 @@ namespace SqListCAI.Pages.MainPage
                     break;
                 case 3:
                     MessageBox.Show("链表创建算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 4:
+                    MessageBox.Show("链表插入算法执行完毕!", "提示", MessageBoxButton.OK);
                     break;
                 default:
                     break;
@@ -766,25 +957,10 @@ namespace SqListCAI.Pages.MainPage
         private void THreadFun_RunTo_Click()
         {
             AlgorThread algroThread = new AlgorThread(allDone, allDone, this);
-            algroThread.Run(flag, 3);//调用AlgorThread的run函数，执行线程体  
-        }
-        /// <summary>
-        /// 恢复最开始的状态
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void resume_Click(object sender, RoutedEventArgs e)
-        {
-            initUI(flag);
-            this.button_run.IsEnabled = true;
-            this.button_run.Background = getImageSrc("/Images/toolbar_run.png");
-            this.lable_pause.Content = "暂停";
-            this.listBox_code.SelectedIndex = -1;
-            this.listBox_currentRow.SelectedIndex = -1;
-            if (wherePoint != null)//清除断点
-                wherePoint = null;
+            algroThread.Run(flag, 3);//调用AlgorThread的run函数，执行线程体      
         }
         public int[] wherePoint;
+        private int v;
 
         /// <summary>
         /// 设置断点
@@ -850,6 +1026,23 @@ namespace SqListCAI.Pages.MainPage
             }
             else
                 MessageBox.Show("您当前未设置任何断点！", "提示", MessageBoxButton.OK);
+        }
+
+        /// <summary>
+        /// 恢复最开始的状态
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void resume_Click(object sender, RoutedEventArgs e)
+        {
+            initUI(flag);
+            this.button_run.IsEnabled = true;
+            this.button_run.Background = getImageSrc("/Images/toolbar_run.png");
+            this.lable_pause.Content = "暂停";
+            this.listBox_code.SelectedIndex = -1;
+            this.listBox_currentRow.SelectedIndex = -1;
+            if (wherePoint != null)//清除断点
+                wherePoint = null;
         }
         /// <summary>
         /// 线程测试函数
@@ -923,6 +1116,7 @@ namespace SqListCAI.Pages.MainPage
                     }
                 case 4://链表的插入
                     {
+                        dempnstration.ShowCode(LinkedListCodes.INSERT_CODE);
                         break;
                     }
                 case 5://链表的删除

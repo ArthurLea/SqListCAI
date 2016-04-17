@@ -76,11 +76,9 @@
     <Compile Include="Entities\LinkedList.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
-    <Compile Include="Algorithm\Ex.cs" />
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
       <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Algorithm\Thread.cs" />
     <Compile Include="Utils\Files.cs" />
     <Compile Include="Utils\SourceCodes\LinkedListCodes.cs" />
     <Compile Include="Utils\SourceCodes\SqListCodes.cs" />
@@ -114,10 +112,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\TabControlStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Algorithm\Thread.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

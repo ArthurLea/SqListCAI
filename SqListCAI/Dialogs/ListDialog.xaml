@@ -41,7 +41,7 @@
                 <Label x:Name="lable_srcdata" Content="建立数据：" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lable_insertData" Content="插入数据：" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lable_place" Content="插入位置：" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="102,15,0,0" TextWrapping="Wrap" Text="1?9AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="1"/>
+                <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="102,15,0,0" TextWrapping="Wrap" Text="1?9W2AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="1"/>
                 <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="102,55,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="210" TabIndex="2"/>
                 <TextBox x:Name="position" HorizontalAlignment="Left" Height="25" Margin="102,95,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="3"/>
             </Grid>
