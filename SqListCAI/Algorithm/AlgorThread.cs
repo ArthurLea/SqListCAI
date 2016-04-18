@@ -1,9 +1,6 @@
 ﻿using SqListCAI.Pages.MainPage;
 using System.Threading;
-using SqListCAI.Utils.SourceCodes;
 using SqListCAI.Entities;
-using System;
-using System.Diagnostics;
 
 namespace SqListCAI.Algorithm
 {
@@ -40,10 +37,134 @@ namespace SqListCAI.Algorithm
                 case 5://链表删除
                     linkedDelete(operatorFlag);
                     break;
+                case 6://顺序查找
+                    orderSearch(operatorFlag);
+                    break;
+                case 7://折半查找
+                    binarySearch(operatorFlag);
+                    break;
                 default:
                     break;
                    
             }
+        }
+
+        private void binarySearch(int operatorFlag)
+        {
+            if (operatorFlag == 1) binarySearchRun();//折半查找全速执行
+            //if (operatorFlag == 2) binarySearchStep();//折半查找单步执行
+            //if (operatorFlag == 3) binarySearchRunTo();//折半查找断点执行到 
+        }
+
+        private void binarySearchRun()
+        {
+            char key = Search.searchData;
+            int low = 1, high = Search.length;
+            int mid = 0;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, 0);  //4//初始化low和high
+            Thread.Sleep(WAITTIME);
+            while (low <=high)
+            {
+                mid = (low + high) / 2;
+                if(key == Search.srcData_BinSearch[mid])
+                {
+                    //return mid;
+                    break;
+                }
+            }
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+        }
+
+        private void orderSearch(int operatorFlag)
+        {
+            if (operatorFlag == 1) orderSearchRun();//顺序查找全速执行
+            if (operatorFlag == 2) orderSearchStep();//顺序查找单步执行
+            if (operatorFlag == 3) orderSearchRunTo();//顺序查找断点执行到
+        }
+
+        private void orderSearchRunTo()
+        {
+            char key = Search.searchData;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(3);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, key);   //4
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(4);
+            int i = 0;
+            for (i = Search.length - 1; (Search.srcData_OrderSearch[i] != key) && (i >= 0); --i)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, i, i);
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(4);
+            }
+            //return i;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, i, i);
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(5);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(6);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 6);//通知主线程算法执行完毕
+        }
+
+        private void orderSearchStep()
+        {
+            char key = Search.searchData;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, key);   //4
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            int i = 0;
+            for (i = Search.length - 1; (Search.srcData_OrderSearch[i] != key) && (i >= 0); --i)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, i, i);
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+            }
+            //return i;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, i, i);
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 6);//通知主线程算法执行完毕
+        }
+
+        private void orderSearchRun()
+        {
+            char key = Search.searchData;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, key);   //4
+            Thread.Sleep(WAITTIME);
+            int i = 0;
+            for (i = Search.length - 1; (Search.srcData_OrderSearch[i]!=key)&&(i>=0); --i)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, i, i);
+                Thread.Sleep(WAITTIME);
+            }
+            //return i;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, i, i);
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 6);//通知主线程算法执行完毕
         }
 
         private void linkedDelete(int operatorFlag)

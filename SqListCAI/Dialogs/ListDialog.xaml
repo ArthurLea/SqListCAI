@@ -23,11 +23,16 @@
                 <Thickness>1</Thickness>
             </Border.BorderThickness>
             <Grid>
-                <RadioButton x:Name="radioButton_orderIns" Content="顺序表插入" HorizontalAlignment="Left" Margin="30,15,0,0" VerticalAlignment="Top" GroupName="SqList" RenderTransformOrigin="-0.152,0.286" IsChecked="True"/>
-                <RadioButton x:Name="radioButton_orderDel" Content="顺序表删除" HorizontalAlignment="Left" Margin="240,15,0,0" VerticalAlignment="Top" GroupName="SqList" IsChecked="True"/>
-                <RadioButton x:Name="radioButton_linkedDel" Content="链表删除" HorizontalAlignment="Left" Margin="240,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
-                <RadioButton x:Name="radioButton_linkedIns" Content="链表插入" HorizontalAlignment="Left" Margin="140,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
-                <RadioButton x:Name="radioButton_linkedCre" Content="链表创建" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" GroupName="SqList"/>
+                <RadioButton x:Name="radioButton_orderIns" Content="顺序表插入" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort" RenderTransformOrigin="-0.152,0.286" IsChecked="True"/>
+                <RadioButton x:Name="radioButton_orderDel" Content="顺序表删除" HorizontalAlignment="Left" Margin="240,10,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort" IsChecked="True"/>
+                <RadioButton x:Name="radioButton_linkedDel" Content="链表删除" HorizontalAlignment="Left" Margin="240,35,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_linkedIns" Content="链表插入" HorizontalAlignment="Left" Margin="142,35,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_linkedCre" Content="链表创建" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_OreSearch" Content="顺序查找" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_BinSearch" Content="折半查找" HorizontalAlignment="Left" Margin="142,60,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_InsSort" Content="插入排序" HorizontalAlignment="Left" Margin="30,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_SwapSort" Content="快速排序" HorizontalAlignment="Left" Margin="240,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_FastSort" Content="冒泡排序" HorizontalAlignment="Left" Margin="142,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="2,2,2,0">
@@ -41,9 +46,9 @@
                 <Label x:Name="lable_srcdata" Content="建立数据：" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lable_insertData" Content="插入数据：" HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lable_place" Content="插入位置：" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="102,15,0,0" TextWrapping="Wrap" Text="1?9W2AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="1"/>
-                <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="102,55,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="210" TabIndex="2"/>
-                <TextBox x:Name="position" HorizontalAlignment="Left" Height="25" Margin="102,95,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="3"/>
+                <TextBox x:Name="srcData" HorizontalAlignment="Left" Height="25" Margin="102,15,0,0" TextWrapping="Wrap" Text="1?9W2AbcD" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="1" IsManipulationEnabled="False"/>
+                <TextBox x:Name="insertData" HorizontalAlignment="Left" Height="25" Margin="102,55,0,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" VerticalContentAlignment="Center"  Width="210" TabIndex="2" IsManipulationEnabled="False"/>
+                <TextBox x:Name="position" HorizontalAlignment="Left" Height="25" Margin="102,95,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="210" TabIndex="3" IsManipulationEnabled="False"/>
             </Grid>
         </Border>
         <Border Grid.Row="2" Margin="2,2,2,0">

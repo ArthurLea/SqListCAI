@@ -133,11 +133,11 @@
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Content="顺序查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="顺序查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderSearch"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="折半查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="折半查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderBinSearch"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>

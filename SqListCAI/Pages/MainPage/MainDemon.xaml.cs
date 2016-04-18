@@ -144,12 +144,34 @@ namespace SqListCAI.Pages.MainPage
             InitializeComponent();
             this.srcData_LinkedDel = srcData;
             this.position_LinkedDel = position;
-            this.demon_lable_name.Content = demon_name;
+            this.demon_lable_name.Content = demon_name; 
             this.flag = 5;
             initUI(this.flag);
         }
+        //查找(顺序查找、折半查找)
+        public string srcData_Search;
+        public char searchData;
         /// <summary>
-        /// UI的初始化
+        /// 
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="searchData"></param>
+        /// <param name="flag">true为顺序查找，false为折半查找</param>
+        public MainDemon(string demon_name,string srcData,char searchData,bool mark)
+        {
+            InitializeComponent();
+            this.srcData_Search = srcData;
+            this.searchData = searchData;
+            this.demon_lable_name.Content = demon_name;
+            if (mark)//顺序查找
+                this.flag = 6;
+            else//折半查找
+                this.flag = 7;
+            initUI(this.flag);
+        }
+        /// <summary>
+        /// 算法UI的初始化
         /// </summary>
         /// <param name="flag"></param>
         public void initUI(int flag)
@@ -172,7 +194,7 @@ namespace SqListCAI.Pages.MainPage
                         getCanseContent();
                         break;
                     }
-                case 2:
+                case 2://线性表删除
                     {
                         Demonstration.data_del.Clear();
                         SqList.init_SqList(srcData_del, position_del);
@@ -184,7 +206,7 @@ namespace SqListCAI.Pages.MainPage
                         getCanseContent();
                         break;
                     }
-                case 3:
+                case 3://链表创建
                     {
                         Demonstration.data_linkCre.Clear();
                         LinkedList.init_LinkedList(srcData_linkedCre);//初始化链表,已建立带头结点的链表
@@ -196,7 +218,7 @@ namespace SqListCAI.Pages.MainPage
                         //getCanseContent();
                         break;
                     }
-                case 4:
+                case 4://链表插入
                     {
                         Demonstration.data_linkIns.Clear();
                         LinkedList.init_LinkedList(srcData_LinkedIns, insertData_LinkedIns, position_LinkedIns);//初始化链表,已建立带头结点的链表
@@ -209,7 +231,7 @@ namespace SqListCAI.Pages.MainPage
                         getCanseContent_linked();
                         break;
                     }
-                case 5:
+                case 5://链表删除
                     {
                         Demonstration.data_linkDel.Clear();
                         LinkedList.init_LinkedList(srcData_LinkedDel, position_LinkedDel);//初始化链表,已建立带头结点的链表
@@ -220,6 +242,30 @@ namespace SqListCAI.Pages.MainPage
                         m_DelegateStep = Step_linkedListDelete;
                         m_delegateExeFinish = ExeFinish;
                         getCanseContent_linked();
+                        break;
+                    }
+                case 6://顺序查找
+                    {
+                        Demonstration.data_orderSearch.Clear();
+                        Search.init_OrderSearch(srcData_Search, searchData);
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_OrderSearch;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContent();//得到canse_demon中的所有组件
+                        break;
+                    }
+                case 7://折半查找
+                    {
+                        Demonstration.data_binarySearch.Clear();
+                        Search.intt_BinSearch(srcData_Search, searchData);
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_BinarySearch;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContent();//得到canse_demon中的所有组件
                         break;
                     }
                 default:
@@ -248,6 +294,66 @@ namespace SqListCAI.Pages.MainPage
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
         }
 
+        private void Step_BinarySearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+
+        }
+
+        private void Step_OrderSearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if (currentRow == 4)
+                {
+                    if (movePosition == 10000)//需要查找的值。修改动画中的第一个矩形
+                    {
+                        lab[0].Content = changeValue;
+                        lab[0].Foreground = Brushes.Red;
+                    }
+                    else//修改索引值i,动画索引（显示未尾索引动画）
+                    {
+                        rec[movePosition+1].Fill = Brushes.Red;
+                        this.listView_value.DataContext = demonstration.GetDataTable_OrderSea(SearchCodes.ORDER_SEARCH_VALUE, 0, "指向位置为"+changeValue, 0).DefaultView;
+                    }
+                }
+                if(currentRow == 5)//看是否查到
+                {
+                    if(Search.srcData_OrderSearch[movePosition] == Search.searchData)//查找到元素
+                    {
+                        //在上方画出查找到的位置（矩形、Label）
+                        Rectangle rc = new Rectangle();
+                        rc.Stroke = Brushes.Yellow;
+                        rc.Fill = Brushes.DarkGray;
+                        rc.Width = 50;
+                        rc.Height = 35;
+                        double rc_margin_left = (movePosition+1) * 50 + 20;
+                        rc.Margin = new Thickness(rc_margin_left, 90-50-10, 0, 0);
+                        Label lab = new Label();
+                        lab.Width = 25;
+                        lab.Height = 35;
+                        lab.FontSize = 15;
+                        lab.Content = movePosition;
+                        lab.Foreground = Brushes.Red;
+                        lab.VerticalContentAlignment = VerticalAlignment.Center;
+                        lab.Margin = new Thickness(rc_margin_left + (50 - 25) / 2, 90 - 50 - 10, 0, 0);
+                        this.canse_demon.Children.Add(rc);
+                        this.canse_demon.Children.Add(lab);
+
+                        this.listView_value.DataContext = demonstration.GetDataTable_OrderSea(SearchCodes.ORDER_SEARCH_VALUE, 0, "指向位置为" + changeValue, 0).DefaultView;
+                    }
+                    else
+                    {
+                        MessageBox.Show("未查找到相应元素", "提示", MessageBoxButton.OK);
+                    }
+                }
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+            }
+        }
         //重新连接线5根
         Line[] line_newConn = new Line[5];
         private void Step_linkedListDelete(int currentRow, bool changeFlag, int movePosition, object changeValue)
@@ -764,19 +870,19 @@ namespace SqListCAI.Pages.MainPage
                         this.canse_demon.Children.Add(rc);
                         this.canse_demon.Children.Add(lable);
 
-                        Demonstration dempnstration = new Demonstration(flag, this);
-                        this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 1, SqList.srcData_del[movePosition].ToString(), movePosition);
+                        Demonstration demonstration = new Demonstration(flag, this);
+                        this.listView_value.DataContext = demonstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 1, SqList.srcData_del[movePosition].ToString(), movePosition);
                     }
                 }
                 if (currentRow == 8)//改变p值
                 {
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 2, changeValue.ToString(), 0);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 2, changeValue.ToString(), 0);
                 }
                 if (currentRow == 10)//改变length长度
                 {
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 3, changeValue.ToString(), 0);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Del(SqListCodes.DELETE_VALUE, 3, changeValue.ToString(), 0);
 
                     this.canse_demon.Children.Remove(rec[rec.Length - 2]);
                     this.canse_demon.Children.Remove(lab[lab.Length - 2]);
@@ -839,14 +945,14 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Add(rc);
                     this.canse_demon.Children.Add(lable);
 
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.srcData_ins[movePosition].ToString(), movePosition);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.srcData_ins[movePosition].ToString(), movePosition);
                 }
                 //变量区，P值改变
                 if (currentRow == 9)
                 {
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 1, changeValue.ToString(),0);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 1, changeValue.ToString(),0);
                 }
                 if (currentRow == 11)
                 {
@@ -864,14 +970,14 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Add(rc);
                     this.canse_demon.Children.Add(lable);
 
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 1);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 1);
                 }
                 //改变变量区中变量长度
                 if (currentRow == 12)
                 {
-                    Demonstration dempnstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = dempnstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 2, changeValue.ToString(),0);
+                    Demonstration demonstration = new Demonstration(flag, this);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 2, changeValue.ToString(),0);
                 }
                 DispatcherHelper.DoEvents();
                 System.Threading.Thread.Sleep(300);
@@ -902,6 +1008,12 @@ namespace SqListCAI.Pages.MainPage
                     break;
                 case 5:
                     MessageBox.Show("链表删除算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 6:
+                    MessageBox.Show("顺序查找算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 7:
+                    MessageBox.Show("折半查找算法执行完毕!", "提示", MessageBoxButton.OK);
                     break;
                 default:
                     break;
@@ -1266,40 +1378,42 @@ namespace SqListCAI.Pages.MainPage
         /// </summary>
         public void ShowCode()
         {
-            Demonstration dempnstration = new Demonstration(flag, this);
+            Demonstration demonstration = new Demonstration(flag, this);
             switch (flag)
             {
                 case 1://顺序表的插入
                     {
-                        dempnstration.ShowCode(SqListCodes.INSERT_CODE);
+                        demonstration.ShowCode(SqListCodes.INSERT_CODE);
                         break;
                     }
                 case 2://顺序表的删除
                     {
-                        dempnstration.ShowCode(SqListCodes.DELETE_CODE);
+                        demonstration.ShowCode(SqListCodes.DELETE_CODE);
                         break;
                     }
                 case 3://链表的创建
                     {
-                        dempnstration.ShowCode(LinkedListCodes.CREATE_CODE);
+                        demonstration.ShowCode(LinkedListCodes.CREATE_CODE);
                         break;
                     }
                 case 4://链表的插入
                     {
-                        dempnstration.ShowCode(LinkedListCodes.INSERT_CODE);
+                        demonstration.ShowCode(LinkedListCodes.INSERT_CODE);
                         break;
                     }
                 case 5://链表的删除
                     {
-                        dempnstration.ShowCode(LinkedListCodes.DELETE_CODE);
+                        demonstration.ShowCode(LinkedListCodes.DELETE_CODE);
                         break;
                     }
-                case 6://直接查找
+                case 6://顺序查找
                     {
+                        demonstration.ShowCode(SearchCodes.ORDER_SEARCH);
                         break;
                     }
-                case 7://二分查找
+                case 7://折半查找
                     {
+                        demonstration.ShowCode(SearchCodes.BINARY_SEARCH);
                         break;
                     }
 
@@ -1313,14 +1427,14 @@ namespace SqListCAI.Pages.MainPage
         //显示当前动画
         public void ShowDemon()
         {
-            Demonstration dempnstration = new Demonstration(flag, this);
-            dempnstration.ShowDemon();
+            Demonstration demonstration = new Demonstration(flag, this);
+            demonstration.ShowDemon();
         }
         //显示当前变量
         public void ShowValue()
         {
-            Demonstration dempnstration = new Demonstration(flag, this);
-            dempnstration.ShowValue();
+            Demonstration demonstration = new Demonstration(flag, this);
+            demonstration.ShowValue();
         }
     }
     public static class DispatcherHelper

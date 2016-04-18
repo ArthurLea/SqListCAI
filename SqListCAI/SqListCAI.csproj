@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Entities\Explain.cs" />
     <Compile Include="Entities\LinkedList.cs" />
+    <Compile Include="Entities\Search.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
@@ -81,6 +82,7 @@
     </Compile>
     <Compile Include="Utils\Files.cs" />
     <Compile Include="Utils\SourceCodes\LinkedListCodes.cs" />
+    <Compile Include="Utils\SourceCodes\SearchCodes.cs" />
     <Compile Include="Utils\SourceCodes\SqListCodes.cs" />
     <Page Include="Dialogs\ListDialog.xaml">
       <SubType>Designer</SubType>

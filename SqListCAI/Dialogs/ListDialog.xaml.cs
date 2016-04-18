@@ -65,6 +65,25 @@ namespace SqListCAI.Dialogs
                     this.insertData.Background = Brushes.DarkBlue;
                     this.lable_place.Content = "删除位置";
                     break;
+                case 6://顺序查找
+                    radioButton_OreSearch.IsChecked = true;
+                    this.listDialog.Title = "顺序查找";
+                    this.srcData.Text = "1e9X2AcDXdfop";//1e9X2AcDXdf
+                    this.lable_insertData.Content = "查找元素：";
+                    this.insertData.Text = "A";
+                    this.lable_place.Background = Brushes.DarkBlue;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+                    break;
+                case 7://折半查找
+                    radioButton_BinSearch.IsChecked = true;
+                    this.listDialog.Title = "折半查找";
+                    this.srcData.Text = "acdefghjlopsv";//需要排序
+                    this.lable_insertData.Content = "查找元素：";
+                    this.insertData.Text = "c";
+                    this.lable_place.Background = Brushes.DarkBlue;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+                    break;
+
                 default:
                     break;
             }
@@ -115,9 +134,75 @@ namespace SqListCAI.Dialogs
                     }
                     linkedListDel();
                     break;
+                case 6:
+                    if(radioButton_OreSearch.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中顺序查找！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    orderSearch();
+                    break;
+                case 7:
+                    if (radioButton_BinSearch.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中折半查找！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    binarySearch();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void binarySearch()
+        {
+            if ((this.srcData.Text == String.Empty) || insertData.Text.Equals(""))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            string src = this.srcData.Text;
+            string[] src_temp = new string[src.Length];
+            for (int i = 0; i < src.Length; i++)
+                src_temp[i] = src[i]+"";
+
+            StringBuilder sb = new StringBuilder(13);
+            //对src进行排序
+            Array.Sort(src_temp);
+            for (int i = 0; i < src.Length; i++)
+                sb.Append(src_temp[i][0]);
+
+            if (this.insertData.Text.Length > 1)
+            {
+                MessageBox.Show("插入内容为一个字符！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            char binartData = this.insertData.Text[0];
+
+            PassValuesEventArgs args = new PassValuesEventArgs(sb.ToString(), binartData);
+            PassValuesEvent(this, args);
+            this.Close();
+        }
+
+        private void orderSearch()
+        {
+            if ((this.srcData.Text == String.Empty) || insertData.Text.Equals(""))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            string src = this.srcData.Text;
+            if (this.insertData.Text.Length > 1)
+            {
+                MessageBox.Show("插入内容为一个字符！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            char orderSearch = this.insertData.Text[0];
+
+            PassValuesEventArgs args = new PassValuesEventArgs(src, orderSearch);
+            PassValuesEvent(this, args);
+            this.Close();
         }
 
         private void linkedListDel()

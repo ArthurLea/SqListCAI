@@ -11,8 +11,10 @@ namespace SqListCAI.Events
         public string srcData;
         public char insertData;
         public int position;
+
+        public char searchData;
         /// <summary>
-        /// 顺序表插入
+        /// 顺序表插入，链表插入
         /// </summary>
         /// <param name="srcData"></param>
         /// <param name="insertData"></param>
@@ -24,7 +26,7 @@ namespace SqListCAI.Events
             this.position = position;
         }
         /// <summary>
-        /// 顺序表删除
+        /// 顺序表删除，链表删除
         /// </summary>
         /// <param name="srcData"></param>
         /// <param name="position"></param>
@@ -42,6 +44,16 @@ namespace SqListCAI.Events
         public PassValuesEventArgs(string srcData)
         {
             this.srcData = srcData;
+        }
+        /// <summary>
+        /// 顺序查找、折半查找
+        /// </summary>
+        /// <param name="srcData"></param>
+        /// <param name="searchData"></param>
+        public PassValuesEventArgs(string srcData, char searchData)
+        {
+            this.srcData = srcData;
+            this.searchData = searchData;
         }
     }
 }
