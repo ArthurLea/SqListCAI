@@ -49,13 +49,176 @@ namespace SqListCAI.Algorithm
         private void linkedDelete(int operatorFlag)
         {
             if (operatorFlag == 1) linkedDeleteRun();//链表删除全速执行
-            //if (operatorFlag == 2) linkedDeleteStep();//链表删除单步执行
-            //if (operatorFlag == 3) linkedDeleteRunTo();//链表删除断点执行到
+            if (operatorFlag == 2) linkedDeleteStep();//链表删除单步执行
+            if (operatorFlag == 3) linkedDeleteRunTo();//链表删除断点执行到
+        }
+
+        private void linkedDeleteRunTo()
+        {
+            LinkedNode p, q = null;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);       //2
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(2);
+
+            p = LinkedList.head;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);        //3
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(3);
+
+            int j = 0;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, j);       //4//p指向头结点
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(4);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 0, 0);       //5//j==0
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(5);
+
+            while ((p.next != null) && j < LinkedList.deletePosition - 1 - 1)//找到删除位置LinkedList.deletePosition - 1 -1的前驱
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);  //6
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(6);
+
+                p = p.next;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, j, j);  //7//p结点改变指向
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(7);
+
+                j++;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, 0, j);  //8//j值开始改变
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(8);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //5
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(5);
+
+            }
+            //删除位置不在        //未找到删除位置
+            if ((p.next == null) || (j != LinkedList.insertPosition - 1 - 1)) { }//return ERROR; //i小于1或者大于表长
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(9);
+
+            q = p.next;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(10);
+
+            p.next = q.next;
+            //代码区11行找到删除元素位置并图色,变量区Q指向值改变
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, q.data);  //11
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(11);
+
+            LinkedList.deleteData = q.data;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 12, true, j, 0);  //12//删除结点的前驱的next开始重新指向删除结点的后继
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(12);
+
+            //free(q);
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, q.data);  //13//删除元素返回值
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(13);
+
+            //return OK;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, j);  //14//释放删除结点（去掉删除元素结点同时，去掉左右箭头）
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(14);
+            //"}//ListInsert_L"
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 15, false, 0, 0);  //15//程序结束 
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(15);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 5);//通知主线程算法执行完毕
+        }
+
+        private void linkedDeleteStep()
+        {
+            LinkedNode p, q = null;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);       //2
+            MainDemon.allDone.WaitOne();
+
+            p = LinkedList.head;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);        //3
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            int j = 0;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, j);       //4//p指向头结点
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 0, 0);       //5//j==0
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            while ((p.next != null) && j < LinkedList.deletePosition - 1 - 1)//找到删除位置LinkedList.deletePosition - 1 -1的前驱
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);  //6
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                p = p.next;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, j, j);  //7//p结点改变指向
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                j++;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, 0, j);  //8//j值开始改变
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //5
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+            }
+            //删除位置不在        //未找到删除位置
+            if ((p.next == null) || (j != LinkedList.insertPosition - 1 - 1)) { }//return ERROR; //i小于1或者大于表长
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            q = p.next;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            p.next = q.next;
+            //代码区11行找到删除元素位置并图色,变量区Q指向值改变
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, q.data);  //11
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            LinkedList.deleteData = q.data;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 12, true, j, 0);  //12//删除结点的前驱的next开始重新指向删除结点的后继
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            //free(q);
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, q.data);  //13//删除元素返回值
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            //return OK;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, j);  //14//释放删除结点（去掉删除元素结点同时，去掉左右箭头）
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+            //"}//ListInsert_L"
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 15, false, 0, 0);  //15//程序结束 
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 5);//通知主线程算法执行完毕
         }
 
         private void linkedDeleteRun()
         {
-            LinkedNode p, s = null;
+            LinkedNode p, q = null;
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);       //2
             Thread.Sleep(WAITTIME);
 
@@ -70,13 +233,12 @@ namespace SqListCAI.Algorithm
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 0, 0);       //5//j==0
             Thread.Sleep(WAITTIME);
 
-            while ((p.next != null) && j < LinkedList.insertPosition - 1)
+            while ((p.next!=null) && j < LinkedList.deletePosition-1-1)//找到删除位置LinkedList.deletePosition - 1 -1的前驱
             {
                 m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);  //6
                 Thread.Sleep(WAITTIME);
 
                 p = p.next;
-
                 m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, j, j);  //7//p结点改变指向
                 Thread.Sleep(WAITTIME);
 
@@ -88,34 +250,36 @@ namespace SqListCAI.Algorithm
                 Thread.Sleep(WAITTIME);
 
             }
-            if ((p == null) || (j > LinkedList.insertPosition - 1)) { }//return ERROR; //i小于1或者大于表长
+            //删除位置不在        //未找到删除位置
+            if ((p.next==null) || (j!=LinkedList.insertPosition-1-1)) { }//return ERROR; //i小于1或者大于表长
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
             Thread.Sleep(WAITTIME);
 
-            s = new LinkedNode(null);//生成新结点
+            q = p.next;
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
             Thread.Sleep(WAITTIME);
 
-            s.data = LinkedList.insertData;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, 0, 0);  //11//生成新的结点
+            p.next = q.next;
+            //代码区11行找到删除元素位置并图色,变量区Q指向值改变
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, q.data);  //11
             Thread.Sleep(WAITTIME);
 
-            s.next = p.next;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 12, true, 0, LinkedList.insertData);  //12//新的结点赋值
+            LinkedList.deleteData = q.data;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 12, true, j,0);  //12//删除结点的前驱的next开始重新指向删除结点的后继
             Thread.Sleep(WAITTIME);
 
-            p.next = s;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, 0);  //13//右边连接 
+            //free(q);
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, q.data);  //13//删除元素返回值
             Thread.Sleep(WAITTIME);
 
             //return OK;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, 0);  //14//左边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, j);  //14//释放删除结点（去掉删除元素结点同时，去掉左右箭头）
             Thread.Sleep(WAITTIME);
             //"}//ListInsert_L"
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 15, false, 0, 0);  //15//程序结束 
             Thread.Sleep(WAITTIME);
 
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 4);//通知主线程算法执行完毕
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 5);//通知主线程算法执行完毕
         }
 
         private void linkedInsert(int operatorFlag)
@@ -146,7 +310,7 @@ namespace SqListCAI.Algorithm
             Thread.Sleep(WAITTIME);
             judgeIsPoint(5);
 
-            while ((p.next != null) && j < LinkedList.insertPosition - 1)
+            while ((p.next != null) && j != LinkedList.insertPosition - 1)
             {
                 m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, false, 0, 0);  //6
                 Thread.Sleep(WAITTIME);
@@ -178,7 +342,7 @@ namespace SqListCAI.Algorithm
             judgeIsPoint(10);
 
             s.data = LinkedList.insertData;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, 0, 0);  //11//生成新的结点
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, 0);  //11//生成新的结点
             Thread.Sleep(WAITTIME);
             judgeIsPoint(11);
 
@@ -188,12 +352,12 @@ namespace SqListCAI.Algorithm
             judgeIsPoint(12);
 
             p.next = s;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, 0);  //13//右边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, j, 0);  //13//右边连接 
             Thread.Sleep(WAITTIME);
             judgeIsPoint(13);
 
             //return OK;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, 0);  //14//左边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, j, 0);  //14//左边连接 
             Thread.Sleep(WAITTIME);
             judgeIsPoint(14);
             //"}//ListInsert_L"
@@ -246,7 +410,7 @@ namespace SqListCAI.Algorithm
                 MainDemon.allDone.WaitOne();
 
             }
-            if ((p == null) || (j > LinkedList.insertPosition - 1)) { }//return ERROR; //i小于1或者大于表长
+            if ((p == null) || (j != LinkedList.insertPosition - 1)) { }//return ERROR; //i小于1或者大于表长
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
@@ -257,7 +421,7 @@ namespace SqListCAI.Algorithm
             MainDemon.allDone.WaitOne();
 
             s.data = LinkedList.insertData;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, 0, 0);  //11//生成新的结点
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, 0);  //11//生成新的结点
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
 
@@ -267,12 +431,12 @@ namespace SqListCAI.Algorithm
             MainDemon.allDone.WaitOne();
 
             p.next = s;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, 0);  //13//右边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, j, 0);  //13//右边连接 
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
 
             //return OK;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, 0);  //14//左边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, j, 0);  //14//左边连接 
             MainDemon.allDone.Reset();
             MainDemon.allDone.WaitOne();
             //"}//ListInsert_L"
@@ -318,7 +482,7 @@ namespace SqListCAI.Algorithm
                 Thread.Sleep(WAITTIME);
 
             }
-            if ((p == null) || (j > LinkedList.insertPosition - 1)) { }//return ERROR; //i小于1或者大于表长
+            if ((p == null) || (j != LinkedList.insertPosition-1)) { }//return ERROR; //i小于1或者大于表长
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9//判断是否合理
             Thread.Sleep(WAITTIME);
 
@@ -327,7 +491,7 @@ namespace SqListCAI.Algorithm
             Thread.Sleep(WAITTIME);
 
             s.data = LinkedList.insertData;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, 0, 0);  //11//生成新的结点
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, true, j, 0);  //11//生成新的结点
             Thread.Sleep(WAITTIME);
 
             s.next = p.next;
@@ -335,11 +499,11 @@ namespace SqListCAI.Algorithm
             Thread.Sleep(WAITTIME);
 
             p.next = s;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, 0, 0);  //13//右边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 13, true, j, 0);  //13//右边连接 
             Thread.Sleep(WAITTIME);
 
             //return OK;
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, 0, 0);  //14//左边连接 
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 14, true, j, 0);  //14//左边连接 
             Thread.Sleep(WAITTIME);
             //"}//ListInsert_L"
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 15, false, 0, 0);  //15//程序结束 

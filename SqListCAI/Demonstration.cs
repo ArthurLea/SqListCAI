@@ -395,19 +395,38 @@ namespace SqListCAI
                         data_linkDel.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
                         data_linkDel.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
-                    m_maindemon.listView_value.DataContext = GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 4, null, 0).DefaultView;
+                    m_maindemon.listView_value.DataContext = GetDataTable_LinkDel(LinkedListCodes.DELETE_VALUE, 4, null, 0).DefaultView;
                     break;
                 default:
                     break;
             }
         }
 
-        private DataTable GetDataTable_LinkDel(string[] str, int updateFlag, string updateValue, int movePosition)
+        public DataTable GetDataTable_LinkDel(string[] str, int updateFlag, string updateValue, int movePosition)
         {
-
+            if (updateFlag == 0)//修改P的当前指向，最开始指向头结点
+            {
+                data_linkDel.Rows[LinkedList.length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 2;
+            }
+            if (updateFlag == 1)//修改j变量值
+            {
+                data_linkDel.Rows[LinkedList.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 3;
+            }
+            if (updateFlag == 2)//修改删除结点Q
+            {
+                data_linkDel.Rows[LinkedList.length + 6]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 6;
+            }
+            if (updateFlag == 3)//修改删除元素返回值
+            {
+                data_linkDel.Rows[LinkedList.length + 5]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 5;
+            }
             if (updateFlag == 4)//显示最开始数据
             {
-                data_linkDel.Rows.Add(str[0], "未知");    //添加头结点
+                data_linkDel.Rows.Add(str[0], "指向头结点");    //添加头结点
                 int length = LinkedList.length;
                 for (int i = 0; i < length; i++)          //添加源数据
                 {
@@ -445,7 +464,7 @@ namespace SqListCAI
             }
             if (updateFlag == 4)//显示最开始数据
             {
-                data_linkIns.Rows.Add(str[0], "未知");    //添加头结点
+                data_linkIns.Rows.Add(str[0], "指向头结点");    //添加头结点
                 int length = LinkedList.length;
                 for (int i = 0; i < length; i++)          //添加源数据
                 {

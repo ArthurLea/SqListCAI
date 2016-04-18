@@ -248,9 +248,140 @@ namespace SqListCAI.Pages.MainPage
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
         }
 
+        //重新连接线5根
+        Line[] line_newConn = new Line[5];
         private void Step_linkedListDelete(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
-            
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if (currentRow == 4)//最开始P指向头结点
+                {
+                    //动画显示
+                    Label label_node_head = (Label)head_node[0];
+                    Label label_data_head = (Label)head_node[2];
+                    label_node_head.Content = "La ** P";
+                    label_data_head.Background = Brushes.Green;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 0, "指向头结点La", 0).DefaultView;
+                }
+                if (currentRow == 5)//第一次进入代表修改变量区j值，这里不用设置标志，因为changeFlag的原因
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 1, changeValue + "", 0).DefaultView;
+                if (currentRow == 7)//P结点指向下一个位置
+                {
+                    if (movePosition == 0)//清除指向头结点的显示
+                    {
+                        ((Label)head_node[0]).Content = "La";
+                        ((Label)head_node[2]).Background = Brushes.DarkGray;
+                    }
+                    else
+                    {
+                        ((Label)label_node[movePosition - 1]).Content = "";
+                        ((Label)label_data[movePosition - 1]).Background = Brushes.DarkGray;
+                    }
+
+                    ((Label)label_node[movePosition]).Content = "P";
+                    ((Label)label_node[movePosition]).Foreground = Brushes.Red;
+                    ((Label)label_data[movePosition]).Background = Brushes.Red;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 0, "当前指向值为" + LinkedList.srcData[movePosition] + "的结点", 0).DefaultView;
+                }
+                if (currentRow == 8)//j值开始改变
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 1, changeValue.ToString(), 0).DefaultView;
+                if (currentRow == 11)//找到删除元素位置并图色,变量区Q指向值改变
+                {
+                    
+                    ((Label)label_node[movePosition]).Content = "Q";
+                    ((Label)label_node[movePosition]).Foreground = Brushes.Red;
+                    ((Label)label_data[movePosition]).Background = Brushes.Yellow;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 2, "当前指向值为"+changeValue+ "的结点", 0).DefaultView;
+                }
+                if (currentRow == 12)//删除结点的前驱的next开始重新指向删除结点的后继
+                {
+                    //画连线，5根
+                    //first
+                    Line line_1 = new Line();                       line_1.Stroke = Brushes.Black;
+                    //以删除的第一根线作为参考基准
+                    line_1.X1 = line1[movePosition].X1 - 20;        line_1.X2 = line_1.X1;
+                    line_1.Y1 = line1[movePosition].Y1 + 25;        line_1.Y2 = line_1.Y1 + 20;
+                    //second
+                    Line line_2 = new Line();                       line_2.Stroke = Brushes.Black;
+                    line_2.X1 = line_1.X2;                          line_2.X2 = line_2.X1+ 4*60;
+                    line_2.Y1 = line_1.Y2;                          line_2.Y2 = line_2.Y1;
+                    //third
+                    Line line_3 = new Line();                       line_3.Stroke = Brushes.Black;
+                    line_3.X1 = line_2.X2;                          line_3.X2 = line_3.X1;
+                    line_3.Y1 = line_2.Y2;                          line_3.Y2 = line_3.Y1 - 20;
+                    //forth left
+                    Line line_4 = new Line();                       line_4.Stroke = Brushes.Black;
+                    line_4.X1 = line_3.X2;                          line_4.X2 = line_4.X1 - 10;
+                    line_4.Y1 = line_3.Y2;                          line_4.Y2 = line_4.Y1 + 10;
+                    //fifth right
+                    Line line_5 = new Line();                       line_5.Stroke = Brushes.Black;
+                    line_5.X1 = line_3.X2;                          line_5.X2 = line_5.X1 + 10;
+                    line_5.Y1 = line_3.Y2;                          line_5.Y2 = line_5.Y1 + 10;
+
+                    line_newConn[0] = line_1; line_newConn[1] = line_2; line_newConn[2] = line_3; line_newConn[3] = line_4; line_newConn[4] = line_5;
+                    this.canse_demon.Children.Add(line_1);
+                    this.canse_demon.Children.Add(line_2);
+                    this.canse_demon.Children.Add(line_3);
+                    this.canse_demon.Children.Add(line_4);
+                    this.canse_demon.Children.Add(line_5);
+                }
+                if (currentRow == 13)//删除元素返回值
+                {
+                    this.listView_value.DataContext = demonstration.GetDataTable_LinkDel(LinkedListCodes.INSERT_VALUE, 3, "删除元素为" + changeValue, 0).DefaultView;
+                }
+                if (currentRow == 14)//释放删除结点（去掉删除元素结点同时，去掉左右箭头）
+                {
+                    double line_X1 = line1[(int)changeValue].X1; 
+                    double line_Y1 = line1[(int)changeValue].Y1;
+                    //移除原先连接线
+                    this.canse_demon.Children.Remove(line1[(int)changeValue]);
+                    this.canse_demon.Children.Remove(line2[(int)changeValue]);
+                    this.canse_demon.Children.Remove(line3[(int)changeValue]);
+                    this.canse_demon.Children.Remove(line1[(int)changeValue+1]);
+                    this.canse_demon.Children.Remove(line2[(int)changeValue+1]);
+                    this.canse_demon.Children.Remove(line3[(int)changeValue+1]);
+
+                    //移动label_node、rec_node、lebel_data到上方
+                    Thickness label_node_margin = label_node[(int)changeValue].Margin;
+                    Thickness Rec_node_margin = Rec_node[(int)changeValue].Margin;
+                    Thickness label_data_margin = label_data[(int)changeValue].Margin;
+                    label_node_margin.Top = 16;
+                    Rec_node_margin.Top = 16 + 22;
+                    label_data_margin.Top = 16 + 22;
+                    label_node[(int)changeValue].Margin = label_node_margin;
+                    Rec_node[(int)changeValue].Margin = Rec_node_margin;
+                    label_data[(int)changeValue].Margin = label_data_margin;
+
+                    //移除原先的5根线组成的连接线
+                    for (int i = 0; i < 5; i++)
+                        this.canse_demon.Children.Remove(line_newConn[i]);
+                    //重新绘制连接线--3根
+                    //first
+                    Line line_1 = new Line();           line_1.Stroke = Brushes.Black;
+                    line_1.X1 = line_X1;                line_1.X2 = line_1.X1 + 3 * 60 + 10;
+                    line_1.Y1 = line_Y1;                line_1.Y2 = line_1.Y1;
+                    //second bottom
+                    Line line_2 = new Line();           line_2.Stroke = Brushes.Black;
+                    line_2.X1 = line_1.X2;              line_2.X2 = line_2.X1 - 10;
+                    line_2.Y1 = line_1.Y2;              line_2.Y2 = line_2.Y1 + 10;
+                    //third top
+                    Line line_3 = new Line();           line_3.Stroke = Brushes.Black;
+                    line_3.X1 = line_1.X2;              line_3.X2 = line_3.X1 - 10;
+                    line_3.Y1 = line_1.Y2;              line_3.Y2 = line_3.Y1 - 10;
+                    this.canse_demon.Children.Add(line_1);
+                    this.canse_demon.Children.Add(line_2);
+                    this.canse_demon.Children.Add(line_3);
+                }
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+            }
         }
 
         private void Step_linkedListInsert(int currentRow, bool changeFlag, int movePosition, object changeValue)
@@ -296,7 +427,7 @@ namespace SqListCAI.Pages.MainPage
                     this.listView_value.DataContext = demonstration.GetDataTable_LinkIns(LinkedListCodes.INSERT_VALUE, 1, changeValue.ToString(), 0).DefaultView;
                 if (currentRow == 11)//生成新的结点，画结点
                 {
-                    double canse_left = (2 * LinkedList.insertPosition - 1)*60 + 20;
+                    double canse_left = (2 * movePosition - 1)*60 + 20;
                     init_labe_node(new_label_node);
                     new_label_node.Background = Brushes.Green;
                     new_label_node.Foreground = Brushes.Red;
@@ -321,7 +452,7 @@ namespace SqListCAI.Pages.MainPage
                 }
                 if (currentRow == 13)//右边连接
                 {
-                    double canse_left1 = (2 * LinkedList.insertPosition - 1) * 60 + 50 + 20;
+                    double canse_left1 = (2 * movePosition - 1) * 60 + 50 + 20;
                     double canse_top1 = 98 - 25 - 10;
                     Line[] line = new Line[4]; 
                     for(int i=0;i<line.Length;i++)
@@ -351,7 +482,7 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Remove(line2[LinkedList.insertPosition - 1]);
                     this.canse_demon.Children.Remove(line3[LinkedList.insertPosition - 1]);
 
-                    double canse_left1 = (2 * LinkedList.insertPosition - 1) * 60 - 30 + 20;
+                    double canse_left1 = (2 * movePosition - 1) * 60 - 30 + 20;
                     double canse_top1 = 98;
                     Line[] line = new Line[4];
                     for (int i = 0; i < line.Length; i++)
@@ -768,6 +899,9 @@ namespace SqListCAI.Pages.MainPage
                     break;
                 case 4:
                     MessageBox.Show("链表插入算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 5:
+                    MessageBox.Show("链表删除算法执行完毕!", "提示", MessageBoxButton.OK);
                     break;
                 default:
                     break;

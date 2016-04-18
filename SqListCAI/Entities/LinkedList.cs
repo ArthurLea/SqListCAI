@@ -30,7 +30,9 @@ namespace SqListCAI.Entities
 
         public static char insertData;
         public static int insertPosition;
+
         public static int deletePosition;
+        public static char deleteData;
         /// <summary>
         /// 演示链表创建动画时的初始化
         /// </summary>
@@ -42,7 +44,7 @@ namespace SqListCAI.Entities
             srcData = new char[data.Length];
             for (int i = 0; i < data.Length; i++)
                 srcData[i] = data[i];
-            length = data.Length;
+            length = data.Length;//加上表头元素
         }
         /// <summary>
         /// 链表的创建函数（尾插法）
@@ -59,6 +61,7 @@ namespace SqListCAI.Entities
                 p.next = LinkedList.head.next;
                 LinkedList.head.next = p;
             }
+            length = srcData.Length;//加上表头元素
         }
         /// <summary>
         /// 链表的插入初始化函数
