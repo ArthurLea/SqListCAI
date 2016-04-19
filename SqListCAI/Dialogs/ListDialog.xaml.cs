@@ -79,7 +79,7 @@ namespace SqListCAI.Dialogs
                     this.listDialog.Title = "折半查找";
                     this.srcData.Text = "acdefghjlopsv";//需要排序
                     this.lable_insertData.Content = "查找元素：";
-                    this.insertData.Text = "c";
+                    this.insertData.Text = "f";
                     this.lable_place.Background = Brushes.DarkBlue;
                     this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
                     break;
@@ -170,6 +170,7 @@ namespace SqListCAI.Dialogs
             StringBuilder sb = new StringBuilder(13);
             //对src进行排序
             Array.Sort(src_temp);
+            MessageBox.Show("源数据以截断并排序！", "提示", MessageBoxButton.OK);
             for (int i = 0; i < src.Length; i++)
                 sb.Append(src_temp[i][0]);
 

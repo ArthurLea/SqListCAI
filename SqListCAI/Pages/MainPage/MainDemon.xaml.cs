@@ -296,9 +296,75 @@ namespace SqListCAI.Pages.MainPage
 
         private void Step_BinarySearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if (currentRow == 4)
+                {
+                    if (movePosition == 10000)//初始化low、high,动画区中画出low和high位置
+                    {
+                        //画动画
+                        //初始化寻找的值
+                        lab[0].Content = Search.searchData;
+                        lab[0].Foreground = Brushes.Red;
+                        //low、high
+                        rec[1].Fill = Brushes.Purple;
+                        rec[Search.length].Fill = Brushes.Yellow;
 
+                        //变量区改变
+                        this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + 1, 0).DefaultView;
+                        this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + Search.length, 0).DefaultView;
+                    }
+                }
+                if (currentRow == 6)
+                {
+                    //画mid的指向
+                    rec[movePosition].Fill = Brushes.SkyBlue;//恢复原来的赋值
+                    rec[(int)changeValue].Fill = Brushes.Red;
+                    //在上方画key
+                    Rectangle rec_key = rec[rec.Length-1];
+                    Label label_key = lab[lab.Length-1];
+                    rec_key.Fill = Brushes.Red;
+                    label_key.Content = Search.searchData;
+                    Thickness rec_key_margin = rec[(int)changeValue].Margin;
+                    rec_key_margin.Top = 45; rec_key.Margin = rec_key_margin;
+                     Thickness label_key_margin = lab[(int)changeValue].Margin;
+                    label_key_margin.Top = 45; label_key.Margin = label_key_margin;
+
+                    this.canse_demon.Children.Remove(rec[rec.Length-1]);
+                    this.canse_demon.Children.Remove(lab[lab.Length-1]);
+                    this.canse_demon.Children.Add(rec_key);
+                    this.canse_demon.Children.Add(label_key);
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 1, "指向位置为" + changeValue, 0).DefaultView;
+
+                    if (Search.srcData_BinSearch[(int)changeValue-1] == Search.searchData)//找到key
+                    {
+                        //做找到的显示动画
+                        this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 1, "指向位置为" + changeValue, 0).DefaultView;
+                    }
+                }
+                if (currentRow == 7)//改变high(变量区、动画)
+                {
+                    rec[(int)changeValue + movePosition].Fill = Brushes.SkyBlue;
+                    rec[(int)changeValue].Fill = Brushes.Yellow;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + changeValue, 0).DefaultView;
+                }
+                if (currentRow == 8)//改变low（变量区、动画）
+                {
+                    rec[(int)changeValue - movePosition].Fill = Brushes.SkyBlue;
+                    rec[(int)changeValue].Fill = Brushes.Purple;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + changeValue, 0).DefaultView;
+                }
+            }
+            if (currentRow == 11)
+                MessageBox.Show("未找到" + Search.searchData, "提示", MessageBoxButton.OK);
         }
-
         private void Step_OrderSearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
             //同步代码区
@@ -342,6 +408,8 @@ namespace SqListCAI.Pages.MainPage
                         lab.Margin = new Thickness(rc_margin_left + (50 - 25) / 2, 90 - 50 - 10, 0, 0);
                         this.canse_demon.Children.Add(rc);
                         this.canse_demon.Children.Add(lab);
+
+                        rec[movePosition+1].Fill = Brushes.Yellow;
 
                         this.listView_value.DataContext = demonstration.GetDataTable_OrderSea(SearchCodes.ORDER_SEARCH_VALUE, 0, "指向位置为" + changeValue, 0).DefaultView;
                     }
@@ -617,7 +685,6 @@ namespace SqListCAI.Pages.MainPage
         Label new_label_node = new Label();
         Rectangle new_rec_node = new Rectangle();
         Label new_label_data = new Label();
-                    
 
         public object[] head_node = new object[3];//存储头结点
         public Label[] label_node = null;
@@ -674,7 +741,6 @@ namespace SqListCAI.Pages.MainPage
             }
         }
         public bool first_draw_new_node_flag = true;
-        //public int[] index_label = new int[2];//记录新节点label_node和label_data在canse中的位置
         private void Step_linkedListCreate(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
             //同步代码区
@@ -807,7 +873,6 @@ namespace SqListCAI.Pages.MainPage
             label_data.HorizontalContentAlignment = HorizontalAlignment.Center;
             label_data.VerticalContentAlignment = VerticalAlignment.Center;
         }
-
         public void init_labe_node(Label label_node)
         {
             label_node.HorizontalContentAlignment = HorizontalAlignment.Center;

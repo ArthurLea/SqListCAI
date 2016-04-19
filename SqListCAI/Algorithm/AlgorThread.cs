@@ -1,6 +1,7 @@
 ﻿using SqListCAI.Pages.MainPage;
 using System.Threading;
 using SqListCAI.Entities;
+using System;
 
 namespace SqListCAI.Algorithm
 {
@@ -52,8 +53,156 @@ namespace SqListCAI.Algorithm
         private void binarySearch(int operatorFlag)
         {
             if (operatorFlag == 1) binarySearchRun();//折半查找全速执行
-            //if (operatorFlag == 2) binarySearchStep();//折半查找单步执行
-            //if (operatorFlag == 3) binarySearchRunTo();//折半查找断点执行到 
+            if (operatorFlag == 2) binarySearchStep();//折半查找单步执行
+            if (operatorFlag == 3) binarySearchRunTo();//折半查找断点执行到 
+        }
+
+        private void binarySearchRunTo()
+        {
+            char key = Search.searchData;
+            int low = 1, high = Search.length;
+            int mid = 0;
+            int mid_temp = (low + high) / 2;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(3);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, 0);  //4//初始化low和high，
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(4);
+            while (low <= high)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //4
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(5);
+
+                mid = (low + high) / 2;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//mid赋值
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(6);
+
+                if (key == Search.srcData_BinSearch[mid - 1])
+                {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//找到元素给mid赋值并对比
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(6);
+
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+                    //return mid;
+                    break;
+                }
+                else if (key < Search.srcData_BinSearch[mid - 1])
+                {
+                    high = mid - 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, mid, high);  //7//移动high,改变high
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(7);
+                }
+                else //if(key > Search.srcData_BinSearch[mid-1])
+                {
+                    low = mid + 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, mid, low);  //8//移动low,改变low
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(8);
+                }
+
+                mid_temp = mid;
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(9);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(4);
+            }
+
+            if (low > high)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(10);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, false, 0, 0);  //11
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(11);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+            }
+        }
+
+        private void binarySearchStep()
+        {
+            char key = Search.searchData;
+            int low = 1, high = Search.length;
+            int mid = 0;
+            int mid_temp = (low + high) / 2;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, 0);  //4//初始化low和high，
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            while (low <= high)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //4
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                mid = (low + high) / 2;
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//mid赋值
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                if (key == Search.srcData_BinSearch[mid - 1])
+                {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//找到元素给mid赋值并对比
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+                    //return mid;
+                    break;
+                }
+                else if (key < Search.srcData_BinSearch[mid - 1])
+                {
+                    high = mid - 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, mid, high);  //7//移动high,改变highv
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+                }
+                else //if(key > Search.srcData_BinSearch[mid-1])
+                {
+                    low = mid + 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, mid, low);  //8//移动low,改变low
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+                }
+
+                mid_temp = mid;
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+            }
+
+            if (low > high)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, false, 0, 0);  //11
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+            }
         }
 
         private void binarySearchRun()
@@ -61,21 +210,62 @@ namespace SqListCAI.Algorithm
             char key = Search.searchData;
             int low = 1, high = Search.length;
             int mid = 0;
+            int mid_temp = (low + high) / 2;
             m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, false, 0, 0);  //3
             Thread.Sleep(WAITTIME);
 
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 0, 0);  //4//初始化low和high
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, true, 10000, 0);  //4//初始化low和high，
             Thread.Sleep(WAITTIME);
             while (low <=high)
             {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, false, 0, 0);  //4
+                Thread.Sleep(WAITTIME);
+                
                 mid = (low + high) / 2;
-                if(key == Search.srcData_BinSearch[mid])
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//mid赋值
+                Thread.Sleep(WAITTIME);
+
+                if (key == Search.srcData_BinSearch[mid-1])
                 {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, mid_temp, mid);  //6//找到元素给mid赋值并对比
+                    Thread.Sleep(WAITTIME);
+
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
                     //return mid;
                     break;
                 }
+                else if(key < Search.srcData_BinSearch[mid-1])
+                {
+                    high = mid - 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, mid, high);  //7//移动high,改变high
+                    Thread.Sleep(WAITTIME);
+                }
+                else //if(key > Search.srcData_BinSearch[mid-1])
+                {
+                    low = mid + 1;
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, mid, low);  //8//移动low,改变low
+                    Thread.Sleep(WAITTIME);
+                }
+
+                mid_temp = mid;
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);  //9
+                Thread.Sleep(WAITTIME);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                Thread.Sleep(WAITTIME);
             }
-            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+
+            if (low > high)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 10, false, 0, 0);  //10
+                Thread.Sleep(WAITTIME);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 11, false, 0, 0);  //11
+                Thread.Sleep(WAITTIME);
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 7);//通知主线程算法执行完毕
+            }
         }
 
         private void orderSearch(int operatorFlag)

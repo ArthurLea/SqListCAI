@@ -84,17 +84,8 @@ namespace SqListCAI
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
-                rc[i].Stroke = Brushes.Yellow;
-                rc[i].Fill = Brushes.SkyBlue;
-                rc[i].Width = 50;
-                rc[i].Height = 35;
-
                 lable[i] = new Label();
-                lable[i].Width = 25;
-                lable[i].Height = 35;
-                lable[i].FontSize = 15;
-                lable[i].Foreground = Brushes.Black;
-                lable[i].VerticalContentAlignment = VerticalAlignment.Center;
+                init_recKey_labelKey(rc[i], lable[i]);
             }
             //绘制需要查找的数据
             rc[0].Fill = Brushes.DarkGray;
@@ -118,8 +109,28 @@ namespace SqListCAI
                 m_maindemon.canse_demon.Children.Add(rc[i]);
                 m_maindemon.canse_demon.Children.Add(lable[i]);
             }
+            //画比较动画需要的组件（上方位置矩形、label）        
+            Rectangle rec_key = new Rectangle();
+            Label label_key = new Label();
+            rec_key.Fill = Brushes.White;
+            rec_key.Stroke = Brushes.White;
+            init_recKey_labelKey(rec_key,label_key);
+            m_maindemon.canse_demon.Children.Add(rec_key);
+            m_maindemon.canse_demon.Children.Add(label_key);
         }
+        private void init_recKey_labelKey(Rectangle rec_key, Label label_key)
+        {
+            rec_key.Stroke = Brushes.Yellow;
+            rec_key.Fill = Brushes.SkyBlue;
+            rec_key.Width = 50;
+            rec_key.Height = 35;
 
+            label_key.Width = 25;
+            label_key.Height = 35;
+            label_key.FontSize = 15;
+            label_key.Foreground = Brushes.Black;
+            label_key.VerticalContentAlignment = VerticalAlignment.Center;
+        }
         private void drawOrderSearch()
         {
             int margin_left = 20;
