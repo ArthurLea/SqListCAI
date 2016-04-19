@@ -141,22 +141,22 @@
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="插入排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="直接插入排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownDirectInsertSort"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="冒泡排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="交换（冒泡）排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSwapSort"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="选择排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownPartitionSort"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <!--<Label Content="简单选择排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSimpleChooseSort"/>
                             <Border >
                                 <Image Source="images/line.png"/>
-                            </Border>
+                            </Border>-->
                             <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>

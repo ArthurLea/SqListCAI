@@ -29,10 +29,10 @@
                 <RadioButton x:Name="radioButton_linkedIns" Content="链表插入" HorizontalAlignment="Left" Margin="142,35,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
                 <RadioButton x:Name="radioButton_linkedCre" Content="链表创建" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
                 <RadioButton x:Name="radioButton_OreSearch" Content="顺序查找" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
-                <RadioButton x:Name="radioButton_BinSearch" Content="折半查找" HorizontalAlignment="Left" Margin="142,60,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_BinSearch" Content="折半查找" HorizontalAlignment="Left" Margin="240,60,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
                 <RadioButton x:Name="radioButton_InsSort" Content="插入排序" HorizontalAlignment="Left" Margin="30,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
-                <RadioButton x:Name="radioButton_SwapSort" Content="快速排序" HorizontalAlignment="Left" Margin="240,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
-                <RadioButton x:Name="radioButton_FastSort" Content="冒泡排序" HorizontalAlignment="Left" Margin="142,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_SwapSort" Content="冒泡排序" HorizontalAlignment="Left" Margin="142,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
+                <RadioButton x:Name="radioButton_FastSort" Content="快速排序" HorizontalAlignment="Left" Margin="240,85,0,0" VerticalAlignment="Top" GroupName="SqList_Search_Sort"/>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="2,2,2,0">

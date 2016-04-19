@@ -68,8 +68,52 @@ namespace SqListCAI
                 case 7://二分查找
                     drawBinarySearch();
                     break;
+                case 8://插入排序
+                    drawSort();
+                    break;
+                case 9://冒泡排序
+                    drawSort();
+                    break;
+                case 10://快速排序
+                    drawSort();
+                    break;
                 default:
                     break;
+            }
+        }
+        private void drawSort()
+        {
+            int margin_left = 20;
+            int margin_top = 90;
+            int length = Sort.length;
+            Rectangle[] rc = new Rectangle[length];//矩形,第一个画查找的数据
+            Label[] lable = new Label[length];//标签，放原始内容，第一个画查找的数据
+            Label[] label_tabNum = new Label[length];
+            for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
+            {
+                rc[i] = new Rectangle();
+                lable[i] = new Label();
+                label_tabNum[i] = new Label();
+                init_recKey_labelKey(rc[i], lable[i], label_tabNum[i]);
+            }
+            //绘制原始数据
+            for (int i = 0; i < rc.Length; i++)
+            {
+                double rc_margin_left = i * rc[i].Width + margin_left;
+                Thickness rc_src_margin = new Thickness(rc_margin_left, margin_top, 0, 0);
+                rc[i].Margin = rc_src_margin;
+
+                lable[i].Content = Sort.srcData[i];
+                double lable_margin_left = rc_margin_left + (rc[i].Width - lable[i].Width) / 2;
+                Thickness lable_src_margin = new Thickness(lable_margin_left, margin_top, 0, 0);
+                lable[i].Margin = lable_src_margin;
+
+                label_tabNum[i].Content = "R["+i+"]";//60
+                label_tabNum[i].Margin = new Thickness(rc_margin_left, 60, 0, 0);
+
+                m_maindemon.canse_demon.Children.Add(rc[i]);
+                m_maindemon.canse_demon.Children.Add(lable[i]);
+                m_maindemon.canse_demon.Children.Add(label_tabNum[i]);
             }
         }
 
@@ -112,24 +156,47 @@ namespace SqListCAI
             //画比较动画需要的组件（上方位置矩形、label）        
             Rectangle rec_key = new Rectangle();
             Label label_key = new Label();
+            init_recKey_labelKey(rec_key, label_key);
             rec_key.Fill = Brushes.White;
             rec_key.Stroke = Brushes.White;
-            init_recKey_labelKey(rec_key,label_key);
             m_maindemon.canse_demon.Children.Add(rec_key);
             m_maindemon.canse_demon.Children.Add(label_key);
+        }
+
+        private void init_recKey_labelKey(Rectangle rec_key, Label label_key,Label label_tabNum)
+        {
+            rec_key.Stroke = Brushes.Yellow;
+            rec_key.Fill = Brushes.SkyBlue;
+            rec_key.Width = 65;
+            rec_key.Height = 50;
+
+            label_key.Width = 45;
+            label_key.Height = 50;
+            label_key.FontSize = 25;
+            label_key.Foreground = Brushes.Black;
+            label_key.VerticalContentAlignment = VerticalAlignment.Center;
+            label_key.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+            label_tabNum.Width = 65;
+            label_tabNum.Height = 30;
+            label_tabNum.FontSize = 15;
+            label_tabNum.Foreground = Brushes.DarkBlue;
+            label_tabNum.VerticalContentAlignment = VerticalAlignment.Center;
+            label_tabNum.HorizontalContentAlignment = HorizontalAlignment.Center;
         }
         private void init_recKey_labelKey(Rectangle rec_key, Label label_key)
         {
             rec_key.Stroke = Brushes.Yellow;
             rec_key.Fill = Brushes.SkyBlue;
-            rec_key.Width = 50;
-            rec_key.Height = 35;
+            rec_key.Width = 65;
+            rec_key.Height = 50;
 
-            label_key.Width = 25;
-            label_key.Height = 35;
-            label_key.FontSize = 15;
+            label_key.Width = 45;
+            label_key.Height = 50;
+            label_key.FontSize = 25;
             label_key.Foreground = Brushes.Black;
             label_key.VerticalContentAlignment = VerticalAlignment.Center;
+            label_key.HorizontalContentAlignment = HorizontalAlignment.Center;
         }
         private void drawOrderSearch()
         {
@@ -465,6 +532,8 @@ namespace SqListCAI
         public static DataTable data_linkDel = new DataTable("DataTable_LinkDel"); 
         public static DataTable data_orderSearch = new DataTable("DataTable_OrderSea"); 
         public static DataTable data_binarySearch = new DataTable("DataTable_BinarySea");
+        public static DataTable data_insSort = new DataTable("DataTable_InsSort"); 
+        public static DataTable data_swapSort = new DataTable("DataTable_SwapSort"); 
         /// <summary>
         /// 显示变量区中的变量
         /// </summary>
@@ -529,12 +598,100 @@ namespace SqListCAI
                     }
                     m_maindemon.listView_value.DataContext = GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 4, null, 0).DefaultView;
                     break;
+                case 8:
+                    if(data_insSort.Columns.Count == 0)
+                    {
+                        data_insSort.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                        data_insSort.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                    }
+                    m_maindemon.listView_value.DataContext = GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 4, null, 0).DefaultView;
+                    break;
+                case 9:
+                    if (data_swapSort.Columns.Count == 0)
+                    {
+                        data_swapSort.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                        data_swapSort.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                    }
+                    m_maindemon.listView_value.DataContext = GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 4, null, 0).DefaultView;
+                    break; 
                 default:
                     break;
             }
         }
 
-        public DataTable GetDataTable_BinarySea(string[] str, int updateFlag, string updateValue, int movePositio)
+        public DataTable GetDataTable_SwapSort(string[] str, int updateFlag, string updateValue, int movePositio)
+        {
+            if (updateFlag == 0)//修改i
+            {
+                data_swapSort.Rows[Sort.length + 1]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 1;
+            }
+            if (updateFlag == 1)//修改j
+            {
+                data_swapSort.Rows[Sort.length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 2;
+            }
+            if (updateFlag == 2)//修改R[0]临时变量存储，作为交换的介质
+            {
+                data_swapSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+            }
+            if(updateFlag == 3)//修改swap
+            {
+                data_swapSort.Rows[Sort.length + 4]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 4;
+            }
+            if (updateFlag == 4)
+            {
+                for (int i = 0; i < Sort.length; i++)//srcData
+                {
+                    string name = str[0] + "[" + i + "]";
+                    string value = Sort.srcData[i] + "";
+                    data_swapSort.Rows.Add(name, value);
+                }
+                data_swapSort.Rows.Add(str[1], Sort.length + "");//length
+                data_swapSort.Rows.Add(str[2], "未知");//外部循环索引
+                data_swapSort.Rows.Add(str[3], "未知");//内部循环索引
+                data_swapSort.Rows.Add(str[4], "未知");//临时变量存储，作为交换的介质
+                data_swapSort.Rows.Add(str[5], "未知");//轮询一次是否有交换标志
+            }
+            return data_swapSort;
+        }
+
+        public DataTable GetDataTable_InsSort(string[] str, int updateFlag, string updateValue, int movePosition)
+        {
+            if(updateFlag == 0)//修改i
+            {
+                data_insSort.Rows[Sort.length + 1]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 1;
+            }
+            if(updateFlag == 1)//修改j
+            {
+                data_insSort.Rows[Sort.length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 2;
+            }
+            if(updateFlag == 2)//修改R[0]监视哨
+            {
+                data_insSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+            }
+            if(updateFlag == 4)
+            {
+                for (int i = 0; i < Sort.length; i++)//srcData
+                {
+                    string name = str[0] + "[" + i + "]";
+                    string value = Sort.srcData[i] + "";
+                    data_insSort.Rows.Add(name, value);
+                }
+                data_insSort.Rows.Add(str[1], Sort.length + "");//length
+                data_insSort.Rows.Add(str[2], "未知");//外部循环索引
+                data_insSort.Rows.Add(str[3], "未知");//内部循环索引
+                data_insSort.Rows.Add(str[4], "未知");//监视哨
+            }
+            return data_insSort;
+        }
+
+        public DataTable GetDataTable_BinarySea(string[] str, int updateFlag, string updateValue, int movePosition)
         {
             if(updateFlag == 0)//修改low
             {
@@ -552,9 +709,8 @@ namespace SqListCAI
                 m_maindemon.listView_value.SelectedIndex = Search.length + 3;
 
             }
-            if (updateFlag == 4)
+            if (updateFlag == 4)//添加源数据
             {
-                //添加源数据
                 for (int i = 0; i < Search.length; i++)//srcData
                 {
                     string name = str[0] + "[" + i + "]";
@@ -863,10 +1019,43 @@ namespace SqListCAI
                         BinarySearchWindow.ShowDialog();
                         break;
                     }
+                case 8://直接插入排序
+                    {
+                        Demonstration.data_insSort.Clear();
+                        ListDialog DirInsSortWindow = new ListDialog(flag);
+                        //订阅事件
+                        DirInsSortWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveSort);
+                        DirInsSortWindow.ShowDialog();
+                        break;
+                    }
+                case 9://交换（冒泡）排序
+                    {
+                        Demonstration.data_insSort.Clear();
+                        ListDialog SwapSortWindow = new ListDialog(flag);
+                        //订阅事件
+                        SwapSortWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveSort);
+                        SwapSortWindow.ShowDialog();
+                        break;
+                    }
+                case 10://快速排序
+                    {
+                        Demonstration.data_insSort.Clear();
+                        ListDialog FastSortWindow = new ListDialog(flag);
+                        //订阅事件
+                        FastSortWindow.PassValuesEvent += new ListDialog.PassValuesHandler(RecieveSort);
+                        FastSortWindow.ShowDialog();
+                        break;
+                    }
                 default:
                     break;
 
             }
+        }
+
+        private void RecieveSort(object sender, PassValuesEventArgs e)
+        {
+            m_maindemon.srcData_Sort = e.srcData;
+            m_maindemon.initUI(flag);
         }
 
         private void RecieveBinarySearch(object sender, PassValuesEventArgs e)
@@ -923,40 +1112,35 @@ namespace SqListCAI
             switch (flag)
             {
                 case 1://顺序表的插入
-                    {
                         MessageBox.Show(Explain.OrderInsExplain, "顺序表插入", MessageBoxButton.OK);
                         break;
-                    }
                 case 2://顺序表的删除
-                    {
                         MessageBox.Show(Explain.OrderDelExplain, "顺序表删除", MessageBoxButton.OK);
                         break;
-                    }
                 case 3://链表的创建
-                    {
                         MessageBox.Show(Explain.LinkedCreExplain, "链表创建", MessageBoxButton.OK);
                         break;
-                    }
                 case 4://链表的插入
-                    {
                         MessageBox.Show(Explain.LinkedInsExplain, "链表插入", MessageBoxButton.OK);
                         break;
-                    }
                 case 5://链表的删除
-                    {
                         MessageBox.Show(Explain.LinkedDelExplain, "链表删除", MessageBoxButton.OK);
                         break;
-                    }
                 case 6://顺序查找
-                    {
                         MessageBox.Show(Explain.OrderSearchExplain, "顺序查找", MessageBoxButton.OK);
                         break;
-                    }
                 case 7://二分查找
-                    {
                         MessageBox.Show(Explain.BinarySearchExplain, "二分查找", MessageBoxButton.OK);
                         break;
-                    }
+                case 8://直接插入排序
+                    MessageBox.Show(Explain.InsertSortExplain, "直接插入排序", MessageBoxButton.OK);
+                    break;
+                case 9://冒泡排序
+                    MessageBox.Show(Explain.SwapSortExplain, "冒泡排序", MessageBoxButton.OK);
+                    break;
+                case 10://快速排序
+                    MessageBox.Show(Explain.PartitionSortExplain, "快速排序", MessageBoxButton.OK);
+                    break;
                 default:
                     break;
             }

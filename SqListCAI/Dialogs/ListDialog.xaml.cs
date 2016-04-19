@@ -38,8 +38,7 @@ namespace SqListCAI.Dialogs
                     radioButton_orderDel.IsChecked = true;
                     this.listDialog.Title = "顺序表删除";
                     this.lable_insertData.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false;
-                    this.insertData.Background = Brushes.DarkBlue;
+                    this.insertData.IsEnabled = false;this.insertData.Background = Brushes.DarkBlue;
                     this.lable_place.Content = "删除位置";
                     break;
                 case 3://链表创建
@@ -61,8 +60,7 @@ namespace SqListCAI.Dialogs
                     this.listDialog.Title = "链表删除";
                     this.srcData.Text = "【?9bD";
                     this.lable_insertData.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false;
-                    this.insertData.Background = Brushes.DarkBlue;
+                    this.insertData.IsEnabled = false;this.insertData.Background = Brushes.DarkBlue;
                     this.lable_place.Content = "删除位置";
                     break;
                 case 6://顺序查找
@@ -83,10 +81,38 @@ namespace SqListCAI.Dialogs
                     this.lable_place.Background = Brushes.DarkBlue;
                     this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
                     break;
-
+                case 8://直接插入排序
+                    radioButton_InsSort.IsChecked = true;
+                    this.listDialog.Title = "直接插入排序";
+                    sortCommon();
+                    break;
+                case 9://交换排序
+                    radioButton_SwapSort.IsChecked = true;
+                    this.listDialog.Title = "交换排序";
+                    sortCommon();
+                    break;
+                case 10://快速排序
+                    radioButton_FastSort.IsChecked = true;
+                    this.listDialog.Title = "快速排序";
+                    sortCommon();
+                    break;
+                //case 11://简单选择排序
+                //    radioButton_ChooseSort.IsChecked = true;
+                //    this.listDialog.Title = "简单选择排序";
+                //    sortCommon();
+                //    break;
                 default:
                     break;
             }
+        }
+
+        private void sortCommon()
+        {
+            this.srcData.Text = "9417652038";//待排序
+            this.lable_insertData.Background = Brushes.DarkBlue;
+            this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
+            this.lable_place.Background = Brushes.DarkBlue;
+            this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
         }
 
         private void button_ok_Click(object sender, RoutedEventArgs e)
@@ -150,9 +176,54 @@ namespace SqListCAI.Dialogs
                     }
                     binarySearch();
                     break;
+                case 8:
+                    if (radioButton_InsSort.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中插入排序！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    getPrepareSortData();
+                    break;
+                case 9:
+                    if (radioButton_SwapSort.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中冒泡排序！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    getPrepareSortData();
+                    break;
+                case 10:
+                    if (radioButton_FastSort.IsChecked == false)
+                    {
+                        MessageBox.Show("请选中快速排序！", "警告", MessageBoxButton.OK);
+                        return;
+                    }
+                    getPrepareSortData();
+                    break;
+                //case 11:
+                //    if (radioButton_InsSort.IsChecked == false)
+                //    {
+                //        MessageBox.Show("请选中插入排序！", "警告", MessageBoxButton.OK);
+                //        return;
+                //    }
+                //    getPrepareSortData();
+                //    break;
                 default:
                     break;
             }
+        }
+
+        private void getPrepareSortData()
+        {
+            if ((this.srcData.Text == String.Empty))
+            {
+                MessageBox.Show("内容不能为空！", "警告", MessageBoxButton.OK);
+                return;
+            }
+            string src = this.srcData.Text;
+            PassValuesEventArgs args = new PassValuesEventArgs(src);
+            PassValuesEvent(this, args);
+            this.Close();
         }
 
         private void binarySearch()
@@ -170,7 +241,7 @@ namespace SqListCAI.Dialogs
             StringBuilder sb = new StringBuilder(13);
             //对src进行排序
             Array.Sort(src_temp);
-            MessageBox.Show("源数据以截断并排序！", "提示", MessageBoxButton.OK);
+            MessageBox.Show("源数据已截断并排序！", "提示", MessageBoxButton.OK);
             for (int i = 0; i < src.Length; i++)
                 sb.Append(src_temp[i][0]);
 

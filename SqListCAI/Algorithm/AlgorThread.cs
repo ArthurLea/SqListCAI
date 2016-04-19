@@ -44,10 +44,217 @@ namespace SqListCAI.Algorithm
                 case 7://折半查找
                     binarySearch(operatorFlag);
                     break;
+                case 8://直接插入排序
+                    insertSort(operatorFlag);
+                    break;
+                case 9://交换（冒泡）排序
+                    swapSort(operatorFlag);
+                    break;
+                case 10://快速排序
+                    //partitionSort(operatorFlag);
+                    break;
                 default:
                     break;
                    
             }
+        }
+
+        private void swapSort(int operatorFlag)
+        {
+            if (operatorFlag == 1) swapSortRun();//交换（冒泡）排序全速执行
+            //if (operatorFlag == 2) swapSortStep();//交换（冒泡）排序单步执行
+            //if (operatorFlag == 3) swapSortRunTo();//交换（冒泡）排序断点执行到 
+        }
+
+        private void swapSortRun()
+        {
+            int i, j;
+            int swap;
+            for(i=1;i<Sort.length;i++)
+            {
+                swap = 0;
+                for(j=1;j<Sort.length- i;j++)
+                {
+                    if(Sort.srcData[j] > Sort.srcData[j+1])//将大的往后甩
+                    {
+                        Sort.srcData[0] = Sort.srcData[j+1];
+                        Sort.srcData[j+1] = Sort.srcData[j];
+                        Sort.srcData[j] = Sort.srcData[0];
+                        swap = 1
+                    }
+                }
+                if (swap == 0)
+                    break;
+            }
+        }
+
+        private void insertSort(int operatorFlag)
+        {
+            if (operatorFlag == 1) insertSortRun();//直接插入排序全速执行
+            if (operatorFlag == 2) insertSortStep();//直接插入排序单步执行
+            if (operatorFlag == 3) insertSortRunTo();//直接插入排序断点执行到 
+        }
+
+        private void insertSortRunTo()
+        {
+            int i, j;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);      //2
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(2);
+
+            for (i = 2; i < Sort.length; i++)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, true, 0, i);   //3//对外层循环索引变量i赋值
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(3);
+
+                if (Sort.srcData[i] < Sort.srcData[i - 1])
+                {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(4);
+
+                    Sort.srcData[0] = Sort.srcData[i];
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 10000, Sort.srcData[0]);   //5
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(5);
+
+                    for (j = i - 1; Sort.srcData[0] < Sort.srcData[j]; j--)
+                    {
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, 0, j);   //6
+                        Thread.Sleep(WAITTIME);
+                        judgeIsPoint(6);
+
+                        Sort.srcData[j + 1] = Sort.srcData[j];
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, j + 1, Sort.srcData[j + 1]);  //5
+                        Thread.Sleep(WAITTIME);
+                        judgeIsPoint(5);
+                    }
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, false, 0, 0);  //7
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(7);
+
+                    Sort.srcData[j + 1] = Sort.srcData[0];
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, j + 1, Sort.srcData[j + 1]);  //8
+                    Thread.Sleep(WAITTIME);
+                    judgeIsPoint(8);
+                }
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);
+                Thread.Sleep(WAITTIME);
+                judgeIsPoint(2);
+            }
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);
+            Thread.Sleep(WAITTIME);
+            judgeIsPoint(9);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 8);//通知主线程算法执行完毕
+        }
+
+        private void insertSortStep()
+        {
+            int i, j;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);      //2
+            MainDemon.allDone.WaitOne();
+
+            for (i = 2; i < Sort.length; i++)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, true, 0, i);   //3//对外层循环索引变量i赋值
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+
+                if (Sort.srcData[i] < Sort.srcData[i - 1])
+                {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+
+                    Sort.srcData[0] = Sort.srcData[i];
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 10000, Sort.srcData[0]);   //5
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+
+                    for (j = i - 1; Sort.srcData[0] < Sort.srcData[j]; j--)
+                    {
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, 0, j);   //6
+                        MainDemon.allDone.Reset();
+                        MainDemon.allDone.WaitOne();
+
+                        Sort.srcData[j + 1] = Sort.srcData[j];
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, j + 1, Sort.srcData[j + 1]);  //5
+                        MainDemon.allDone.Reset();
+                        MainDemon.allDone.WaitOne();
+                    }
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, false, 0, 0);  //7
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+
+                    Sort.srcData[j + 1] = Sort.srcData[0];
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, j + 1, Sort.srcData[j + 1]);  //8
+                    MainDemon.allDone.Reset();
+                    MainDemon.allDone.WaitOne();
+                }
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);
+                MainDemon.allDone.Reset();
+                MainDemon.allDone.WaitOne();
+            }
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);
+            MainDemon.allDone.Reset();
+            MainDemon.allDone.WaitOne();
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 8);//通知主线程算法执行完毕
+        }
+
+        private void insertSortRun()
+        {
+            int i, j;
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);      //2
+            Thread.Sleep(WAITTIME);
+
+            for(i=2;i<Sort.length;i++)
+            {
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 3, true, 0, i);   //3//对外层循环索引变量i赋值
+                Thread.Sleep(WAITTIME);
+
+                if (Sort.srcData[i] < Sort.srcData[i-1])
+                {
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 4, false, 0, 0);  //4
+                    Thread.Sleep(WAITTIME);
+
+                    Sort.srcData[0] = Sort.srcData[i];
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, 10000, Sort.srcData[0]);   //5
+                    Thread.Sleep(WAITTIME);
+
+                    for (j = i - 1; Sort.srcData[0] < Sort.srcData[j]; j--)
+                    {
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 6, true, 0, j);   //6
+                        Thread.Sleep(WAITTIME);
+
+                        Sort.srcData[j + 1] = Sort.srcData[j];
+
+                        m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 5, true, j+1, Sort.srcData[j + 1]);  //5
+                        Thread.Sleep(WAITTIME);
+                    }
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, false, 0, 0);  //7
+                    Thread.Sleep(WAITTIME);
+
+                    Sort.srcData[j + 1] = Sort.srcData[0];
+
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, j+1, Sort.srcData[j + 1]);  //8
+                    Thread.Sleep(WAITTIME);
+                }
+
+                m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 2, false, 0, 0);
+                Thread.Sleep(WAITTIME);
+            }
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 9, false, 0, 0);
+            Thread.Sleep(WAITTIME);
+
+            m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_delegateExeFinish, 8);//通知主线程算法执行完毕
         }
 
         private void binarySearch(int operatorFlag)

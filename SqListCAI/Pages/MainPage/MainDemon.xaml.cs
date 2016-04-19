@@ -152,7 +152,7 @@ namespace SqListCAI.Pages.MainPage
         public string srcData_Search;
         public char searchData;
         /// <summary>
-        /// 
+        /// 查找(顺序查找true、折半查找false)的构造函数
         /// </summary>
         /// <param name="demon_name"></param>
         /// <param name="srcData"></param>
@@ -168,6 +168,29 @@ namespace SqListCAI.Pages.MainPage
                 this.flag = 6;
             else//折半查找
                 this.flag = 7;
+            initUI(this.flag);
+        }
+        //排序
+        public string srcData_Sort;
+        /// <summary>
+        /// 排序(直接插入排序--1、交换（冒泡）排序--2、快速排序--3、简单选择排序--4)
+        /// </summary>
+        /// <param name="demon_name"></param>
+        /// <param name="srcData"></param>
+        /// <param name="mark"></param>
+        public MainDemon(string demon_name,string srcData,char mark)
+        {
+            InitializeComponent();
+            this.srcData_Sort = srcData;
+            this.demon_lable_name.Content = demon_name;
+            if ((int)mark == '1')//直接插入排序
+                this.flag = 8;
+            else if (mark == '2')//交换（冒泡）排序
+                this.flag = 9;
+            else if (mark == '3')//快速排序
+                this.flag = 10;
+            //else if (mark == '4')
+            //    this.flag = 11;
             initUI(this.flag);
         }
         /// <summary>
@@ -268,6 +291,35 @@ namespace SqListCAI.Pages.MainPage
                         getCanseContent();//得到canse_demon中的所有组件
                         break;
                     }
+                case 8://直接插入排序
+                    {
+                        Demonstration.data_insSort.Clear();
+                        Sort.init_Sort(srcData_Sort);
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_InsSort;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContentOfSort();//得到canse_demon中的所有组件
+                        break;
+                    }
+                case 9://冒泡排序
+                    {
+                        Demonstration.data_swapSort.Clear();
+                        Sort.init_Sort(srcData_Sort);
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_InsSort;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContentOfSort();//得到canse_demon中的所有组件
+                        break;
+                    }
+                case 10://快速排序
+                    {
+
+                        break;
+                    }
                 default:
                     break;
             }
@@ -292,6 +344,44 @@ namespace SqListCAI.Pages.MainPage
             fisrst_enter_runTo_click_flag = true;//重置断点执行标志
 
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
+        }
+
+        private void Step_InsSort(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if(currentRow == 3)//改变外部索引量i
+                    this.listView_value.DataContext = demonstration.GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 0, changeValue+"", 0).DefaultView;
+                if(currentRow == 5)
+                {
+                    if(movePosition == 10000)//监视哨的值改变
+                    {
+                        //动画区第一个矩形结点改变
+                        lab[0].Foreground = Brushes.Red;
+                        lab[0].Content = changeValue + "";
+                        //变量区R[0]改变
+                        this.listView_value.DataContext = demonstration.GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 2, changeValue + "", 0).DefaultView;
+                    }
+                    else//开始移动数据
+                    {
+                        lab[movePosition].Content = changeValue + "";
+                        lab[movePosition].Foreground = Brushes.Yellow;
+                    }
+                }
+                if(currentRow == 6)//改变内部循环索引量j
+                    this.listView_value.DataContext = demonstration.GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 1, changeValue + "", 0).DefaultView;
+                if(currentRow == 8)//动画区监视哨的值进入已排好的区间
+                {
+                    lab[movePosition].Content = changeValue + "";
+                    lab[movePosition].Foreground = Brushes.Purple;
+                }
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+            }
         }
 
         private void Step_BinarySearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
@@ -361,6 +451,9 @@ namespace SqListCAI.Pages.MainPage
 
                     this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + changeValue, 0).DefaultView;
                 }
+
+                DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
             }
             if (currentRow == 11)
                 MessageBox.Show("未找到" + Search.searchData, "提示", MessageBoxButton.OK);
@@ -1080,6 +1173,15 @@ namespace SqListCAI.Pages.MainPage
                 case 7:
                     MessageBox.Show("折半查找算法执行完毕!", "提示", MessageBoxButton.OK);
                     break;
+                case 8:
+                    MessageBox.Show("直接插入排序算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 9:
+                    MessageBox.Show("交换（冒泡）排序算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
+                case 10:
+                    MessageBox.Show("快速排序算法执行完毕!", "提示", MessageBoxButton.OK);
+                    break;
                 default:
                     break;
             }
@@ -1089,9 +1191,33 @@ namespace SqListCAI.Pages.MainPage
             this.button_resume.IsEnabled = true;
             this.button_resume.Background = getImageSrc("/Images/toolbar_resume.png");
         }
-
+        private void getCanseContentOfSort()
+        {
+            int i = 0;
+            int rc_num = 0;
+            int lable_num = 0;
+            int lab_tabNum_num = 0;
+            if (rec != null) rec = null;
+            if (lab != null) lab = null;
+            if (lab_tabNum != null) lab_tabNum = null;
+            rec = new Rectangle[this.canse_demon.Children.Count / 3];
+            lab = new Label[this.canse_demon.Children.Count / 3];
+            lab_tabNum = new Label[this.canse_demon.Children.Count / 3];
+            IEnumerator ie = this.canse_demon.Children.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                if (i % 3 == 0)//矩形
+                    rec[rc_num++] = (Rectangle)ie.Current;
+                else if (i % 3 == 1)//lable
+                    lab[lable_num++] = (Label)ie.Current;
+                else if (i % 3 == 2)//label_tabNum
+                    lab_tabNum[lab_tabNum_num++] = (Label)ie.Current;
+                i++;
+            }
+        }
         public Rectangle[] rec = null;
         public Label[] lab = null;
+        public Label[] lab_tabNum = null;
         /// <summary>
         /// 获取动画显示画布中的所有组件
         /// </summary>
@@ -1447,41 +1573,35 @@ namespace SqListCAI.Pages.MainPage
             switch (flag)
             {
                 case 1://顺序表的插入
-                    {
                         demonstration.ShowCode(SqListCodes.INSERT_CODE);
                         break;
-                    }
                 case 2://顺序表的删除
-                    {
                         demonstration.ShowCode(SqListCodes.DELETE_CODE);
                         break;
-                    }
                 case 3://链表的创建
-                    {
                         demonstration.ShowCode(LinkedListCodes.CREATE_CODE);
                         break;
-                    }
                 case 4://链表的插入
-                    {
                         demonstration.ShowCode(LinkedListCodes.INSERT_CODE);
                         break;
-                    }
                 case 5://链表的删除
-                    {
                         demonstration.ShowCode(LinkedListCodes.DELETE_CODE);
                         break;
-                    }
                 case 6://顺序查找
-                    {
                         demonstration.ShowCode(SearchCodes.ORDER_SEARCH);
                         break;
-                    }
                 case 7://折半查找
-                    {
                         demonstration.ShowCode(SearchCodes.BINARY_SEARCH);
                         break;
-                    }
-
+                case 8://插入排序
+                    demonstration.ShowCode(SortCodes.INSERT_SORT_CODE);
+                    break;
+                case 9://交换（冒泡）排序
+                    demonstration.ShowCode(SortCodes.SWAP_SORT_CODE);
+                    break;
+                case 10://快速排序
+                    demonstration.ShowCode(SortCodes.FAST_SORT_CODE);
+                    break;
                 default:
                     break;
             }
