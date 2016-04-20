@@ -310,14 +310,21 @@ namespace SqListCAI.Pages.MainPage
                         ShowDemon();
                         ShowCode();
                         ShowValue();
-                        m_DelegateStep = Step_InsSort;
+                        m_DelegateStep = Step_SwapSort;
                         m_delegateExeFinish = ExeFinish;
                         getCanseContentOfSort();//得到canse_demon中的所有组件
                         break;
                     }
                 case 10://快速排序
                     {
-
+                        Demonstration.data_fastSort.Clear();
+                        Sort.init_Sort(srcData_Sort);
+                        ShowDemon();
+                        ShowCode();
+                        ShowValue();
+                        m_DelegateStep = Step_FastSort;
+                        m_delegateExeFinish = ExeFinish;
+                        getCanseContentOfSort();//得到canse_demon中的所有组件
                         break;
                     }
                 default:
@@ -345,6 +352,136 @@ namespace SqListCAI.Pages.MainPage
 
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
         }
+        //定义一个数组存储每一个划分后枢纽到位时的位置
+        //public int[] pivoPoition = new int[Sort.length-1];
+        private void Step_FastSort(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            Demonstration demonstration = new Demonstration(flag, this);
+            if (changeFlag)
+            {
+                if(currentRow == 4)
+                {
+                    lab[0].Content = changeValue;
+                    lab[0].Foreground = Brushes.Red;
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 2, changeValue + "", 0).DefaultView;
+                }
+                if (currentRow == 5)
+                {
+                    if(movePosition == 1000)//改变pivoloc
+                        this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 5, changeValue + "", 0).DefaultView;
+                    else                    //给pivotkey赋值
+                        this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 3, changeValue + "", 0).DefaultView;
+                }
+                if (currentRow == 6 && (movePosition == 1000))
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 5, changeValue + "", 0).DefaultView;
+                if(currentRow == 7)//改变high值
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 1, changeValue + "", 0).DefaultView;
+                if(currentRow == 8)//修改源数据中比枢纽值小的部分
+                {
+                    lab[movePosition].Content = changeValue;
+                    rec[movePosition].Fill = Brushes.Purple;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 6, changeValue + "", movePosition).DefaultView;
+                }
+                if(currentRow == 9)//改变low的值
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 0, changeValue + "", 0).DefaultView;
+                if(currentRow == 10)//修改源数据中比枢纽值大的部分
+                {
+                    lab[movePosition].Content = changeValue;
+                    rec[movePosition].Fill = Brushes.Pink;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 6, changeValue + "", movePosition).DefaultView;
+                }
+                if(currentRow == 12)//枢纽记录到位
+                {
+                    lab[movePosition].Content = changeValue;
+                    rec[movePosition].Fill = Brushes.Red;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 6, changeValue + "", movePosition).DefaultView;
+                }
+                DispatcherHelper.DoEvents();
+                Thread.Sleep(300);
+            }
+            //改变算法代码行
+            if ((currentRow==1000) && (movePosition==2000))//显示partition代码
+            {
+                DispatcherHelper.DoEvents();
+                Thread.Sleep(300);
+                demonstration.ShowCode(SortCodes.FAST_SORT_CODE_PARTITION);
+                DispatcherHelper.DoEvents();
+                Thread.Sleep(300);
+                allDone.Set();
+            }
+            if ((currentRow==1000) && (movePosition==1000))//显示Quick递归代码
+            {
+                DispatcherHelper.DoEvents();
+                Thread.Sleep(300);
+                demonstration.ShowCode(SortCodes.FAST_SORT_CODE_QUICK);
+                DispatcherHelper.DoEvents();
+                Thread.Sleep(300);
+                allDone.Set();
+            }
+            if(((currentRow==5)||(currentRow==6)||(currentRow==8)) && (movePosition==1000))//等待主线程（此正在编辑的文件就是在主线程执行）显示
+                allDone.Set();
+
+        }
+        private void Step_SwapSort(int currentRow, bool changeFlag, int movePosition, object changeValue)
+        {
+            //同步代码区
+            this.listBox_code.SelectedIndex = currentRow;
+            //同步动画和变量区
+            if (changeFlag)
+            {
+                Demonstration demonstration = new Demonstration(flag, this);
+                if(currentRow == 1)//排序一次完将最大的数置为红色,其余的全部恢复为原来的skyBlie颜色
+                {
+                    for (int i = 0; i < movePosition; i++)
+                        rec[i].Fill = Brushes.SkyBlue;
+                    rec[movePosition].Fill = Brushes.Red;
+                }
+                    
+                if (currentRow == 2)//改变变量区i值
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 0, changeValue+"", 0).DefaultView;
+
+                if(currentRow == 3)//修改swap标记
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 3, changeValue + "", 0).DefaultView;
+
+                if(currentRow == 4)//修改变量区j
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 1, changeValue + "", 0).DefaultView;
+                if(currentRow == 6)//修改R[0]
+                {
+                    //动画区R[0]改变
+                    lab[0].Content = changeValue;
+                    lab[0].Foreground = Brushes.Red;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 2, changeValue + "", 0).DefaultView;
+                }
+                if(currentRow == 7)//修改源数据R[j+1]
+                {
+                    //动画区R[j+1]改变
+                    lab[movePosition].Content = changeValue;
+                    rec[movePosition].Fill = Brushes.Pink;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 5, changeValue + "", movePosition).DefaultView;
+                }
+                if (currentRow == 8)//修改源数据R[j]
+                {
+                    //动画区R[j]改变
+                    lab[movePosition].Content = changeValue;
+                    rec[movePosition].Fill = Brushes.Purple;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 5, changeValue + "", movePosition).DefaultView;
+                }
+                if (currentRow == 9)//修改swap
+                    this.listView_value.DataContext = demonstration.GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 3, changeValue + "", 0).DefaultView;
+
+                    DispatcherHelper.DoEvents();
+                System.Threading.Thread.Sleep(300);
+            }
+        }
 
         private void Step_InsSort(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
@@ -370,6 +507,8 @@ namespace SqListCAI.Pages.MainPage
                     {
                         lab[movePosition].Content = changeValue + "";
                         lab[movePosition].Foreground = Brushes.Yellow;
+
+                        this.listView_value.DataContext = demonstration.GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 3, changeValue + "", movePosition).DefaultView;
                     }
                 }
                 if(currentRow == 6)//改变内部循环索引量j
@@ -378,6 +517,8 @@ namespace SqListCAI.Pages.MainPage
                 {
                     lab[movePosition].Content = changeValue + "";
                     lab[movePosition].Foreground = Brushes.Purple;
+
+                    this.listView_value.DataContext = demonstration.GetDataTable_InsSort(SortCodes.INSERT_SORT_VALUE, 3, changeValue + "", movePosition).DefaultView;
                 }
                 DispatcherHelper.DoEvents();
                 System.Threading.Thread.Sleep(300);
@@ -402,7 +543,7 @@ namespace SqListCAI.Pages.MainPage
                         lab[0].Foreground = Brushes.Red;
                         //low、high
                         rec[1].Fill = Brushes.Purple;
-                        rec[Search.length].Fill = Brushes.Yellow;
+                        rec[Search.length].Fill = Brushes.Pink;
 
                         //变量区改变
                         this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + 1, 0).DefaultView;
@@ -420,9 +561,9 @@ namespace SqListCAI.Pages.MainPage
                     rec_key.Fill = Brushes.Red;
                     label_key.Content = Search.searchData;
                     Thickness rec_key_margin = rec[(int)changeValue].Margin;
-                    rec_key_margin.Top = 45; rec_key.Margin = rec_key_margin;
-                     Thickness label_key_margin = lab[(int)changeValue].Margin;
-                    label_key_margin.Top = 45; label_key.Margin = label_key_margin;
+                    rec_key_margin.Top = 25; rec_key.Margin = rec_key_margin;
+                    Thickness label_key_margin = lab[(int)changeValue].Margin;
+                    label_key_margin.Top = 25; label_key.Margin = label_key_margin;
 
                     this.canse_demon.Children.Remove(rec[rec.Length-1]);
                     this.canse_demon.Children.Remove(lab[lab.Length-1]);
@@ -440,7 +581,7 @@ namespace SqListCAI.Pages.MainPage
                 if (currentRow == 7)//改变high(变量区、动画)
                 {
                     rec[(int)changeValue + movePosition].Fill = Brushes.SkyBlue;
-                    rec[(int)changeValue].Fill = Brushes.Yellow;
+                    rec[(int)changeValue].Fill = Brushes.Pink;
 
                     this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + changeValue, 0).DefaultView;
                 }
@@ -745,9 +886,9 @@ namespace SqListCAI.Pages.MainPage
                 if(currentRow ==14)//左边连接
                 {
                     //移除原先连接线
-                    this.canse_demon.Children.Remove(line1[LinkedList.insertPosition - 1]);
-                    this.canse_demon.Children.Remove(line2[LinkedList.insertPosition - 1]);
-                    this.canse_demon.Children.Remove(line3[LinkedList.insertPosition - 1]);
+                    this.canse_demon.Children.Remove(line1[LinkedList.insertPosition - 2]);
+                    this.canse_demon.Children.Remove(line2[LinkedList.insertPosition - 2]);
+                    this.canse_demon.Children.Remove(line3[LinkedList.insertPosition - 2]);
 
                     double canse_left1 = (2 * movePosition - 1) * 60 - 30 + 20;
                     double canse_top1 = 98;
@@ -1052,17 +1193,18 @@ namespace SqListCAI.Pages.MainPage
             }
         }
 
-        private void initRcLable(Rectangle rc, Label lable)
+        private void initRcLable(Rectangle rc, Label label)
         {
             rc.Stroke = Brushes.Yellow;
             rc.Fill = Brushes.Red;
             rc.Width = 50;
-            rc.Height = 35;
+            rc.Height = 60;
 
-            lable.Width = 25;
-            lable.Height = 35;
-            lable.FontSize = 15;
-            lable.VerticalContentAlignment = VerticalAlignment.Center;
+            label.Width = 45;
+            label.Height = 60;
+            label.FontSize = 25;
+            label.VerticalContentAlignment = VerticalAlignment.Center;
+            label.HorizontalContentAlignment = HorizontalAlignment.Center;
         }
 
         /// <summary>
@@ -1129,7 +1271,7 @@ namespace SqListCAI.Pages.MainPage
                     this.canse_demon.Children.Add(lable);
 
                     Demonstration demonstration = new Demonstration(flag, this);
-                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 1);
+                    this.listView_value.DataContext = demonstration.GetDataTable_Ins(SqListCodes.INSERT_VALUE, 0, SqList.insertData.ToString(), SqList.insPosition - 2);
                 }
                 //改变变量区中变量长度
                 if (currentRow == 12)
@@ -1433,7 +1575,6 @@ namespace SqListCAI.Pages.MainPage
             algroThread.Run(flag, 3);//调用AlgorThread的run函数，执行线程体      
         }
         public int[] wherePoint;
-        private int v;
 
         /// <summary>
         /// 设置断点
@@ -1600,7 +1741,7 @@ namespace SqListCAI.Pages.MainPage
                     demonstration.ShowCode(SortCodes.SWAP_SORT_CODE);
                     break;
                 case 10://快速排序
-                    demonstration.ShowCode(SortCodes.FAST_SORT_CODE);
+                    demonstration.ShowCode(SortCodes.FAST_SORT_CODE_QUICK);
                     break;
                 default:
                     break;

@@ -164,8 +164,8 @@
         <StackPanel Name="Demon_Code_Value" Grid.Row="1" Orientation="Horizontal" Margin="0">
             <Grid Margin="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="250"></RowDefinition>
-                    <RowDefinition Height="304"></RowDefinition>
+                    <RowDefinition Height="225"></RowDefinition>
+                    <RowDefinition Height="334"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Border  Name="demon_border" Margin="1,0,0,1" Width="751">
                     <Border.BorderBrush>

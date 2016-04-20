@@ -116,10 +116,6 @@
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
 
                         </StackPanel>
 
@@ -157,10 +153,6 @@
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>-->
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
                         </StackPanel>
 
                         <!--end 内容区-->
@@ -172,10 +164,6 @@
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Content="DOC Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
                             <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
@@ -189,10 +177,6 @@
                                 <Image Source="images/line.png"/>
                             </Border>
                             <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="Graphic Design" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>

@@ -24,13 +24,13 @@ namespace SqListCAI
         }
         public void ShowCode(string[] str)
         {
+            this.m_maindemon.listBox_currentRow.Items.Clear();
             this.m_maindemon.listBox_code.Items.Clear();
             for (int i = 0; i < str.Length; i++)
             {
                 this.m_maindemon.listBox_currentRow.Items.Insert(i, i);
                 this.m_maindemon.listBox_code.Items.Insert(i, str[i]);
             }
-                
             //修改ListBox中某行，先移除，然后插入
             //TextBlock tb = new TextBlock();
             //tb.Text = str[1];
@@ -38,7 +38,6 @@ namespace SqListCAI
             //this.m_maindemon.listBox_code.Items.RemoveAt(0);
             //this.m_maindemon.listBox_code.Items.Insert(0, tb);
             //this.m_maindemon.listBox_code.Items.Add("1234567887946516316");//在末尾增加一行显示
-
         }
         /// <summary>
         /// 显示当前动画
@@ -135,7 +134,7 @@ namespace SqListCAI
             rc[0].Fill = Brushes.DarkGray;
             rc[0].Margin = new Thickness(margin_left, margin_top, 0, 0);
             lable[0].Content = "?";
-            lable[0].Margin = new Thickness(margin_left + (50 - 25) / 2, margin_top, 0, 0);
+            lable[0].Margin = new Thickness(margin_left + (rc[0].Width - lable[0].Width) / 2, margin_top, 0, 0);
             m_maindemon.canse_demon.Children.Add(rc[0]);
             m_maindemon.canse_demon.Children.Add(lable[0]);
             //绘制原始数据
@@ -153,7 +152,7 @@ namespace SqListCAI
                 m_maindemon.canse_demon.Children.Add(rc[i]);
                 m_maindemon.canse_demon.Children.Add(lable[i]);
             }
-            //画比较动画需要的组件（上方位置矩形、label）        
+            //画比较动画需要的组件（上方位置矩形、label组成的需要查找的元素）        
             Rectangle rec_key = new Rectangle();
             Label label_key = new Label();
             init_recKey_labelKey(rec_key, label_key);
@@ -188,11 +187,11 @@ namespace SqListCAI
         {
             rec_key.Stroke = Brushes.Yellow;
             rec_key.Fill = Brushes.SkyBlue;
-            rec_key.Width = 65;
-            rec_key.Height = 50;
+            rec_key.Width = 50;
+            rec_key.Height = 60;
 
             label_key.Width = 45;
-            label_key.Height = 50;
+            label_key.Height = 60;
             label_key.FontSize = 25;
             label_key.Foreground = Brushes.Black;
             label_key.VerticalContentAlignment = VerticalAlignment.Center;
@@ -209,23 +208,14 @@ namespace SqListCAI
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
-                rc[i].Stroke = Brushes.Yellow;
-                rc[i].Fill = Brushes.SkyBlue;
-                rc[i].Width = 50;
-                rc[i].Height = 35;
-
                 lable[i] = new Label();
-                lable[i].Width = 25;
-                lable[i].Height = 35;
-                lable[i].FontSize = 15;
-                lable[i].Foreground = Brushes.Black;
-                lable[i].VerticalContentAlignment = VerticalAlignment.Center;
+                init_recKey_labelKey(rc[i], lable[i]);
             }
             //绘制需要查找的数据
             rc[0].Fill = Brushes.DarkGray;
             rc[0].Margin = new Thickness(margin_left, margin_top, 0, 0);
             lable[0].Content = "?";
-            lable[0].Margin = new Thickness(margin_left + (50 - 25) / 2, margin_top, 0, 0);
+            lable[0].Margin = new Thickness(margin_left + (rc[0].Width - lable[0].Width) / 2, margin_top, 0, 0);
             m_maindemon.canse_demon.Children.Add(rc[0]);
             m_maindemon.canse_demon.Children.Add(lable[0]);
             //绘制原始数据
@@ -415,16 +405,8 @@ namespace SqListCAI
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
-                rc[i].Stroke = Brushes.Yellow;
-                rc[i].Fill = Brushes.SkyBlue;
-                rc[i].Width = 50;
-                rc[i].Height = 35;
-
                 lable[i] = new Label();
-                lable[i].Width = 25;
-                lable[i].Height = 35;
-                lable[i].FontSize = 15;
-                lable[i].VerticalContentAlignment = VerticalAlignment.Center;
+                init_recKey_labelKey(rc[i], lable[i]);
 
                 index[i] = 0;//初始化位置索引
             }
@@ -452,11 +434,11 @@ namespace SqListCAI
                 }
             }
             //绘制删除位置
-            rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 60, 0, 0);
+            rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 80, 0, 0);
             rc[rc.Length - 1].Fill = Brushes.DarkGray;
             lable[rc.Length - 1].Content = SqList.delPosition;
             lable[rc.Length - 1].Foreground = Brushes.Red;
-            lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 60, 0, 0);
+            lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 80, 0, 0);
 
             m_maindemon.canse_demon.Children.Add(rc[rc.Length - 1]);
             m_maindemon.canse_demon.Children.Add(lable[lable.Length - 1]);
@@ -475,16 +457,8 @@ namespace SqListCAI
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
-                rc[i].Stroke = Brushes.Yellow;
-                rc[i].Fill = Brushes.SkyBlue;
-                rc[i].Width = 50;
-                rc[i].Height = 35;
-
                 lable[i] = new Label();
-                lable[i].Width = 25;
-                lable[i].Height = 35;
-                lable[i].FontSize = 15;
-                lable[i].VerticalContentAlignment = VerticalAlignment.Center;
+                init_recKey_labelKey(rc[i], lable[i]);
 
                 index[i] = 0;//初始化位置索引
             }
@@ -514,11 +488,11 @@ namespace SqListCAI
                 }
             }
             //绘制插入数据
-            rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 60, 0, 0);
+            rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 80, 0, 0);
             rc[rc.Length - 1].Fill = Brushes.DarkGray;
             lable[rc.Length - 1].Content = SqList.insertData;
             lable[rc.Length - 1].Foreground = Brushes.Red;
-            lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 60, 0, 0);
+            lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 80, 0, 0);
 
             m_maindemon.canse_demon.Children.Add(rc[rc.Length - 1]);
             m_maindemon.canse_demon.Children.Add(lable[lable.Length - 1]);
@@ -534,6 +508,7 @@ namespace SqListCAI
         public static DataTable data_binarySearch = new DataTable("DataTable_BinarySea");
         public static DataTable data_insSort = new DataTable("DataTable_InsSort"); 
         public static DataTable data_swapSort = new DataTable("DataTable_SwapSort"); 
+        public static DataTable data_fastSort = new DataTable("DataTable_FastSort"); 
         /// <summary>
         /// 显示变量区中的变量
         /// </summary>
@@ -613,13 +588,72 @@ namespace SqListCAI
                         data_swapSort.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
                     m_maindemon.listView_value.DataContext = GetDataTable_SwapSort(SortCodes.SWAP_SORT_VALUE, 4, null, 0).DefaultView;
-                    break; 
+                    break;
+                case 10:
+                    if (data_fastSort.Columns.Count == 0)
+                    {
+                        data_fastSort.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
+                        data_fastSort.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
+                    }
+                    m_maindemon.listView_value.DataContext = GetDataTable_FastSort(SortCodes.FAST_SORT_VALUE, 4, null, 0).DefaultView;
+                    break;
                 default:
                     break;
             }
         }
 
-        public DataTable GetDataTable_SwapSort(string[] str, int updateFlag, string updateValue, int movePositio)
+        public DataTable GetDataTable_FastSort(string[] str, int updateFlag, string updateValue, int movePosition)
+        {
+            if (updateFlag == 0)//修改low
+            {
+                data_fastSort.Rows[Sort.length + 1]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 1;
+            }
+            if (updateFlag == 1)//修改high
+            {
+                data_fastSort.Rows[Sort.length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 2;
+            }
+            if (updateFlag == 2)//修改支点记录R[0]
+            {
+                data_fastSort.Rows[0]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = 0;
+            }
+            if (updateFlag == 3)//修改pivokey
+            {
+                data_fastSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+            }
+            if (updateFlag == 5)//修改pivotloc
+            {
+                data_fastSort.Rows[Sort.length + 4]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 4;
+            }
+            if(updateFlag == 6)//修改源数据
+            {
+                data_fastSort.Rows[movePosition]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition;
+            }
+            if (updateFlag == 4)
+            {
+                for (int i = 0; i < Sort.length; i++)//srcData
+                {
+                    string name = str[0] + "[" + i + "]";
+                    if (i == 0)//作为交换的介质R[0]支点记录
+                        name = "支点记录-" + name;
+                    string value = Sort.srcData[i] + "";
+                    data_fastSort.Rows.Add(name, value);
+                }
+                data_fastSort.Rows.Add(str[1], Sort.length + "");//length
+                data_fastSort.Rows.Add(str[2], "未知");//low
+                data_fastSort.Rows.Add(str[3], "未知");//high
+                data_fastSort.Rows.Add(str[4], "未知");
+                data_fastSort.Rows.Add(str[5], "未知");
+            }
+            return data_fastSort;
+        }
+
+        public DataTable GetDataTable_SwapSort(string[] str, int updateFlag, string updateValue, int movePosition)
         {
             if (updateFlag == 0)//修改i
             {
@@ -633,27 +667,33 @@ namespace SqListCAI
             }
             if (updateFlag == 2)//修改R[0]临时变量存储，作为交换的介质
             {
-                data_swapSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+                data_swapSort.Rows[0]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = 0;
             }
             if(updateFlag == 3)//修改swap
             {
-                data_swapSort.Rows[Sort.length + 4]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = Sort.length + 4;
+                data_swapSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+            }
+            if(updateFlag == 5)//修改源数据
+            {
+                data_swapSort.Rows[movePosition]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition;
             }
             if (updateFlag == 4)
             {
                 for (int i = 0; i < Sort.length; i++)//srcData
                 {
                     string name = str[0] + "[" + i + "]";
+                    if (i == 0)//临时变量存储，作为交换的介质
+                        name = "交换介质-" + name;
                     string value = Sort.srcData[i] + "";
                     data_swapSort.Rows.Add(name, value);
                 }
                 data_swapSort.Rows.Add(str[1], Sort.length + "");//length
                 data_swapSort.Rows.Add(str[2], "未知");//外部循环索引
                 data_swapSort.Rows.Add(str[3], "未知");//内部循环索引
-                data_swapSort.Rows.Add(str[4], "未知");//临时变量存储，作为交换的介质
-                data_swapSort.Rows.Add(str[5], "未知");//轮询一次是否有交换标志
+                data_swapSort.Rows.Add(str[4], "未知");//轮询一次是否有交换标志
             }
             return data_swapSort;
         }
@@ -672,21 +712,27 @@ namespace SqListCAI
             }
             if(updateFlag == 2)//修改R[0]监视哨
             {
-                data_insSort.Rows[Sort.length + 3]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = Sort.length + 3;
+                data_insSort.Rows[0]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = 0;
+            }
+            if(updateFlag == 3)//修改源数据
+            {
+                data_insSort.Rows[movePosition]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition;
             }
             if(updateFlag == 4)
             {
                 for (int i = 0; i < Sort.length; i++)//srcData
                 {
                     string name = str[0] + "[" + i + "]";
+                    if (i == 0)//监视哨
+                        name = "监视哨-" + name;
                     string value = Sort.srcData[i] + "";
                     data_insSort.Rows.Add(name, value);
                 }
                 data_insSort.Rows.Add(str[1], Sort.length + "");//length
                 data_insSort.Rows.Add(str[2], "未知");//外部循环索引
                 data_insSort.Rows.Add(str[3], "未知");//内部循环索引
-                data_insSort.Rows.Add(str[4], "未知");//监视哨
             }
             return data_insSort;
         }

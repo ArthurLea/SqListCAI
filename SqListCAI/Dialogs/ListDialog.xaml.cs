@@ -108,7 +108,7 @@ namespace SqListCAI.Dialogs
 
         private void sortCommon()
         {
-            this.srcData.Text = "9417652038";//待排序
+            this.srcData.Text = "41652703";//待排序
             this.lable_insertData.Background = Brushes.DarkBlue;
             this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
             this.lable_place.Background = Brushes.DarkBlue;
