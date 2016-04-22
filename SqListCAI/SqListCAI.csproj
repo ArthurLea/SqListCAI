@@ -33,6 +33,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SqListCAI.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -44,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.TreeListView, Version=1.0.1336.34694, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -72,6 +83,9 @@
     <Compile Include="Dialogs\ListDialog.xaml.cs">
       <DependentUpon>ListDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SetDialog.xaml.cs">
+      <DependentUpon>SetDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Explain.cs" />
     <Compile Include="Entities\LinkedList.cs" />
     <Compile Include="Entities\Search.cs" />
@@ -87,6 +101,10 @@
     <Compile Include="Utils\SourceCodes\SortCodes.cs" />
     <Compile Include="Utils\SourceCodes\SqListCodes.cs" />
     <Page Include="Dialogs\ListDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SetDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +173,6 @@
     <Resource Include="Images\arrow.png" />
     <Resource Include="Images\calendaricon.png" />
     <Resource Include="Images\dropdownbtn.png" />
-    <Resource Include="Images\email.png" />
     <Resource Include="Images\graphicon.png" />
     <Resource Include="Images\homeicon.png" />
     <Resource Include="Images\hoverbutton.png" />
@@ -206,6 +223,42 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\hide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app7.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app8.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dialog_operator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dialog_setting.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

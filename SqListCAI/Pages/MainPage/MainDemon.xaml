@@ -45,7 +45,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_data.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="数据" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="数据" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="1" Name="toolbar_explain">
                     <Grid.RowDefinitions>
@@ -57,7 +57,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_data.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="算法说明" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="算法说明" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Image Source="/Images/lineblue.png" Grid.Column="2" Margin="0" Height="60" Stretch="UniformToFill" ></Image>
                 <Grid Grid.Column="3" Name="toolbar_pause">
@@ -70,7 +70,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_pause.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Name="lable_pause" Content="暂停" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Name="lable_pause" Content="暂停" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="4" Name="toolbar_run">
                     <Grid.RowDefinitions>
@@ -82,7 +82,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_run.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="全速执行" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="全速执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="5" Name="toolbar_onestep">
                     <Grid.RowDefinitions>
@@ -94,7 +94,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_onestep.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="单步执行" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="单步执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="6" Name="toolbar_follow">
                     <Grid.RowDefinitions>
@@ -106,7 +106,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_runto.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="断点执行" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="断点执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="7" Name="toolbar_runTo">
                     <Grid.RowDefinitions>
@@ -118,7 +118,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_point.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="设置断点" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="设置断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="8" Name="toolbar_resume">
                     <Grid.RowDefinitions>
@@ -131,7 +131,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_point.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="清除所有断点" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="清除断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
                 </Grid>
                 <Grid Grid.Column="9" Name="toolbar_breakPoint">
@@ -144,7 +144,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_point.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="当前断点" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="当前断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Image Source="/Images/lineblue.png" Grid.Column="10" Margin="0" Height="60" Stretch="UniformToFill" ></Image>
                 <Grid Grid.Column="11" Name="toolbar_set">
@@ -157,7 +157,7 @@
                             <ImageBrush ImageSource="/Images/toolbar_resume.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="恢复" Grid.Row="1" Foreground="Blue" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Content="恢复" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
         </StackPanel>

@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         Background="DarkGray"
         Name="listDialog"
-        Title="current operator" Height="350" Width="350" WindowStartupLocation="Manual" WindowStyle="ToolWindow">
+        Title="current operator" Height="350" Width="350" WindowStartupLocation="Manual" Icon="/SqListCAI;component/Images/dialog_operator.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="113*"/>

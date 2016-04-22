@@ -1584,12 +1584,12 @@ namespace SqListCAI.Pages.MainPage
         private void breakPoint_Click(object sender, RoutedEventArgs e)
         {
             //得到算法区选中的代码行数
-            int count = this.listBox_code.SelectedItems.Count;
+            int count = this.listBox_currentRow.SelectedItems.Count;
             this.wherePoint = new int[count];
             //一次存储选中行在代码区中的行数
-            IList lists = this.listBox_code.SelectedItems;
+            IList lists = this.listBox_currentRow.SelectedItems;
             for (int i = 0; i < count; i++)
-                this.wherePoint[i] = this.listBox_code.Items.IndexOf(lists[i]);
+                this.wherePoint[i] = this.listBox_currentRow.Items.IndexOf(lists[i]);
 
             this.listBox_currentRow.SelectedIndex = -1;//先清除所有断点在设置
             for (int i = 0; i < wherePoint.Length; i++)//显示用户设置的当前断点到this.listBox_currentRow

@@ -470,7 +470,7 @@ namespace SqListCAI
                 rc[i].Margin = rc_src_margin;
 
                 if (i == length)
-                    lable[i].Content = '?';
+                    lable[i].Content = "";
                 else
                     lable[i].Content = SqList.srcData_ins[i];
                 double lable_margin_left = rc_margin_left + (rc[i].Width - lable[i].Width) / 2;
@@ -929,8 +929,8 @@ namespace SqListCAI
             }
             if(updateFlag == 3)//长度
             {
-                data_del.Rows[SqList.length]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = SqList.length;
+                data_del.Rows[SqList.length+1]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = SqList.length +1;
 
                 data_del.Rows[SqList.length]["VALUE"] = "已删除";
             }

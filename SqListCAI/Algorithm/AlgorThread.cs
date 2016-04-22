@@ -8,7 +8,7 @@ namespace SqListCAI.Algorithm
     public partial class AlgorThread
     {
         public static ManualResetEvent allDone = new ManualResetEvent(false);
-        public static int WAITTIME = 500;//执行算法的一行时需要缓冲等待的时间
+        public static int WAITTIME = (int)App.WAITTIME;//执行算法的一行时需要缓冲等待的时间
         public ManualResetEvent m_EvnentStop;  //主线程Set以示要停止自定义线程
         ManualResetEvent m_EvnentStopped;  //主线程Set以示线程已经停止
         MainDemon m_mainDemon;  //主窗口引用

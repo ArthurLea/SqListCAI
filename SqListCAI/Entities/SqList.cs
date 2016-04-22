@@ -12,7 +12,7 @@ namespace SqListCAI.Entities
         public static int ERROR = -1;
         public static int OK = 1;
         public static int length;
-        public static int MAXSIZE = 14;
+        public static int MAXSIZE = 18;
 
         public static char[] srcData_ins;
         public static char insertData;
@@ -30,7 +30,6 @@ namespace SqListCAI.Entities
             insPosition = position;
             length = data.Length;
         }
-
         public static int Inset_SqList(int i,char insData)
         {
             int p = 0;
@@ -51,7 +50,7 @@ namespace SqListCAI.Entities
         /// <param name="position"></param>
         public static void init_SqList(string data, int position)
         {
-            srcData_del = new char[data.Length + 1];
+            srcData_del = new char[data.Length];
             for (int i = 0; i < data.Length; i++)
                 srcData_del[i] = data[i];
             delPosition = position;

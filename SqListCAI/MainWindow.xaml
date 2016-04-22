@@ -8,7 +8,7 @@
     Title="MainWindow" Height="710" MaxHeight="710" Width="980" MaxWidth="980" 
     Name="mainForm"
     AllowsTransparency="True" WindowStyle="None" ResizeMode = "NoResize"
-    Background="{x:Null}" MouseLeftButtonDown="Window_MouseLeftButtonDown"  >
+    Background="{x:Null}" MouseLeftButtonDown="Window_MouseLeftButtonDown" Icon="app.ico" >
     <Window.Resources>
         <Storyboard x:Key="sb" >
             <DoubleAnimation Storyboard.TargetName="mainForm" Storyboard.TargetProperty="Width" From="0" To="980" Duration="0:0:1" BeginTime="0:0:0"/>
@@ -16,7 +16,11 @@
         </Storyboard>
     </Window.Resources>
     <Grid Background="Black">
-        <Grid x:Name="gridForm" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="105*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridForm" Margin="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
@@ -43,7 +47,7 @@
                         <ColumnDefinition Width="400" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="appName" FontWeight="Bold" FontSize="22"  Margin="8,11,282,20" Text="线性表动态演示系统"   Grid.Column="0" Grid.Row="0"	VerticalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+                    <TextBlock x:Name="appName" FontWeight="Bold" FontSize="24"  Margin="8,11,282,20" Text="线性表动态演示系统" Foreground="#FF00D1E5"  FontStyle="Italic" Grid.Column="0" Grid.Row="0"	VerticalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2" />
                     <TextBlock x:Name="authorName" FontWeight="Bold" FontSize="10"  Margin="8,4,282,10" Text="wx_1551243857@qq.com"  Foreground="#FF463E3E" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" />
                     <TextBlock x:Name="userInfo" FontWeight="Bold" FontSize="16"  Margin="171,16,5,0" Text="Welcome to Admin Of WX"  Foreground="#FF333333" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" />
                     <!--TextBox自定义下拉日历-->
@@ -51,9 +55,9 @@
                     <!--<Image Source="images/email.png"  Stretch="Uniform" Margin="255,22,99,22" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"  Width="26" VerticalAlignment="Center" RenderTransformOrigin="-1.115,0.552"/>
                     <Image Source="images/toolbar_point.png"  Stretch="Uniform" Margin="267,12,93,4" Grid.Column="2" Grid.Row="0" Height="20" Width="20" RenderTransformOrigin="4.3,0.5"/>
                     <TextBlock x:Name="notifyCount"  FontSize="9"  Margin="270,16,92,10" Grid.Column="2" Grid.Row="0"  Text="22"  Foreground="#FFFFFFFF" VerticalAlignment="Center" Width="18" RenderTransformOrigin="-1.056,-6.909"/>-->
-                    <Image Source="images/minimize.png" MouseLeftButtonDown="MouseLeftButtonDown_minSize" Stretch="Fill"  Margin="255,22,99,22" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"  Width="26" VerticalAlignment="Center" RenderTransformOrigin="-1.115,0.552"/>
-                    <Image Source="/Images/toolbar_settings.png"  Stretch="Uniform" Margin="300,16,50,18" Grid.Column="2" Grid.Row="0" Height="26" Width="30" VerticalAlignment="Center" Grid.RowSpan="2" RenderTransformOrigin="5.75,0.538"  />
-                    <Image x:Name="Logout"  MouseLeftButtonDown="MouseLeftButtonDown_Logout"  Source="images/logout.png"  Stretch="Uniform" Margin="0,15,12,19" Grid.Column="2" Grid.Row="0" Height="26" Width="30" HorizontalAlignment="Right" Grid.RowSpan="2" Cursor="Hand"/>
+                    <Image Source="images/hide.png" MouseLeftButtonDown="MouseLeftButtonDown_Hide" Stretch="Fill"  Margin="257,16,97,18" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"  RenderTransformOrigin="-1.115,0.552" Width="30" Height="26"/>
+                    <Image Source="/Images/toolbar_settings.png" MouseLeftButtonDown="MouseLeftButtonDown_Setting" Stretch="Uniform" Margin="300,15,50,18" Grid.Column="2" Grid.Row="0" Height="26" Width="30" VerticalAlignment="Center" Grid.RowSpan="2" RenderTransformOrigin="5.75,0.538"  />
+                    <Image x:Name="Logout"  MouseLeftButtonDown="MouseLeftButtonDown_Logout"  Source="images/logout.png"  Stretch="Uniform" Margin="0,15,10,19" Grid.Column="2" Grid.Row="0" Height="26" Width="30" HorizontalAlignment="Right" Grid.RowSpan="2" Cursor="Hand"/>
                 </Grid>
             </StackPanel>
             <!--end toolbar-->
