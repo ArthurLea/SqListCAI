@@ -24,7 +24,7 @@ namespace SqListCAI.Dialogs
 
         int flag;
         public ListDialog(int flag)
-    {
+        {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//窗口居中
             this.flag = flag;
@@ -32,6 +32,7 @@ namespace SqListCAI.Dialogs
             {
                 case 1://顺序表插入
                     radioButton_orderIns.IsChecked = true;
+                    radioButton_orderIns.Foreground = Brushes.Green;
                     this.listDialog.Title = "顺序表插入";
                     this.srcData.Text = "xmXpzvq6s4CRb";
                     this.insertData.Text = 'n' + "";
@@ -39,24 +40,30 @@ namespace SqListCAI.Dialogs
                     break;
                 case 2://顺序表删除
                     radioButton_orderDel.IsChecked = true;
+                    radioButton_orderDel.Foreground = Brushes.Green;
                     this.listDialog.Title = "顺序表删除";
                     this.srcData.Text = "3zE5NwmahrbOpS";
                     this.position.Text = 5 +"";
-                    this.lable_insertData.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
+                    this.lable_insertData.Background = Brushes.DarkGray; this.lable_insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkGray; this.insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.Visibility = Visibility.Hidden;
                     this.lable_place.Content = "删除位置";
                     break;
                 case 3://链表创建
                     radioButton_linkedCre.IsChecked = true;
+                    radioButton_linkedCre.Foreground = Brushes.Green;
                     this.listDialog.Title = "链表创建";
                     this.srcData.Text = "E89bD";
-                    this.lable_insertData.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
-                    this.lable_place.Background = Brushes.DarkBlue;
-                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+                    this.lable_insertData.Background = Brushes.DarkGray; this.lable_insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkGray; this.insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.Visibility = Visibility.Hidden;
+                    this.lable_place.Background = Brushes.DarkGray; this.lable_place.Foreground = Brushes.DarkGray;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkGray; this.position.Foreground = Brushes.DarkGray;
+                    this.position.Visibility = Visibility.Hidden;                   
                     break;
                 case 4://链表插入
                     radioButton_linkedIns.IsChecked = true;
+                    radioButton_linkedIns.Foreground = Brushes.Green;
                     this.listDialog.Title = "链表插入";
                     this.srcData.Text = "Z6ehS";
                     this.insertData.Text = 'I' + "";
@@ -64,51 +71,55 @@ namespace SqListCAI.Dialogs
                     break;
                 case 5://链表删除
                     radioButton_linkedDel.IsChecked = true;
+                    radioButton_linkedDel.Foreground = Brushes.Green;
                     this.listDialog.Title = "链表删除";
                     this.srcData.Text = "N8V56";
                     this.position.Text = 3+"";
-                    this.lable_insertData.Background = Brushes.DarkBlue;
-                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
+                    this.lable_insertData.Background = Brushes.DarkGray; this.lable_insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkGray; this.insertData.Foreground = Brushes.DarkGray;
+                    this.insertData.Visibility = Visibility.Hidden;
                     this.lable_place.Content = "删除位置";
                     break;
                 case 6://顺序查找
                     radioButton_OreSearch.IsChecked = true;
+                    radioButton_OreSearch.Foreground = Brushes.Green;
                     this.listDialog.Title = "顺序查找";
                     this.srcData.Text = "1e9X2AcDXdfop";//1e9X2AcDXdf
                     this.lable_insertData.Content = "查找元素：";
                     this.insertData.Text = "A";
-                    this.lable_place.Background = Brushes.DarkBlue;
-                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+                    this.lable_place.Background = Brushes.DarkGray; this.lable_place.Foreground = Brushes.DarkGray;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkGray; this.position.Foreground = Brushes.DarkGray;
+                    this.position.Visibility = Visibility.Hidden; 
                     break;
                 case 7://折半查找
                     radioButton_BinSearch.IsChecked = true;
+                    radioButton_BinSearch.Foreground = Brushes.Green;
                     this.listDialog.Title = "折半查找";
                     this.srcData.Text = "acdefghjlopsv";//需要排序
                     this.lable_insertData.Content = "查找元素：";
                     this.insertData.Text = "f";
-                    this.lable_place.Background = Brushes.DarkBlue;
-                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+                    this.lable_place.Background = Brushes.DarkGray; this.lable_place.Foreground = Brushes.DarkGray;
+                    this.position.IsEnabled = false; this.position.Background = Brushes.DarkGray; this.position.Foreground = Brushes.DarkGray;
+                    this.position.Visibility = Visibility.Hidden; 
                     break;
                 case 8://直接插入排序
                     radioButton_InsSort.IsChecked = true;
+                    radioButton_InsSort.Foreground = Brushes.Green;
                     this.listDialog.Title = "直接插入排序";
                     sortCommon();
                     break;
                 case 9://交换排序
                     radioButton_SwapSort.IsChecked = true;
+                    radioButton_SwapSort.Foreground = Brushes.Green;
                     this.listDialog.Title = "交换排序";
                     sortCommon();
                     break;
                 case 10://快速排序
                     radioButton_FastSort.IsChecked = true;
+                    radioButton_FastSort.Foreground = Brushes.Green;
                     this.listDialog.Title = "快速排序";
                     sortCommon();
                     break;
-                //case 11://简单选择排序
-                //    radioButton_ChooseSort.IsChecked = true;
-                //    this.listDialog.Title = "简单选择排序";
-                //    sortCommon();
-                //    break;
                 default:
                     break;
             }
@@ -116,10 +127,12 @@ namespace SqListCAI.Dialogs
         private void sortCommon()
         {
             this.srcData.Text = "4196582703";//待排序
-            this.lable_insertData.Background = Brushes.DarkBlue;
-            this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkBlue;
-            this.lable_place.Background = Brushes.DarkBlue;
-            this.position.IsEnabled = false; this.position.Background = Brushes.DarkBlue;
+            this.lable_insertData.Background = Brushes.DarkGray; this.lable_insertData.Foreground = Brushes.DarkGray;
+            this.insertData.IsEnabled = false; this.insertData.Background = Brushes.DarkGray; this.insertData.Foreground = Brushes.DarkGray;
+            this.insertData.Visibility = Visibility.Hidden;
+            this.lable_place.Background = Brushes.DarkGray; this.lable_place.Foreground = Brushes.DarkGray;
+            this.position.IsEnabled = false; this.position.Background = Brushes.DarkGray; this.position.Foreground = Brushes.DarkGray;
+            this.position.Visibility = Visibility.Hidden; 
         }
 
         private void button_ok_Click(object sender, RoutedEventArgs e)
@@ -207,14 +220,6 @@ namespace SqListCAI.Dialogs
                     }
                     getPrepareSortData();
                     break;
-                //case 11:
-                //    if (radioButton_InsSort.IsChecked == false)
-                //    {
-                //        MessageBox.Show("请选中插入排序！", "警告", MessageBoxButton.OK);
-                //        return;
-                //    }
-                //    getPrepareSortData();
-                //    break;
                 default:
                     break;
             }
@@ -298,9 +303,17 @@ namespace SqListCAI.Dialogs
                 string src = this.srcData.Text;
                 src = srcDataSpilt(src, '3');//判断源数据输入是否合法（主要是长度的检测）
                 int position = Convert.ToInt32(this.position.Text);
-                PassValuesEventArgs args = new PassValuesEventArgs(src, position);
-                PassValuesEvent(this, args);
-                this.Close();
+                if((2<=position) && (position<=src.Length))
+                {
+                    PassValuesEventArgs args = new PassValuesEventArgs(src, position);
+                    PassValuesEvent(this, args);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("删除位置必须为[2," + src.Length + "]", "警告", MessageBoxButton.OK);
+                    return;
+                }
             }
             catch (FormatException fe)
             {
@@ -327,9 +340,17 @@ namespace SqListCAI.Dialogs
                 }
                 char insert = this.insertData.Text[0];
                 int position = Convert.ToInt32(this.position.Text);
-                PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
-                PassValuesEvent(this, args);
-                this.Close();
+                if((2<=position) && (position<=(src.Length+1)))
+                {
+                    PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
+                    PassValuesEvent(this, args);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("插入位置必须为[2," + (src.Length + 1) + "]", "警告", MessageBoxButton.OK);
+                    return;
+                }
             }
             catch (FormatException fe)
             {
@@ -364,9 +385,17 @@ namespace SqListCAI.Dialogs
                 string src = this.srcData.Text;
                 src = srcDataSpilt(src, '2');//判断源数据输入是否合法（主要是长度的检测）
                 int position = Convert.ToInt32(this.position.Text);
-                PassValuesEventArgs args = new PassValuesEventArgs(src, position);
-                PassValuesEvent(this, args);
-                this.Close();
+                if((1<=position) && (position<=src.Length))
+                {
+                    PassValuesEventArgs args = new PassValuesEventArgs(src, position);
+                    PassValuesEvent(this, args);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("删除位置必须为[1," + src.Length + "]", "警告", MessageBoxButton.OK);
+                    return;
+                }
             }
             catch (FormatException fe)
             {
@@ -385,17 +414,25 @@ namespace SqListCAI.Dialogs
             try
             {
                 string src = this.srcData.Text;
-                src = srcDataSpilt(src,'1');//判断源数据输入是否合法（主要是长度的检测）
+                src = srcDataSpilt(src,'1');//判断源数据输入是否合法（主要是长度的检测）得到源数据
                 if (this.insertData.Text.Length > 1)
                 {
                     MessageBox.Show("插入内容为一个字符！", "警告", MessageBoxButton.OK);
                     return;
                 }
-                char insert = this.insertData.Text[0];
-                int position = Convert.ToInt32(this.position.Text);
-                PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
-                PassValuesEvent(this, args);
-                this.Close();
+                char insert = this.insertData.Text[0];//得到插入数据
+                int position = Convert.ToInt32(this.position.Text); //得到插入位置
+                if((1<=position) && (position<=src.Length+1))
+                {
+                    PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
+                    PassValuesEvent(this, args);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("插入位置必须为[1,"+(src.Length+1)+"]", "警告", MessageBoxButton.OK);
+                    return;
+                }
             }
             catch (FormatException fe)
             {
@@ -404,6 +441,12 @@ namespace SqListCAI.Dialogs
             }
         }
         public static string SRCDATAWARN = "源数据警告";
+        /// <summary>
+        /// 源数据的截取（因为具体空间的限制），截取方式为前截取
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="currntOperatorFlag"></param>
+        /// <returns></returns>
         private string srcDataSpilt(string src, char currntOperatorFlag)
         {
             if (MainWindow.__isLeftHide)//隐藏（未展开，宽度变长）
@@ -459,7 +502,6 @@ namespace SqListCAI.Dialogs
                         {
                             MessageBox.Show("源数据最多输入13个字符，已截取", SRCDATAWARN, MessageBoxButton.OK);
                             src = src.Substring(0, 13);//截取13个字符
-
                         }
                         break;
                     case '2':
@@ -613,7 +655,18 @@ namespace SqListCAI.Dialogs
                 position = random.Next(str.Length);
                 this.insertData.Text = str[position] + "";//插入数据生成
             }
-            position = random.Next(1,sb_srcData.Length);//[1,sb_srcData.Length)
+            if (flag == 4)//链表插入生成的插入位置检测
+            {
+                position = random.Next(2, sb_srcData.Length+1+1);//链表插入生成的插入位置必须在[2,src.Length+1)
+            }
+            else if (flag == 5)//链表删除生成的删除位置检测
+            {
+                position = random.Next(2, sb_srcData.Length+1);//[2,sb_srcData.Length)
+            }
+            else
+            {
+                position = random.Next(1,sb_srcData.Length+1);//[1,sb_srcData.Length)
+            }
             this.position.Text = position + "";//插入位置生成
         }
 

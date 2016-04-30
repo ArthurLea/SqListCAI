@@ -40,9 +40,7 @@
     <StartupObject>SqListCAI.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup />
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -92,6 +90,15 @@
     <Compile Include="Entities\Sort.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
+    <Compile Include="Instances\ExamplePage.xaml.cs">
+      <DependentUpon>ExamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Instances\FlashControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Instances\FlashControl.Designer.cs">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
       <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
@@ -105,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SetDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Instances\ExamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,10 +166,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Instances\FlashControl.resx">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -178,7 +193,7 @@
     <Resource Include="Images\hoverbutton.png" />
     <Resource Include="Images\line.png" />
     <Resource Include="Images\logout.PNG" />
-    <Resource Include="Images\toolbar_point.png" />
+    <Resource Include="Images\toolbar_cleanPoint.png" />
     <Resource Include="Images\panelexpand.png" />
     <Resource Include="Images\projects.png" />
     <Resource Include="Images\toolbar_settings.png" />
@@ -259,6 +274,34 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\dialog_setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_currentPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toolbar_explain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -168,19 +168,15 @@
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Name="order_ins"  Content="顺序表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="order_ins_MouseLeftButtonDown"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="链表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="排序视频" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>

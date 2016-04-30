@@ -341,9 +341,9 @@ namespace SqListCAI.Pages.MainPage
             this.button_breakPoint.IsEnabled = true;
             this.button_breakPoint.Background = getImageSrc("/Images/toolbar_point.png");
             this.button_clearAllPoint.IsEnabled = true;
-            this.button_clearAllPoint.Background = getImageSrc("/Images/toolbar_point.png");
+            this.button_clearAllPoint.Background = getImageSrc("/Images/toolbar_cleanPoint.png");
             this.button_currentPoint.IsEnabled = true;
-            this.button_currentPoint.Background = getImageSrc("/Images/toolbar_point.png");
+            this.button_currentPoint.Background = getImageSrc("/Images/toolbar_currentPoint.png");
             this.button_resume.IsEnabled = true;
             this.button_resume.Background = getImageSrc("/Images/toolbar_resume.png");
 
@@ -1110,7 +1110,7 @@ namespace SqListCAI.Pages.MainPage
         public void init_labe_node(Label label_node)
         {
             label_node.HorizontalContentAlignment = HorizontalAlignment.Center;
-            label_node.Height = 22;
+            label_node.Height = 25;
             label_node.Width = 60;
             label_node.Foreground = Brushes.Green;
         }

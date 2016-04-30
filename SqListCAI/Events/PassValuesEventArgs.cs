@@ -37,7 +37,7 @@ namespace SqListCAI.Events
         }
 
         /// <summary>
-        /// 链表创建，只需要得到插入的源数据即可
+        /// 链表创建，所有排序只需要得到源数据即可
         /// </summary>
         /// <param name="srcData"></param>
         /// <param name="position"></param>
