@@ -40,7 +40,7 @@
                 <Grid VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="36" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200" />

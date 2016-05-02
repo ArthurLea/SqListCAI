@@ -9,13 +9,9 @@ namespace SqListCAI.Algorithm
     {
         public static ManualResetEvent allDone = new ManualResetEvent(false);
         public static int WAITTIME = (int)App.WAITTIME;//执行算法的一行时需要缓冲等待的时间
-        public ManualResetEvent m_EvnentStop;  //主线程Set以示要停止自定义线程
-        ManualResetEvent m_EvnentStopped;  //主线程Set以示线程已经停止
         MainDemon m_mainDemon;  //主窗口引用
-        public AlgorThread( ManualResetEvent evnentStop, ManualResetEvent evnentStopped, MainDemon mainDemon)
+        public AlgorThread(MainDemon mainDemon)
         {
-            this.m_EvnentStop = evnentStop;
-            this.m_EvnentStopped = evnentStopped;
             this.m_mainDemon = mainDemon;
         }
         public delegate void outputDelegate(int i);
@@ -967,13 +963,13 @@ namespace SqListCAI.Algorithm
                 else if(key < Search.srcData_BinSearch[mid-1])
                 {
                     high = mid - 1;
-                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, mid, high);  //7//移动high,改变high
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 7, true, high, null);  //7//移动high,改变high
                     Thread.Sleep(WAITTIME);
                 }
                 else //if(key > Search.srcData_BinSearch[mid-1])
                 {
                     low = mid + 1;
-                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, mid, low);  //8//移动low,改变low
+                    m_mainDemon.Dispatcher.Invoke(m_mainDemon.m_DelegateStep, 8, true, low, null);  //8//移动low,改变low
                     Thread.Sleep(WAITTIME);
                 }
 

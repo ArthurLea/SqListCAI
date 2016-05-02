@@ -351,6 +351,10 @@ namespace SqListCAI.Pages.MainPage
             fisrst_enter_runTo_click_flag = true;//重置断点执行标志
 
             first_draw_new_node_flag = true;//第一次画新的结点，原先P结点不清除，否则清除
+
+            //清除low和high的位置
+            lowPosition = 0;
+            highPosition = 0;
         }
         //定义一个数组存储每一个划分后枢纽到位时的位置
         //public int[] pivoPoition = new int[Sort.length-1];
@@ -524,7 +528,9 @@ namespace SqListCAI.Pages.MainPage
                 System.Threading.Thread.Sleep(300);
             }
         }
-
+        //记录low和high的位置（为了在low和high改变时，将之前的low后者high所在位置的矩形变为SkyBlue）
+        int lowPosition = 0;
+        int highPosition = 0;
         private void Step_BinarySearch(int currentRow, bool changeFlag, int movePosition, object changeValue)
         {
             //同步代码区
@@ -544,7 +550,9 @@ namespace SqListCAI.Pages.MainPage
                         //low、high
                         rec[1].Fill = Brushes.Purple;
                         rec[Search.length].Fill = Brushes.Pink;
-
+                        //记录low和high的位置
+                        lowPosition = 1;
+                        highPosition = Search.length;
                         //变量区改变
                         this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + 1, 0).DefaultView;
                         this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + Search.length, 0).DefaultView;
@@ -580,17 +588,18 @@ namespace SqListCAI.Pages.MainPage
                 }
                 if (currentRow == 7)//改变high(变量区、动画)
                 {
-                    rec[(int)changeValue + movePosition].Fill = Brushes.SkyBlue;
-                    rec[(int)changeValue].Fill = Brushes.Pink;
+                    rec[highPosition].Fill = Brushes.SkyBlue;
+                    rec[movePosition].Fill = Brushes.Pink;
+                    highPosition = movePosition;
 
-                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + changeValue, 0).DefaultView;
+                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 2, "指向位置为" + movePosition, 0).DefaultView;
                 }
                 if (currentRow == 8)//改变low（变量区、动画）
                 {
-                    rec[(int)changeValue - movePosition].Fill = Brushes.SkyBlue;
-                    rec[(int)changeValue].Fill = Brushes.Purple;
-
-                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + changeValue, 0).DefaultView;
+                    rec[lowPosition].Fill = Brushes.SkyBlue;
+                    rec[movePosition].Fill = Brushes.Purple;
+                    lowPosition = movePosition;
+                    this.listView_value.DataContext = demonstration.GetDataTable_BinarySea(SearchCodes.BINARY_SEARCH_VALUE, 0, "指向位置为" + movePosition, 0).DefaultView;
                 }
 
                 DispatcherHelper.DoEvents();
@@ -1490,7 +1499,7 @@ namespace SqListCAI.Pages.MainPage
 
         private void THreadFun_Run_Click()
         {
-            AlgorThread algroThread = new AlgorThread(allDone, allDone, this);
+            AlgorThread algroThread = new AlgorThread(this);
             algroThread.Run(flag,1);//调用AlgorThread的run函数，执行线程体，实现全速执行
         }
         public bool first_enter_oneStep_flag = true;
@@ -1532,7 +1541,7 @@ namespace SqListCAI.Pages.MainPage
         }
         private void THreadFun_OneStep_Click()
         {
-            AlgorThread algroThread = new AlgorThread(allDone, allDone, this);
+            AlgorThread algroThread = new AlgorThread(this);
             algroThread.Run(flag, 2);//调用AlgorThread的run函数，执行线程体，实现单步执行
         }
         public bool fisrst_enter_runTo_click_flag = true;
@@ -1571,7 +1580,7 @@ namespace SqListCAI.Pages.MainPage
         }
         private void THreadFun_RunTo_Click()
         {
-            AlgorThread algroThread = new AlgorThread(allDone, allDone, this);
+            AlgorThread algroThread = new AlgorThread(this);
             algroThread.Run(flag, 3);//调用AlgorThread的run函数，执行线程体      
         }
         public int[] wherePoint;

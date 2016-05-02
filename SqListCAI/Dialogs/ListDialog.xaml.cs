@@ -248,15 +248,24 @@ namespace SqListCAI.Dialogs
             }
             string src = this.srcData.Text;
             src = srcDataSpilt(src, '6');//判断源数据输入是否合法（主要是长度的检测）
-            string[] src_temp = new string[src.Length];
+            char[] srcCh = new char[src.Length];
             for (int i = 0; i < src.Length; i++)
-                src_temp[i] = src[i]+"";
+                srcCh[i] = src[i];
 
             StringBuilder sb = new StringBuilder(13);
             //对src进行排序
-            Array.Sort(src_temp);
-            for (int i = 0; i < src.Length; i++)
-                sb.Append(src_temp[i][0]);
+            for(int i=0;i<srcCh.Length;i++)
+            {
+                for(int j=i+1;j< srcCh.Length;j++)
+                {
+                    if(srcCh[j] < srcCh[i])
+                    {
+                        char temp = srcCh[j];
+                        srcCh[j] = srcCh[i];
+                        srcCh[i] = temp;
+                    }
+                }
+            }
 
             if (this.insertData.Text.Length > 1)
             {
@@ -265,7 +274,7 @@ namespace SqListCAI.Dialogs
             }
             char binartData = this.insertData.Text[0];
 
-            PassValuesEventArgs args = new PassValuesEventArgs(sb.ToString(), binartData);
+            PassValuesEventArgs args = new PassValuesEventArgs(new string(srcCh), binartData);
             PassValuesEvent(this, args);
             this.Close();
         }

@@ -99,6 +99,9 @@
     <Compile Include="Instances\FlashControl.Designer.cs">
       <DependentUpon>FlashControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instances\WindowSwf.xaml.cs">
+      <DependentUpon>WindowSwf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
       <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Instances\ExamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Instances\WindowSwf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
