@@ -24,27 +24,17 @@ namespace SqListCAI
         }
         public void ShowCode(string[] str)
         {
-            this.m_maindemon.listBox_currentRow.Items.Clear();
-            this.m_maindemon.listBox_code.Items.Clear();
             for (int i = 0; i < str.Length; i++)
             {
                 this.m_maindemon.listBox_currentRow.Items.Insert(i, i);
                 this.m_maindemon.listBox_code.Items.Insert(i, str[i]);
             }
-            //修改ListBox中某行，先移除，然后插入
-            //TextBlock tb = new TextBlock();
-            //tb.Text = str[1];
-            //tb.Foreground = Brushes.Blue;
-            //this.m_maindemon.listBox_code.Items.RemoveAt(0);
-            //this.m_maindemon.listBox_code.Items.Insert(0, tb);
-            //this.m_maindemon.listBox_code.Items.Add("1234567887946516316");//在末尾增加一行显示
         }
         /// <summary>
         /// 显示当前动画
         /// </summary>
         public void ShowDemon()
         {
-            m_maindemon.canse_demon.Children.Clear();
             switch (flag)
             {
                 case 1://线性表插入
@@ -1153,6 +1143,9 @@ namespace SqListCAI
             m_maindemon.position_ins = e.position;
             m_maindemon.initUI(flag);
         }
+        /// <summary>
+        /// 算法解释
+        /// </summary>
         public void ShowExplain()
         {
             switch (flag)

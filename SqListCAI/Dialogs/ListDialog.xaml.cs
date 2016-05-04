@@ -266,7 +266,7 @@ namespace SqListCAI.Dialogs
                     }
                 }
             }
-
+            MessageBox.Show("源数据已经按ASCII码递增排序！","提示",MessageBoxButton.OK);
             if (this.insertData.Text.Length > 1)
             {
                 MessageBox.Show("插入内容为一个字符！", "警告", MessageBoxButton.OK);
@@ -648,33 +648,35 @@ namespace SqListCAI.Dialogs
             for (int i = 0; i < maxLength; i++)
             {
                 length = str.Length;
-                position = random.Next(length);
+                position = random.Next(length);//[0,length)
                 char ch = str[position];
                 sb_srcData.Append(ch);
                 str = str.Remove(position, 1);
             }
             this.srcData.Text = sb_srcData + "";//源数据生成
+
             if((flag==6) || (flag==7))//查找就在源数据中查找
             {
                 position = random.Next(sb_srcData.Length);
-                this.insertData.Text = sb_srcData[position] + "";//插入数据生成
+                this.insertData.Text = sb_srcData[position] + "";//查找数据生成
             }
             else
             {
                 position = random.Next(str.Length);
                 this.insertData.Text = str[position] + "";//插入数据生成
             }
+
             if (flag == 4)//链表插入生成的插入位置检测
             {
-                position = random.Next(2, sb_srcData.Length+1+1);//链表插入生成的插入位置必须在[2,src.Length+1)
+                position = random.Next(2, sb_srcData.Length+1+1);//链表插入生成的插入位置必须在[2,src.Length+2)
             }
             else if (flag == 5)//链表删除生成的删除位置检测
             {
-                position = random.Next(2, sb_srcData.Length+1);//[2,sb_srcData.Length)
+                position = random.Next(2, sb_srcData.Length+1);//[2,sb_srcData.Length+1)
             }
             else
             {
-                position = random.Next(1,sb_srcData.Length+1);//[1,sb_srcData.Length)
+                position = random.Next(1,sb_srcData.Length+1);//[1,sb_srcData.Length+1)
             }
             this.position.Text = position + "";//插入位置生成
         }

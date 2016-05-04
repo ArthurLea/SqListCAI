@@ -8,14 +8,12 @@
       Background="White"
       Title="MianDemon">
 
-
-
-    <Grid Margin="0">
+    <Grid Margin="0" Name="mainDemonGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="0">
             <StackPanel.Background>
                 <ImageBrush ImageSource="/Images/toolbarbg.png" Stretch="UniformToFill"/>
             </StackPanel.Background>
@@ -27,7 +25,6 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -40,7 +37,7 @@
                         <RowDefinition Height="40"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Name="button_data" Grid.Row="0" Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="data_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_data" Grid.Row="0" Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="data_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_data.png" Stretch="None"/>
                         </Button.Background>
@@ -52,7 +49,7 @@
                         <RowDefinition Height="40"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Name="button_explain" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="explain_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Name="button_explain" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="explain_Click"   VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_explain.png" Stretch="None"/>
                         </Button.Background>
@@ -184,19 +181,7 @@
                             <Label x:Name="demon_lable_name" Content="当前操作类名" MaxWidth="150" Foreground="Blue" FontStyle="Italic" Width="150" Height="25"/>
                             <Image Source="/images/menu_drop.png" Name="demo_drop" Margin="508,0,0,0"/>
                         </Menu>
-                        <Canvas Name="canse_demon" Grid.Row="1" ClipToBounds="False" Margin="0,1,0,0">
-                            <Rectangle Height="50" Width="60" Margin="20,120,0,0" Stroke="Yellow" Fill="SkyBlue"/>
-                            <Label x:Name="head_point" Content="La" HorizontalContentAlignment="Center" Canvas.Left="20" Canvas.Top="98" Height="22" Width="60" Foreground="Green"/>
-                            <Label x:Name="data" Content="" FontSize="30" Background="DarkGray" Canvas.Left="20" Canvas.Top="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Height="50" Width="40"/>
-
-                            <Line x:Name="connect_line" X1="70" Y1="145" X2="140" Y2="145" Stroke="Black"/>
-                            <Line x:Name="arrowUp_line" X1="140" Y1="145" X2="130" Y2="135" Stroke="Black"/>
-                            <Line x:Name="arrowDown_line" X1="140" Y1="145" X2="130" Y2="155" Stroke="Black"/>
-
-                            <Rectangle Height="50" Width="60" Stroke="Yellow" Fill="SkyBlue" Canvas.Left="140" Canvas.Top="120"/>
-                            <Label x:Name="new_point" Content="P" HorizontalContentAlignment="Center" Canvas.Left="140" Canvas.Top="98" Height="22" Width="60" Foreground="DarkBlue"/>
-                            <Label x:Name="data_Copy" Content="x" FontSize="30" Background="DarkGray" Canvas.Left="140" Canvas.Top="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="50" Width="40"/>
-                        </Canvas>
+                        <Canvas Name="canse_demon" Grid.Row="1" ClipToBounds="False" Margin="0,1,0,0"/>
                     </Grid>
                 </Border>
                 <Grid Grid.Row="1" Name="grid_code_value" Margin="0" Grid.ColumnSpan="4">
@@ -204,7 +189,7 @@
                         <ColumnDefinition Width="450"></ColumnDefinition>
                         <ColumnDefinition Width="300"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border Name="code_border" Grid.Row="0" Margin="1,0,0,1" MaxWidth="550">
+                    <Border Name="code_border" Margin="1,0,0,1" MaxWidth="550">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="DimGray"  Opacity="1" />
                         </Border.BorderBrush>

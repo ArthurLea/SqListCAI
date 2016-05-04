@@ -2,6 +2,7 @@
 using System.Threading;
 using SqListCAI.Entities;
 using System;
+using SqListCAI.Pages.Example;
 
 namespace SqListCAI.Algorithm
 {
@@ -97,6 +98,7 @@ namespace SqListCAI.Algorithm
                 quickSortRunTo(Sort.srcData, pivotloc + 1, high);
             }
         }
+
         private int partitionSortRunTo(char[] srcData, int low, int high)
         {
             //改变算法代码区为partitionSort

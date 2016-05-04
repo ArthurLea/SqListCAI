@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SqListCAI.Entities
+﻿namespace SqListCAI.Entities
 {
     #region 线性表实体的基本操作，插入，删除
     public partial class SqList
@@ -66,6 +60,17 @@ namespace SqListCAI.Entities
                 SqList.srcData_del[p - 1] = SqList.srcData_del[p];//向左移动
             SqList.length--;
             return OK;
+        }
+
+        //做举例说明
+        public char[] srcData_example;
+        public int length_example;
+        public SqList(string data)
+        {
+            this.srcData_example = new char[data.Length];
+            for (int i = 0; i < data.Length; i++)
+                srcData_example[i] = data[i];
+            length_example = data.Length;
         }
     }
     #endregion

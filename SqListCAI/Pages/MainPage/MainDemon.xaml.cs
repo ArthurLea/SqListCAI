@@ -52,7 +52,7 @@ namespace SqListCAI.Pages.MainPage
 
         public delegate void DelegateExeFinish(int flag);
         public DelegateExeFinish m_delegateExeFinish;
-        //顺序表插入
+        //顺序表插入所需数据的备份
         public string srcData_ins;
         public char insertData_ins;
         public int position_ins;

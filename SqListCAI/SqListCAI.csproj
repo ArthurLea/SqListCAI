@@ -90,18 +90,12 @@
     <Compile Include="Entities\Sort.cs" />
     <Compile Include="Entities\SqList.cs" />
     <Compile Include="Events\PassValuesEventArgs.cs" />
-    <Compile Include="Instances\ExamplePage.xaml.cs">
-      <DependentUpon>ExamplePage.xaml</DependentUpon>
+    <Compile Include="Pages\Example\ExampleDemon.xaml.cs">
+      <DependentUpon>ExampleDemon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Instances\FlashControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Instances\FlashControl.Designer.cs">
-      <DependentUpon>FlashControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Instances\WindowSwf.xaml.cs">
-      <DependentUpon>WindowSwf.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Pages\Example\ProblemCode.cs" />
+    <Compile Include="Pages\Example\ProblemDescribe.cs" />
+    <Compile Include="Pages\Example\ProblemSolutionWay.cs" />
     <Compile Include="Pages\MainPage\MainDemon.xaml.cs">
       <DependentUpon>MainDemon.xaml</DependentUpon>
     </Compile>
@@ -115,14 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SetDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Instances\ExamplePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Instances\WindowSwf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,6 +128,10 @@
     <Page Include="Pages\BaseContent\SqListBaseContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Example\ExampleDemon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage\MainDemon.xaml">
       <SubType>Designer</SubType>
@@ -173,14 +163,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Instances\FlashControl.resx">
-      <DependentUpon>FlashControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -309,6 +295,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\toolbar_explain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dialog_swf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\examples.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mapping.png" />
+    <Resource Include="Images\sorts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example_demon.png" />
+    <Resource Include="Images\example_solutionWay.png" />
+    <Resource Include="Images\example_sourceCode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example_problem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

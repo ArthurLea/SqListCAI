@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       Margin="0" 
 	  Title="SqListBaseContent" Background="White">
-    <Grid>
+    <Grid Name="gridBaseStatic">
         <Border Margin="0,2,0.2,0.5">
             <Border.BorderBrush>
                 <SolidColorBrush Color="DimGray"  Opacity="5" />

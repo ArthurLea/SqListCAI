@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SqListCAI.Entities
+﻿namespace SqListCAI.Entities
 {
     public partial class LinkedNode
     {
@@ -97,6 +91,23 @@ namespace SqListCAI.Entities
             deletePosition = position_LinkedDel;
 
             Create_LinkedList();
+        }
+
+
+        //做举例说明
+        public char[] srcData_example;
+        public int length_example;
+        public LinkedList(string data)
+        {
+            this.srcData_example = new char[data.Length + 1];//加上头结点
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (i == 0)
+                    srcData_example[i] = ' ';
+                else
+                    srcData_example[i] = data[i];
+            }
+            length_example = srcData_example.Length;
         }
     }
     

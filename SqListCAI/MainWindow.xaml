@@ -48,7 +48,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="appName" FontWeight="Bold" FontSize="24"  Margin="8,11,282,20" Text="线性表动态演示系统" Foreground="#FF00D1E5"  FontStyle="Italic" Grid.Column="0" Grid.Row="0"	VerticalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2" />
-                    <TextBlock x:Name="authorName" FontWeight="Bold" FontSize="10"  Margin="8,4,282,10" Text="wx_1551243857@qq.com"  Foreground="#FF463E3E" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2" />
+                    <TextBlock x:Name="authorName" FontWeight="Bold" FontSize="13"  Margin="8,0,282,4" Text="wx_1551243857@qq.com"  Foreground="#FF463E3E" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="20" Grid.Row="1" />
                     <TextBlock x:Name="userInfo" FontWeight="Bold" FontSize="16"  Margin="171,16,5,0" Text="Welcome to Admin Of WX"  Foreground="#FF333333" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" />
                     <!--TextBox自定义下拉日历-->
                     <TextBox x:Name="datePick" Text="Choose Date" VerticalContentAlignment="Center"   Margin="36,12,164,18"  Height="30"   Foreground="#FF333333" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Width="180" Grid.RowSpan="2"  />
@@ -63,7 +63,7 @@
             <!--end toolbar-->
             <StackPanel  Grid.Row="1" Grid.Column="0" x:Name="LeftBar" Background="#FF333333" Margin="0,0.2,0,0">
                 <TabControl  x:Name="LeftTabControl" TabStripPlacement="Left" Background="#FF00D1E5" Height="1000">
-                    <TabItem Header="基本内容" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                    <TabItem Header="基本知识" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
                             <ImageBrush ImageSource="images/homeicon.png" />
                         </TabItem.Background>
@@ -92,7 +92,7 @@
                     <!-- Margin="0,0,-3,0" 中的-3为了消除右边的边框-->
                     <TabItem Header="映射方式" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
-                            <ImageBrush ImageSource="images/projects.png" />
+                            <ImageBrush ImageSource="images/mapping.png" />
                         </TabItem.Background>
                         <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
@@ -161,27 +161,20 @@
 
                         <!--end 内容区-->
                     </TabItem>
-
-                    <TabItem Header="举例说明" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                    <TabItem Header="测试用例" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
                         <TabItem.Background>
-                            <ImageBrush ImageSource="images/calendaricon.png" />
+                            <ImageBrush ImageSource="Images/examples.png" Stretch="UniformToFill" />
                         </TabItem.Background>
-                        <!--内容区-->
                         <StackPanel Margin="2,6,2,2" >
-                            <Label Name="order_ins"  Content="顺序表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="order_ins_MouseLeftButtonDown"/>
+                            <Label Content="顺序表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="orderExample_MouseLeftButtonDown"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
-                            <Label Content="链表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="排序视频" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center"/>
+                            <Label Content="单链表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="linkedExample_MouseLeftButtonDown"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>
                         </StackPanel>
-                        <!--end 内容区-->
                     </TabItem>
                 </TabControl>
             </StackPanel>
@@ -207,7 +200,7 @@
                             <Border.BorderThickness >
                                 <Thickness>1</Thickness>
                             </Border.BorderThickness>
-                            <Label x:Name="currentOperator" FontSize="18" Content="当前操作？？？" FontStyle="Italic" HorizontalAlignment="Left">
+                            <Label x:Name="currentOperator" FontSize="18" Content="当前操作？？？" FontStyle="Italic" HorizontalAlignment="Left" Width="414">
                                 <Label.Foreground>
                                     <LinearGradientBrush>
                                         <GradientStop Color="#ed1c24" Offset="0"/>
