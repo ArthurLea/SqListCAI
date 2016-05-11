@@ -25,15 +25,14 @@
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="242"/>
-                    <ColumnDefinition Width="46"/>
-                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="244"/>
+                    <ColumnDefinition Width="38"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="label_demon" Grid.Column="0" Content="动画速度:" Foreground="Pink"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="60" Margin="2,28,8,32"/>
-                <TextBlock x:Name="sliderBegin_Demon"  Text="0" Foreground="Pink" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="14" Width="10" Margin="10,32,10,40"/>
-                <Slider x:Name="slider_demon" Grid.Column="2" ValueChanged="slider_demon_ValueChanged" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,28,10,34" Width="226" Value="400" Maximum="700" Minimum="300" TickFrequency="50" TickPlacement="TopLeft" Background="#FFF1AAC7" Height="24"/>
-                <TextBlock x:Name="sliderCurrent_Demon" Text="400" Foreground="Pink" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="14" Width="30" Margin="8,34,8,38"/>
+                <Label x:Name="label_demon" Grid.Column="0" Content="动画速度:" Foreground="Pink"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="60" Margin="2,28,8,33"/>
+                <TextBlock x:Name="sliderBegin_Demon"  Text="300" Foreground="Pink" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="14" Width="28" Margin="4,34,4,39"/>
+                <Slider x:Name="slider_demon" Grid.Column="2" ValueChanged="slider_demon_ValueChanged" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,28,8,35" Width="226" Value="400" Maximum="700" Minimum="300" TickFrequency="50" TickPlacement="TopLeft" Background="#FFF1AAC7" Height="24"/>
+                <TextBlock x:Name="sliderCurrent_Demon" Text="400" Foreground="Pink" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="30" Margin="4,34,4,35"/>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="2,2,2,0">
@@ -47,15 +46,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="218"/>
+                    <ColumnDefinition Width="57"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="checkBox_open" Grid.Column="0" Content="音乐开" Foreground="DarkBlue" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Height="14" Width="56"/>
                 <Label x:Name="label_sound" Content="音量:" Foreground="DarkBlue" Margin="0,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,0.4" Height="25" HorizontalAlignment="Left" Width="38" Grid.Column="1"/>
-                <TextBlock x:Name="sliderBegin_sound" Grid.Column="2" Text="0" Foreground="DarkBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,34,0,38" Height="14" Width="7"/>
-                <Slider x:Name="slider_sound" Grid.Column="3" ValueChanged="slider_sound_ValueChanged" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="200" Background="#FF0A464F" Maximum="100" Minimum="15" TickPlacement="TopLeft" TickFrequency="10" Value="30" Foreground="DarkBlue" Height="24"/>
-                <TextBlock x:Name="sliderCurrent_sound" Grid.Column="4" Text="30" Foreground="DarkBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="30" Margin="9,31,21,39"/>
+                <TextBlock x:Name="sliderBegin_sound" Grid.Column="2" Text="10" Foreground="DarkBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,34,0,38" Height="14" Width="16"/>
+                <Slider x:Name="slider_sound" Grid.Column="3" ValueChanged="slider_sound_ValueChanged" HorizontalAlignment="Right" Margin="0,26,11,0" VerticalAlignment="Top" Width="200" Background="#FF0A464F" Maximum="100" Minimum="15" TickPlacement="TopLeft" TickFrequency="10" Value="30" Foreground="DarkBlue" Height="24"/>
+                <TextBlock x:Name="sliderCurrent_sound" Grid.Column="4" Text="30" Foreground="DarkBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16" Width="26" Margin="10,31,21,39"/>
             </Grid>
         </Border>
         <Border Grid.Row="2" Margin="2,2,2,2">

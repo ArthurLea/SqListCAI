@@ -33,155 +33,103 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Name="toolbar_data">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_data" Grid.Row="0" Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="data_Click">
+                    <Button Name="button_data" Content="数据" Foreground="Blue" FontSize="12" Margin="1,0,0,0"  Height="60" Width="75" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalContentAlignment="Bottom" BorderThickness="0" Click="data_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_data.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="数据" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="1" Name="toolbar_explain">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_explain" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="explain_Click"   VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Name="button_explain" Content="算法说明" Foreground="Blue" FontSize="12" Margin="0,3,1,-3"  Height="60" Width="75" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalContentAlignment="Bottom" BorderThickness="0" Click="explain_Click"   VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_explain.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="算法说明" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
-                <Image Source="/Images/lineblue.png" Grid.Column="2" Margin="0" Height="60" Stretch="UniformToFill" ></Image>
+                <Image Source="/Images/lineblue.png" Grid.Column="2" Margin="0" Height="60" Stretch="UniformToFill" />
                 <Grid Grid.Column="3" Name="toolbar_pause">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_pause" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="pause_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_pause"  Content="暂停" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="pause_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_pause.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Name="lable_pause" Content="暂停" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="4" Name="toolbar_run">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_run" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="run_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_run" Content="全速执行" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="run_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_run.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="全速执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="5" Name="toolbar_onestep">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_oneStep" Grid.Row="0" Margin="1,0,0,0"  Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="oneStep_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_oneStep" Content="单步执行" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="oneStep_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_onestep.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="单步执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="6" Name="toolbar_follow">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_runTo" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="runTo_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_runTo" Content="断点执行" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="runTo_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_runto.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="断点执行" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="7" Name="toolbar_runTo">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_breakPoint" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="breakPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_breakPoint" Content="设置断点" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="breakPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_point.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="设置断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid Grid.Column="8" Name="toolbar_resume">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Button Name="button_clearAllPoint" Grid.Row="0"  Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="clearAllPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_clearAllPoint" Content="清除断点" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="clearAllPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_cleanPoint.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="清除断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
                 </Grid>
                 <Grid Grid.Column="9" Name="toolbar_breakPoint">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="63"/>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_currentPoint" Grid.Row="0" Margin="1,0,0,0" Grid.RowSpan="2" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="currentPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_currentPoint" Content="当前断点" Foreground="Blue" FontSize="12" Margin="1,0,0,0" Height="60" Width="75" VerticalContentAlignment="Bottom" BorderThickness="0" Click="currentPoint_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_currentPoint.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="当前断点" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Image Source="/Images/lineblue.png" Grid.Column="10" Margin="0" Height="60" Stretch="UniformToFill" ></Image>
                 <Grid Grid.Column="11" Name="toolbar_set">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Name="button_resume" Grid.Row="0" Margin="0,0,0,0"  Grid.RowSpan="2" Height="60" Width="60" VerticalContentAlignment="Bottom" BorderThickness="0" FontSize="18" Click="resume_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button Name="button_resume" Content="恢复" Foreground="Blue" FontSize="12" Margin="0,0,0,0" Height="60" Width="60" VerticalContentAlignment="Bottom" BorderThickness="0" Click="resume_Click"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Images/toolbar_resume.png" Stretch="None"/>
                         </Button.Background>
                     </Button>
-                    <Label Content="恢复" Grid.Row="1" Foreground="Blue" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
         </StackPanel>
-        <StackPanel Name="Demon_Code_Value" Grid.Row="1" Orientation="Horizontal" Margin="0">
+        <StackPanel Grid.Row="1" Name="Demon_Code_Value"  Orientation="Horizontal" Margin="0">
             <Grid Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="225"></RowDefinition>
-                    <RowDefinition Height="334"></RowDefinition>
+                    <RowDefinition Height="325"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border  Name="demon_border" Margin="1,0,0,1" Width="751">
+                <Border Grid.Row="0" Name="demon_border" Margin="1,0,0,1" Width="750">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="DimGray"  Opacity="1" />
                     </Border.BorderBrush>
                     <Border.BorderThickness>
                         <Thickness>1</Thickness>
                     </Border.BorderThickness>
-                    <Grid Grid.Row="0">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Menu Grid.Row="0" ClipToBounds="True" Margin="2,0,0,0">
-                            <Image Source="/images/menu_star.png" Margin="0"></Image>
+                            <Image Source="/images/menu_star.png" Margin="0"/>
                             <Label x:Name="demon_lable_name" Content="当前操作类名" MaxWidth="150" Foreground="Blue" FontStyle="Italic" Width="150" Height="25"/>
                             <Image Source="/images/menu_drop.png" Name="demo_drop" Margin="508,0,0,0"/>
                         </Menu>
-                        <Canvas Name="canse_demon" Grid.Row="1" ClipToBounds="False" Margin="0,1,0,0"/>
+                        <Canvas Grid.Row="1" Name="canse_demon" ClipToBounds="False" Margin="0,1,0,0"/>
                     </Grid>
                 </Border>
                 <Grid Grid.Row="1" Name="grid_code_value" Margin="0" Grid.ColumnSpan="4">
@@ -189,14 +137,14 @@
                         <ColumnDefinition Width="450"></ColumnDefinition>
                         <ColumnDefinition Width="300"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border Name="code_border" Margin="1,0,0,1" MaxWidth="550">
+                    <Border Grid.Column="0" Name="code_border" Margin="1,0,0,1" MaxWidth="550">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="DimGray"  Opacity="1" />
                         </Border.BorderBrush>
                         <Border.BorderThickness >
                             <Thickness>1</Thickness>
                         </Border.BorderThickness>
-                        <Grid Grid.Column="0">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
@@ -211,7 +159,7 @@
                                     <ColumnDefinition Width="20"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <ListBox Name="listBox_currentRow" Grid.Column="0" SelectionMode="Multiple" ClipToBounds="False" Margin="0.5,1,1,1">
+                                <ListBox Name="listBox_currentRow" Grid.Column="0" SelectionMode="Multiple" ClipToBounds="False" Margin="1,1,1,1">
                                     <!-- 设置ListBoxItem样式 -->
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
@@ -281,7 +229,7 @@
                         <Border.BorderThickness >
                             <Thickness>1</Thickness>
                         </Border.BorderThickness>
-                        <Grid Grid.Column="0">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
@@ -289,9 +237,9 @@
                             <Menu Grid.Row="0" ClipToBounds="False">
                                 <Image Source="/images/menu_star.png" Margin="0"></Image>
                                 <Label x:Name="value_lable_name" Content="变量" Foreground="Blue" MaxWidth="100" FontStyle="Italic" Width="60" Height="25"/>
-                                <Image Source="/images/menu_drop.png" Name="value_drop" Margin="150,0,0,0"/>
+                                <Image Source="/Images/menu_drop.png" Name="value_drop" Margin="150,0,0,0"/>
                             </Menu>
-                            <ListView Name="listView_value" Grid.Row="1" ItemsSource="{Binding}" Margin="1,1,1,1">
+                            <ListView Grid.Row="1" Name="listView_value" ItemsSource="{Binding}" Margin="1,1,1,1">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="变量名"  DisplayMemberBinding="{Binding Path=NAME}" Width="150" CellTemplateSelector="{x:Null}">

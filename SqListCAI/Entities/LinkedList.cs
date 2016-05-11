@@ -12,15 +12,15 @@
         }
         public LinkedNode(LinkedNode nextVal)
         {
+            this.data = ' ';
             this.next = nextVal;
         }
     }
     public partial class LinkedList
     {
         public static LinkedNode head;
-
-        public static char[] srcData;
         public static int length;
+        public static char[] srcData;
 
         public static char insertData;
         public static int insertPosition;
@@ -38,7 +38,6 @@
             srcData = new char[data.Length];
             for (int i = 0; i < data.Length; i++)
                 srcData[i] = data[i];
-            length = data.Length;//加上表头元素
         }
         /// <summary>
         /// 链表的创建函数（尾插法）
@@ -55,7 +54,6 @@
                 p.next = LinkedList.head.next;
                 LinkedList.head.next = p;
             }
-            length = srcData.Length;//加上表头元素
         }
         /// <summary>
         /// 链表的插入初始化函数
@@ -69,7 +67,6 @@
             srcData = new char[srcData_LinkedIns.Length];
             for (int i = 0; i < srcData_LinkedIns.Length; i++)
                 srcData[i] = srcData_LinkedIns[i];
-            length = srcData_LinkedIns.Length;
             insertData = insertData_LinkedIns;
             insertPosition = position_LinkedIns;
 
@@ -87,7 +84,6 @@
             srcData = new char[srcData_LinkedDel.Length];
             for (int i = 0; i < srcData_LinkedDel.Length; i++)
                 srcData[i] = srcData_LinkedDel[i];
-            length = srcData_LinkedDel.Length;
             deletePosition = position_LinkedDel;
 
             Create_LinkedList();

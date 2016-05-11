@@ -13,21 +13,23 @@ namespace SqListCAI.Utils.SourceCodes
             "void CreateList_L(LinkList &L,int n) {",
             "   //输入N个元素的值，建立带表头结点的单链表线性表L(尾差法)",
             "   L = (LinkList) malloc(sizeof(LNode)) L->next = NULL;",
+            "   r = L;",
             "   for(i=0;i<n;++i) {",
             "       p = (LinkList) malloc(sizeof(LNode));",
             "       scanf(&p->data);",
-            "       p->next = L->next;",
-            "       L->next = p;",
+            "       r->next = p;",
+            "       r = p",
             "   }",
             "}//CreateList_L"
         };
         public static string[] CREATE_VALUE =
         {
-            "La(头结点)",//指向头结点
+            "L",//指向头结点
             "a",//当前输入的数据域值（一个数组）
             "n",//数据域的长度，当前链表中除头结点的个数
             "p",//指向值为？的结点（是当前插入的结点）
-            "i"//索引变量
+            "i",//索引变量
+            "r"//中间节点
         };
         public static string[] INSERT_CODE =
         {
@@ -50,14 +52,14 @@ namespace SqListCAI.Utils.SourceCodes
         };
         public static string[] INSERT_VALUE =
         {
-            "La(头结点)",
+            "L",
             "a",
             "n",
-            "P",
+            "p",
             "j",
             "i",
             "e",
-            "S"
+            "s"
         };
         public static string[] DELETE_CODE =
         {
@@ -80,14 +82,14 @@ namespace SqListCAI.Utils.SourceCodes
         };
         public static string[] DELETE_VALUE =
         {
-            "La(头结点)",
+            "L",
             "a",
             "n",
-            "P",//删除结点的前一个位置
+            "p",//删除结点的前一个位置
             "j",
             "i",
             "e",//返回删除的数据值
-            "Q"//作为删除的结点的指标
+            "q"//作为删除的结点的指标
         };
     }
 }

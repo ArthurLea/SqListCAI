@@ -15,184 +15,171 @@
             <DoubleAnimation Storyboard.TargetName="mainForm" Storyboard.TargetProperty="Height" From="0" To="710" Duration="0:0:1" BeginTime="0:0:1"/>
         </Storyboard>
     </Window.Resources>
-    <Grid Background="Black">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="105*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="gridForm" Margin="0" Grid.RowSpan="2">
+    <Grid>
+        <Grid x:Name="gridFormMain" Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" x:Name="gridFormLeft"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
             <!-- toolbar-->
-            <StackPanel  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" >
-                <StackPanel.Background>
-                    <ImageBrush ImageSource="images/toolbarbg.png" Stretch="UniformToFill"/>
-                </StackPanel.Background>
-
-                <Grid VerticalAlignment="Top">
+            <Grid Grid.Row="0" Background="#FFD1CDCD">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="36" />
-                        <RowDefinition />
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="400" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="appName" FontWeight="Bold" FontSize="24"  Margin="8,11,282,20" Text="线性表动态演示系统" Foreground="#FF00D1E5"  FontStyle="Italic" Grid.Column="0" Grid.Row="0"	VerticalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="2" />
-                    <TextBlock x:Name="authorName" FontWeight="Bold" FontSize="13"  Margin="8,0,282,4" Text="wx_1551243857@qq.com"  Foreground="#FF463E3E" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="20" Grid.Row="1" />
-                    <TextBlock x:Name="userInfo" FontWeight="Bold" FontSize="16"  Margin="171,16,5,0" Text="Welcome to Admin Of WX"  Foreground="#FF333333" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" />
-                    <!--TextBox自定义下拉日历-->
-                    <TextBox x:Name="datePick" Text="Choose Date" VerticalContentAlignment="Center"   Margin="36,12,164,18"  Height="30"   Foreground="#FF333333" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Width="180" Grid.RowSpan="2"  />
-                    <!--<Image Source="images/email.png"  Stretch="Uniform" Margin="255,22,99,22" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"  Width="26" VerticalAlignment="Center" RenderTransformOrigin="-1.115,0.552"/>
-                    <Image Source="images/toolbar_point.png"  Stretch="Uniform" Margin="267,12,93,4" Grid.Column="2" Grid.Row="0" Height="20" Width="20" RenderTransformOrigin="4.3,0.5"/>
-                    <TextBlock x:Name="notifyCount"  FontSize="9"  Margin="270,16,92,10" Grid.Column="2" Grid.Row="0"  Text="22"  Foreground="#FFFFFFFF" VerticalAlignment="Center" Width="18" RenderTransformOrigin="-1.056,-6.909"/>-->
-                    <Image Source="images/hide.png" MouseLeftButtonDown="MouseLeftButtonDown_Hide" Stretch="Fill"  Margin="257,16,97,18" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"  RenderTransformOrigin="-1.115,0.552" Width="30" Height="26"/>
-                    <Image Source="/Images/toolbar_settings.png" MouseLeftButtonDown="MouseLeftButtonDown_Setting" Stretch="Uniform" Margin="300,15,50,18" Grid.Column="2" Grid.Row="0" Height="26" Width="30" VerticalAlignment="Center" Grid.RowSpan="2" RenderTransformOrigin="5.75,0.538"  />
-                    <Image x:Name="Logout"  MouseLeftButtonDown="MouseLeftButtonDown_Logout"  Source="images/logout.png"  Stretch="Uniform" Margin="0,15,10,19" Grid.Column="2" Grid.Row="0" Height="26" Width="30" HorizontalAlignment="Right" Grid.RowSpan="2" Cursor="Hand"/>
+                    <TextBlock Grid.Row="0" x:Name="appName" FontWeight="Bold" FontSize="24"  Margin="8,3,15,2" Text="线性表动态演示系统" Foreground="#FF00D1E5"  FontStyle="Italic" VerticalAlignment="Center" />
+                    <TextBlock Grid.Row="1" x:Name="authorName"  FontWeight="Bold" FontSize="13"  Margin="8,0,15,4" Text="wx_1551243857@qq.com"  Foreground="#FF463E3E" Grid.Column="0" VerticalAlignment="Center" Height="20"/>
                 </Grid>
-            </StackPanel>
-            <!--end toolbar-->
-            <StackPanel  Grid.Row="1" Grid.Column="0" x:Name="LeftBar" Background="#FF333333" Margin="0,0.2,0,0">
-                <TabControl  x:Name="LeftTabControl" TabStripPlacement="Left" Background="#FF00D1E5" Height="1000">
-                    <TabItem Header="基本知识" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
-                        <TabItem.Background>
-                            <ImageBrush ImageSource="images/homeicon.png" />
-                        </TabItem.Background>
+                <Grid Grid.Column="1">
+                    <TextBlock x:Name="userInfo" FontWeight="Bold" FontSize="18"  Margin="32,18,22,14" Text="Welcome to Admin Of WX"  Foreground="#FF333333" Grid.Row="0" VerticalAlignment="Center" Height="28" />
+                </Grid>
+                <!--TextBox自定义下拉日历-->
+                <Grid Grid.Column="2">
+                    <TextBox x:Name="datePick" Text="Choose Date" VerticalContentAlignment="Center"   Margin="30,12,164,18"  Height="30" VerticalAlignment="Center"  Foreground="#FF333333" Grid.Column="2" Width="180"/>
+                    <Image Source="/Images/hide.png" MouseLeftButtonDown="MouseLeftButtonDown_Hide" Stretch="Fill"  Margin="257,16,97,18"   RenderTransformOrigin="-1.115,0.552" Width="30" Height="26"/>
+                    <Image Source="/Images/toolbar_settings.png" MouseLeftButtonDown="MouseLeftButtonDown_Setting" Stretch="Uniform" Margin="300,15,50,18" Height="26" Width="30" VerticalAlignment="Center"  RenderTransformOrigin="5.75,0.538"  />
+                    <Image Source="/Images/logout.png" x:Name="Logout"  MouseLeftButtonDown="MouseLeftButtonDown_Logout"    Stretch="Uniform" Margin="0,15,10,19" Height="26" Width="30" HorizontalAlignment="Right" Grid.RowSpan="2" Cursor="Hand"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Name="gridForm">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="#FF333333">
+                    <TabControl x:Name="LeftTabControl" TabStripPlacement="Left" Background="#FF00D1E5" Height="1000">
+                        <TabItem Header="基本知识" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                            <TabItem.Background>
+                                <ImageBrush ImageSource="images/homeicon.png" />
+                            </TabItem.Background>
+                            <StackPanel Margin="2,6,2,2">
+                                <Label Content="线性表定义" Foreground="White" Margin="17,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListDefine" />
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="线性表特征" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListFeature" />
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="线性表结构" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListStructure"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="线性表操作" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListOperator"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem Header="映射方式" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                            <TabItem.Background>
+                                <ImageBrush ImageSource="images/mapping.png" />
+                            </TabItem.Background>
+                            <!--内容区-->
+                            <StackPanel Margin="2,6,2,2" >
+                                <Label Content="储存结构说明" Foreground="White"  HorizontalAlignment="Center" Margin="0,6,0,6" MouseLeftButtonDown="Label_MouseLeftButtonDownStorageExplain"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="顺序结构插入" Foreground="White"  HorizontalAlignment="Center" Margin="11,6" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderInsert"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="顺序结构删除" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderDelete"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="链表结构创建" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedCreate"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="链表结构插入" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedInsert"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="链表结构删除" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedDelete"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
 
-                        <StackPanel Margin="2,6,2,2" >
-                            <Label Content="线性表定义" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListDefine" />
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="线性表特征" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListFeature" />
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="线性表结构" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListStructure"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="线性表操作" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSQListOperator"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
+                            </StackPanel>
 
-                        </StackPanel>
+                            <!--end 内容区-->
 
-                    </TabItem>
-                    <!-- Margin="0,0,-3,0" 中的-3为了消除右边的边框-->
-                    <TabItem Header="映射方式" Height="80" Margin="0,0,-3,0" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
-                        <TabItem.Background>
-                            <ImageBrush ImageSource="images/mapping.png" />
-                        </TabItem.Background>
-                        <!--内容区-->
-                        <StackPanel Margin="2,6,2,2" >
-                            <Label Content="储存结构说明" Foreground="White"  HorizontalAlignment="Center" Margin="0,6,0,6" MouseLeftButtonDown="Label_MouseLeftButtonDownStorageExplain"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="顺序结构插入" Foreground="White"  HorizontalAlignment="Center" Margin="0,6,0,6" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderInsert"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="顺序结构删除" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderDelete"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="链表结构创建" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedCreate"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="链表结构插入" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedInsert"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="链表结构删除" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownLinkedDelete"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-
-                        </StackPanel>
-
-                        <!--end 内容区-->
-
-                    </TabItem>
-
-                    <TabItem Header="查找排序" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
-                        <TabItem.Background>
-                            <ImageBrush ImageSource="images/taskicon.png" />
-                        </TabItem.Background>
-                        <!--内容区-->
-                        <StackPanel Margin="2,6,2,2" >
-                            <Label Content="顺序查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderSearch"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="折半查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderBinSearch"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="直接插入排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownDirectInsertSort"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="交换（冒泡）排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSwapSort"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownPartitionSort"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <!--<Label Content="简单选择排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSimpleChooseSort"/>
+                        </TabItem>
+                        <TabItem Header="查找排序" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                            <TabItem.Background>
+                                <ImageBrush ImageSource="images/taskicon.png" />
+                            </TabItem.Background>
+                            <!--内容区-->
+                            <StackPanel Margin="2,6,2,2" >
+                                <Label Content="顺序查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderSearch"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="折半查找" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownOrderBinSearch"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="直接插入排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownDirectInsertSort"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="交换（冒泡）排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSwapSort"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="快速排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownPartitionSort"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <!--<Label Content="简单选择排序" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="Label_MouseLeftButtonDownSimpleChooseSort"/>
                             <Border >
                                 <Image Source="images/line.png"/>
                             </Border>-->
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!--end 内容区-->
-                    </TabItem>
-                    <TabItem Header="测试用例" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
-                        <TabItem.Background>
-                            <ImageBrush ImageSource="Images/examples.png" Stretch="UniformToFill" />
-                        </TabItem.Background>
-                        <StackPanel Margin="2,6,2,2" >
-                            <Label Content="顺序表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="orderExample_MouseLeftButtonDown"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                            <Label Content="单链表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="linkedExample_MouseLeftButtonDown"/>
-                            <Border >
-                                <Image Source="images/line.png"/>
-                            </Border>
-                        </StackPanel>
-                    </TabItem>
-                </TabControl>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Background="White" Margin="0">
-                <Border x:Name="spliter" Width="32" Height="64" Margin="-30,200,-10,290"   Cursor="Hand" MouseLeftButtonDown="spliter_MouseLeftButtonDown">
-                    <Border.Background>
-                        <ImageBrush ImageSource="images/panelexpand.png" Stretch="UniformToFill"/>
-                    </Border.Background>
-                </Border>
-            </StackPanel>
-            <!--end tab-->
-            <StackPanel Grid.Row="1" Grid.Column="2" Background="White" Margin="0" Orientation="Vertical" >
-                <Grid Margin="0">
+                            <!--end 内容区-->
+                        </TabItem>
+                        <TabItem Header="测试用例" Height="80" Margin="0,3,0,-3" Width="80" FontWeight="Bold" Style="{DynamicResource TabItemStyle}" TextOptions.TextFormattingMode="Display">
+                            <TabItem.Background>
+                                <ImageBrush ImageSource="Images/examples.png" Stretch="UniformToFill" />
+                            </TabItem.Background>
+                            <StackPanel Margin="2,6,2,2" >
+                                <Label Content="顺序表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="orderExample_MouseLeftButtonDown"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                                <Label Content="单链表例子" Foreground="White" Margin="0,6,0,6" HorizontalAlignment="Center" MouseLeftButtonDown="linkedExample_MouseLeftButtonDown"/>
+                                <Border >
+                                    <Image Source="images/line.png"/>
+                                </Border>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <StackPanel Background="White">
+                        <Border x:Name="spliter" Width="32" Height="64" Margin="-30,200,-10,290"   Cursor="Hand" MouseLeftButtonDown="spliter_MouseLeftButtonDown">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/Images/panelexpand.png" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Grid Grid.Row="0" Background="White">
                         <Border Margin="0,0,1,0" Name="border_currentOperator" Height="35">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="DimGray"  Opacity="1" />
@@ -200,7 +187,7 @@
                             <Border.BorderThickness >
                                 <Thickness>1</Thickness>
                             </Border.BorderThickness>
-                            <Label x:Name="currentOperator" FontSize="18" Content="当前操作？？？" FontStyle="Italic" HorizontalAlignment="Left" Width="414">
+                            <Label x:Name="currentOperator" FontSize="18" Content="当前操作？？？" FontStyle="Italic" HorizontalAlignment="Left" Width="735">
                                 <Label.Foreground>
                                     <LinearGradientBrush>
                                         <GradientStop Color="#ed1c24" Offset="0"/>
@@ -211,20 +198,17 @@
                                 </Label.Foreground>
                             </Label>
                         </Border>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="1" Grid.Column="0">
-                        <Frame x:Name="pageContainer" Margin="0,0,1,2" ScrollViewer.CanContentScroll="True" NavigationUIVisibility="Hidden" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.RowSpan="2"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Frame x:Name="pageContainer" Margin="0,0,1,2" ScrollViewer.CanContentScroll="True" NavigationUIVisibility="Hidden" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
                         <!--end Expand button-->
                         <!--加载其他的page xaml-->
                         <!--加载其他的xaml窗体,但是必须frm.show才能显示，有闪烁
                         <ContentControl Name="frmContainter" Margin="2" ></ContentControl>
                         -->
-                    </StackPanel>
+                    </Grid>
                 </Grid>
-                <!-- Expand button-->
-            </StackPanel>
-            <!--end Content-->
+            </Grid>
         </Grid>
     </Grid>
 </Window>

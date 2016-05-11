@@ -312,7 +312,7 @@ namespace SqListCAI.Dialogs
                 string src = this.srcData.Text;
                 src = srcDataSpilt(src, '3');//判断源数据输入是否合法（主要是长度的检测）
                 int position = Convert.ToInt32(this.position.Text);
-                if((2<=position) && (position<=src.Length))
+                if((1<=position) && (position<=src.Length-1))
                 {
                     PassValuesEventArgs args = new PassValuesEventArgs(src, position);
                     PassValuesEvent(this, args);
@@ -320,7 +320,7 @@ namespace SqListCAI.Dialogs
                 }
                 else
                 {
-                    MessageBox.Show("删除位置必须为[2," + src.Length + "]", "警告", MessageBoxButton.OK);
+                    MessageBox.Show("删除位置必须为[1," + (src.Length-1) + "]", "警告", MessageBoxButton.OK);
                     return;
                 }
             }
@@ -349,7 +349,7 @@ namespace SqListCAI.Dialogs
                 }
                 char insert = this.insertData.Text[0];
                 int position = Convert.ToInt32(this.position.Text);
-                if((2<=position) && (position<=(src.Length+1)))
+                if((1<=position) && (position<=(src.Length)))
                 {
                     PassValuesEventArgs args = new PassValuesEventArgs(src, insert, position);
                     PassValuesEvent(this, args);
@@ -357,7 +357,7 @@ namespace SqListCAI.Dialogs
                 }
                 else
                 {
-                    MessageBox.Show("插入位置必须为[2," + (src.Length + 1) + "]", "警告", MessageBoxButton.OK);
+                    MessageBox.Show("插入位置必须为[1," + (src.Length) + "]", "警告", MessageBoxButton.OK);
                     return;
                 }
             }
@@ -408,7 +408,7 @@ namespace SqListCAI.Dialogs
             }
             catch (FormatException fe)
             {
-                MessageBox.Show("插入位置必须为数字！" + fe.StackTrace, "警告", MessageBoxButton.OK);
+                MessageBox.Show("删除位置必须为数字！" + fe.StackTrace, "警告", MessageBoxButton.OK);
                 return;
             }
         }
@@ -668,11 +668,11 @@ namespace SqListCAI.Dialogs
 
             if (flag == 4)//链表插入生成的插入位置检测
             {
-                position = random.Next(2, sb_srcData.Length+1+1);//链表插入生成的插入位置必须在[2,src.Length+2)
+                position = random.Next(1, sb_srcData.Length+1);//链表插入生成的插入位置必须在[1,src.Length)
             }
             else if (flag == 5)//链表删除生成的删除位置检测
             {
-                position = random.Next(2, sb_srcData.Length+1);//[2,sb_srcData.Length+1)
+                position = random.Next(1, sb_srcData.Length);//[1,sb_srcData.Length-1)
             }
             else
             {

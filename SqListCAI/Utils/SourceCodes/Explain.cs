@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqListCAI.Entities
+namespace SqListCAI.Utils.SourceCodes
 {
     public partial class Explain
     {
@@ -26,10 +26,9 @@ namespace SqListCAI.Entities
         public static string LinkedInsExplain = 
             "算法中的参数i表示插入的位置，其合理值的范围为1至表长+1,。插入\n"+
             "时，首先需要查找插入位置，由于表头也是链表元素，因此在第i个元素\n"+
-            "之前插入也就是在头结点的第i-2个之后，注意：在查找的过程中，始终\n"+
-            "保持活动指针指向链表中的第j个结点，则j=0时，p应该指向头结点。\n"+
-            "本算法约定新结点插入在第i个结点之前，则需要修改第i-1个结点中的指针\n"+
-            "域的值。注意查找时循环结束的条件";
+            "之前插入，注意：在查找的过程中，始终保持活动指针指向链表中的第j\n"+
+            "个结点，则j=0时，p应该指向头结点。本算法约定新结点插入在第i个结\n"+
+            "点之前，则需要修改第i-1个结点中的指针域的值。注意查找时循环结束的条件";
         public static string LinkedDelExplain =
             "算法中的参数i表示删除额位置，其合理值的范围为1至表长。首先需要\n" +
             "查找被删除结点所在的位置，由于表头也是链表元素，因此删除第i个\n"+

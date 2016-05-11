@@ -19,13 +19,12 @@ namespace SqListCAI
         System.Windows.Forms.NotifyIcon notifyIcon;
         private SetDialog setDialog = null;
         private MainDemon maindemon = null;//关联动画窗口
-        private SqListBassContent baseStaticWindow = null;
+        private SqListBassContent baseStaticPage = null;
         public MainWindow()
         {
-            InitializeComponent();//显示托盘
+            InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//窗口居中
 
-            //this.notifyCount.Text = "20";
             // 应用下拉日历样式
             TextBox tb = new TextBox();
             Style sCalendar = (Style)tb.TryFindResource("tbCalendarStyle");
@@ -46,10 +45,10 @@ namespace SqListCAI
         private void trayIcon()
         {
             this.notifyIcon = new System.Windows.Forms.NotifyIcon();
-            this.notifyIcon.Text = "线性表演示系统";//最小化到托盘时，鼠标点击时显示的文本//打开菜单项
-            System.Windows.Forms.MenuItem open = new System.Windows.Forms.MenuItem("打开");//退出菜单项
+            this.notifyIcon.Text = "线性表演示系统";//最小化到托盘时，鼠标移动到该图标上方时显示的文本
+            System.Windows.Forms.MenuItem open = new System.Windows.Forms.MenuItem("打开");//打开菜单项
             open.Click += new EventHandler(Show);
-            System.Windows.Forms.MenuItem hide = new System.Windows.Forms.MenuItem("隐藏");//退出菜单项
+            System.Windows.Forms.MenuItem hide = new System.Windows.Forms.MenuItem("隐藏");//隐藏菜单项
             hide.Click += new EventHandler(Hide);
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");//退出菜单项
             exit.Click += new EventHandler(Close);
@@ -65,7 +64,7 @@ namespace SqListCAI
                     this.Show(sender, e);
             });
             //设置程序启动时显示的文本
-            this.notifyIcon.ShowBalloonTip(50000, "线性表的动态演示系统", "开始启动", System.Windows.Forms.ToolTipIcon.Info);
+            this.notifyIcon.ShowBalloonTip(5000, "线性表的动态演示系统", "开始启动", System.Windows.Forms.ToolTipIcon.Info);
             System.Threading.Thread.Sleep(2000); //Wait 2 second
             this.notifyIcon.Visible = false; //这样可以控制2秒后其乖乖地消失在人间
             this.notifyIcon.Visible = true; //只是会闪一下
@@ -111,7 +110,7 @@ namespace SqListCAI
             try
             {
                 this.DragMove();
-                e.Handled = true;//阻止消息默认有
+                e.Handled = true;//阻止消息默认路由
             }
             catch(Exception ee)
             {
@@ -189,9 +188,9 @@ namespace SqListCAI
         private void getStaticContent(object sender,int flag)
         {
             getCurrentOperator(sender);
-            baseStaticWindow = new SqListBassContent(flag);
-            this.pageContainer.Navigate(baseStaticWindow, flag);
-            this.baseStaticWindow.gridBaseStatic.Visibility = Visibility.Visible;
+            baseStaticPage= new SqListBassContent(flag);
+            this.pageContainer.Navigate(baseStaticPage, "");
+            this.baseStaticPage.gridBaseStatic.Visibility = Visibility.Visible;
         }
         /// <summary>
         /// 线性表的基本定义
@@ -269,8 +268,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfOrderInsert(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("SqListInsert", e.srcData, e.insertData, e.position);
             this.pageContainer.Navigate(maindemon, "SqListInsert");
         }
@@ -293,8 +290,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfOrderDelete(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("SqListDelete", e.srcData, e.position);
             this.pageContainer.Navigate(maindemon, "SqListDelete");
         }
@@ -315,8 +310,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfLinkedListCreate(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("LinkedListedCreate", e.srcData);
             this.pageContainer.Navigate(maindemon, "LinkedListedCreate");
         }
@@ -339,8 +332,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfLinkedListInsert(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("LinkedListedInsert", e.srcData,e.insertData,e.position,4);//这个构造方法跟顺序表插入的一样，但是为了区别，在多传一个无用参数
             this.pageContainer.Navigate(maindemon, "LinkedListedInsert");
         }
@@ -364,8 +355,6 @@ namespace SqListCAI
 
         private void ReceiveValuesOfLinkedListDelete(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("LinkedListedDelete", e.srcData, e.position, 5);//这个构造方法跟顺序表删除的一样，但是为了区别，在多传一个无用参数
             this.pageContainer.Navigate(maindemon, "LinkedListedDelete");
         }
@@ -389,8 +378,6 @@ namespace SqListCAI
 
         private void ReceiveValuesOfOrderSearch(object sender, PassValuesEventArgs e)
         {
-            if(maindemon!=null)
-            { maindemon = null; }
             maindemon = new MainDemon("OrderSearch", e.srcData, e.searchData,true);
             this.pageContainer.Navigate(maindemon, "OrderSearch");
         }
@@ -409,8 +396,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfBinaarySearch(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("BinarySearch", e.srcData, e.searchData, false);
             this.pageContainer.Navigate(maindemon, "BinarySearch");
         }
@@ -430,8 +415,6 @@ namespace SqListCAI
 
         private void ReceiveValuesOfDirInsSort(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("DirInsSort", e.srcData,'1');//直接插入排序---1，‘1’三个排序的构造函数一样，为了区别，传递一个mark
             this.pageContainer.Navigate(maindemon, "DirInsSort");
         }
@@ -451,8 +434,6 @@ namespace SqListCAI
 
         private void ReceiveValuesOfSwapSort(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("SwapSort", e.srcData, '2');//冒泡排序---2
             this.pageContainer.Navigate(maindemon, "SwapSort");
         }
@@ -471,8 +452,6 @@ namespace SqListCAI
         }
         private void ReceiveValuesOfFastSort(object sender, PassValuesEventArgs e)
         {
-            if (maindemon != null)
-            { maindemon = null; }
             maindemon = new MainDemon("QuickSort", e.srcData, '3');//快速排序---3
             this.pageContainer.Navigate(maindemon, "QuickSort");
         }

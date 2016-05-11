@@ -14,7 +14,6 @@ namespace SqListCAI
 {
     public partial class Demonstration
     {
-        public static int[] index = null;
         int flag;
         MainDemon m_maindemon;
         public Demonstration(int flag,MainDemon maindemon)
@@ -24,6 +23,11 @@ namespace SqListCAI
         }
         public void ShowCode(string[] str)
         {
+            if(flag == 10)//快速排序需要显示另一种代码
+            {
+                m_maindemon.listBox_currentRow.Items.Clear();
+                m_maindemon.listBox_code.Items.Clear();
+            }
             for (int i = 0; i < str.Length; i++)
             {
                 this.m_maindemon.listBox_currentRow.Items.Insert(i, i);
@@ -113,7 +117,6 @@ namespace SqListCAI
             int length = Search.length;
             Rectangle[] rc = new Rectangle[length + 1];//矩形,第一个画查找的数据
             Label[] lable = new Label[length + 1];//标签，放原始内容，第一个画查找的数据
-            index = new int[rc.Length];
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
@@ -194,7 +197,6 @@ namespace SqListCAI
             int length = Search.length;
             Rectangle[] rc = new Rectangle[length + 1];//矩形,第一个画查找的数据
             Label[] lable = new Label[length + 1];//标签，放原始内容，第一个画查找的数据
-            index = new int[rc.Length];
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
@@ -228,15 +230,14 @@ namespace SqListCAI
         private void drawLinkedDelete()
         {
             double canse_left_1 = 20;//头结点距离canse left的距离
-            double canse_top = 120;//rec_node、label_data距离canse top的距离
-            double canse_top_label_node = 98;//label_node距离canse top的距离
-            Label[] label_node = new Label[LinkedList.length + 1];
-            Rectangle[] rec_node = new Rectangle[LinkedList.length + 1];
-            Label[] label_data = new Label[LinkedList.length + 1];
-            Line[] line1 = new Line[LinkedList.length + 1];//直线
-            Line[] line2 = new Line[LinkedList.length + 1];//下方直线
-            Line[] line3 = new Line[LinkedList.length + 1];//上方直线
-            for (int i = 0; i < LinkedList.length + 1; i++)//初始化所有组件（一个节点label、一个矩形、一个数据label，三条线）
+            double canse_top_label_node = 90;//label_node距离canse top的距离
+            Label[] label_node = new Label[LinkedList.srcData.Length + 1];
+            Rectangle[] rec_node = new Rectangle[LinkedList.srcData.Length + 1];
+            Label[] label_data = new Label[LinkedList.srcData.Length + 1];
+            Line[] line1 = new Line[LinkedList.srcData.Length + 1];//直线
+            Line[] line2 = new Line[LinkedList.srcData.Length + 1];//下方直线
+            Line[] line3 = new Line[LinkedList.srcData.Length + 1];//上方直线
+            for (int i = 0; i < LinkedList.srcData.Length + 1; i++)//初始化所有组件（一个节点label、一个矩形、一个数据label，三条线）
             {
                 label_node[i] = new Label();
                 m_maindemon.init_labe_node(label_node[i]);
@@ -251,18 +252,18 @@ namespace SqListCAI
                 line3[i].Stroke = Brushes.Black;
             }
             //画头结点
-            label_node[0].Content = "La";
+            label_node[0].Content = "L";
             label_node[0].Foreground = Brushes.Red;
             label_node[0].Margin = new Thickness(canse_left_1, canse_top_label_node, 0, 0);
             m_maindemon.canse_demon.Children.Add(label_node[0]);
 
-            rec_node[0].Margin = new Thickness(canse_left_1, canse_top, 0, 0);
+            rec_node[0].Margin = new Thickness(canse_left_1, canse_top_label_node + label_node[0].Height, 0, 0);
             label_data[0].Content = "";
-            label_data[0].Margin = new Thickness(canse_left_1, canse_top, 0, 0);
+            label_data[0].Margin = rec_node[0].Margin;
             m_maindemon.canse_demon.Children.Add(rec_node[0]);
             m_maindemon.canse_demon.Children.Add(label_data[0]);
             //画新的结点，（一个节点label、一个矩形、一个数据label，三条线）
-            for (int i = 1; i < LinkedList.length + 1; i++)
+            for (int i = 1; i < LinkedList.srcData.Length + 1; i++)
             {
                 double canse_left = canse_left_1 + i * 2 * 60;
                 //结点label
@@ -272,10 +273,10 @@ namespace SqListCAI
                 m_maindemon.canse_demon.Children.Add(label_node[i]);
 
                 //矩形、数据label
-                rec_node[i].Margin = new Thickness(canse_left, canse_top, 0, 0);
+                rec_node[i].Margin = new Thickness(canse_left, canse_top_label_node+25, 0, 0);
                 rec_node[i].Fill = Brushes.SkyBlue;
                 label_data[i].Content = LinkedList.srcData[i - 1];
-                label_data[i].Margin = new Thickness(canse_left, canse_top, 0, 0);
+                label_data[i].Margin = rec_node[i].Margin;
                 m_maindemon.canse_demon.Children.Add(rec_node[i]);
                 m_maindemon.canse_demon.Children.Add(label_data[i]);
                 //三条线
@@ -299,23 +300,22 @@ namespace SqListCAI
             lab_over.Width = 60 - 40;
             lab_over.Height = 50;
             lab_over.Background = Brushes.SkyBlue;
-            double canse_left_over = canse_left_1 + LinkedList.length * 2 * 60 + 40;
-            lab_over.Margin = new Thickness(canse_left_over, canse_top, 0, 0);
+            double canse_left_over = canse_left_1 + LinkedList.srcData.Length * 2 * 60 + 40;
+            lab_over.Margin = new Thickness(canse_left_over, canse_top_label_node+25, 0, 0);
             m_maindemon.canse_demon.Children.Add(lab_over);
         }
 
         private void drawLinkedInsert()
         {
             double canse_left_1 = 20;//头结点距离canse left的距离
-            double canse_top = 120;//rec_node、label_data距离canse top的距离
-            double canse_top_label_node = 98;//label_node距离canse top的距离
-            Label[] label_node = new Label[LinkedList.length + 1];
-            Rectangle[] rec_node = new Rectangle[LinkedList.length + 1];
-            Label[] label_data = new Label[LinkedList.length + 1];
-            Line[] line1 = new Line[LinkedList.length + 1];//直线
-            Line[] line2 = new Line[LinkedList.length + 1];//下方直线
-            Line[] line3 = new Line[LinkedList.length + 1];//上方直线
-            for (int i = 0; i < LinkedList.length + 1; i++)//初始化所有组件（一个节点label、一个矩形、一个数据label，三条线）
+            double canse_top_label_node = 90;//label_node距离canse top的距离
+            Label[] label_node = new Label[LinkedList.srcData.Length + 1];
+            Rectangle[] rec_node = new Rectangle[LinkedList.srcData.Length + 1];
+            Label[] label_data = new Label[LinkedList.srcData.Length + 1];
+            Line[] line1 = new Line[LinkedList.srcData.Length + 1];//直线
+            Line[] line2 = new Line[LinkedList.srcData.Length + 1];//下方直线
+            Line[] line3 = new Line[LinkedList.srcData.Length + 1];//上方直线
+            for (int i = 0; i < LinkedList.srcData.Length + 1; i++)//初始化所有组件（一个节点label、一个矩形、一个数据label，三条线）
             {
                 label_node[i] = new Label();
                 m_maindemon.init_labe_node(label_node[i]);
@@ -330,18 +330,18 @@ namespace SqListCAI
                 line3[i].Stroke = Brushes.Black;
             }
             //画头结点
-            label_node[0].Content = "La";
+            label_node[0].Content = "L";
             label_node[0].Foreground = Brushes.Red;
             label_node[0].Margin = new Thickness(canse_left_1, canse_top_label_node, 0, 0);
             m_maindemon.canse_demon.Children.Add(label_node[0]);
 
-            rec_node[0].Margin = new Thickness(canse_left_1, canse_top, 0, 0);
+            rec_node[0].Margin = new Thickness(canse_left_1, canse_top_label_node + label_node[0].Height, 0, 0);
             label_data[0].Content = "";
-            label_data[0].Margin = new Thickness(canse_left_1, canse_top, 0, 0);
+            label_data[0].Margin = rec_node[0].Margin;
             m_maindemon.canse_demon.Children.Add(rec_node[0]);
             m_maindemon.canse_demon.Children.Add(label_data[0]);
             //画新的结点，（一个节点label、一个矩形、一个数据label，三条线）
-            for (int i = 1; i < LinkedList.length + 1; i++)
+            for (int i = 1; i < LinkedList.srcData.Length + 1; i++)
             {
                 double canse_left = canse_left_1 + i * 2 * 60;
                 //结点label
@@ -351,11 +351,11 @@ namespace SqListCAI
                 m_maindemon.canse_demon.Children.Add(label_node[i]);
 
                 //矩形、数据label
-                rec_node[i].Margin = new Thickness(canse_left, canse_top, 0, 0);
+                rec_node[i].Margin = new Thickness(canse_left, canse_top_label_node+label_node[i].Height, 0, 0);
                 rec_node[i].Fill = Brushes.SkyBlue;
                 label_data[i].Content = LinkedList.srcData[i - 1];
-                label_data[i].Margin = new Thickness(canse_left, canse_top, 0, 0);
-                m_maindemon.canse_demon.Children.Add(rec_node[i]);
+                label_data[i].Margin = rec_node[i].Margin;
+                this.m_maindemon.canse_demon.Children.Add(rec_node[i]);
                 m_maindemon.canse_demon.Children.Add(label_data[i]);
                 //三条线
                 line1[i].X1 = canse_left_1 + (2 * i - 1) * 60 - 10; line1[i].X2 = line1[i].X1 + 70;
@@ -378,8 +378,8 @@ namespace SqListCAI
             lab_over.Width = 60 - 40;
             lab_over.Height = 50;
             lab_over.Background = Brushes.SkyBlue;
-            double canse_left_over = canse_left_1 + LinkedList.length * 2 * 60 + 40;
-            lab_over.Margin = new Thickness(canse_left_over, canse_top, 0, 0);
+            double canse_left_over = canse_left_1 + LinkedList.srcData.Length * 2 * 60 + 40;
+            lab_over.Margin = new Thickness(canse_left_over, canse_top_label_node+25, 0, 0);
             m_maindemon.canse_demon.Children.Add(lab_over);
         }
 
@@ -387,18 +387,15 @@ namespace SqListCAI
         {
             int margin_left = 20;
             int margin_top = 90;
-            double ins_margin_left = 0.0d;
+            double del_margin_left = 0.0d;
             int length = SqList.length;
             Rectangle[] rc = new Rectangle[length + 1];//矩形
             Label[] lable = new Label[length + 1];//标签，放原始内容
-            index = new int[rc.Length];//存储矩形在canse中的索引
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
                 lable[i] = new Label();
                 init_recKey_labelKey(rc[i], lable[i]);
-
-                index[i] = 0;//初始化位置索引
             }
             //绘制原始数据
             for (int i = 0; i < rc.Length - 1; i++)
@@ -415,24 +412,21 @@ namespace SqListCAI
                 m_maindemon.canse_demon.Children.Add(rc[i]);
                 m_maindemon.canse_demon.Children.Add(lable[i]);
 
-                index[i] = m_maindemon.canse_demon.Children.IndexOf(rc[i]);//存储矩形在canse_demon中的位置
-                                                                           //相应lable位置在其后
-                                                                           //保存插入位置的矩形
                 if (SqList.delPosition == (i + 1))
                 {
-                    ins_margin_left = rc_margin_left;
+                    del_margin_left = rc_margin_left;
                 }
             }
             //绘制删除位置
-            rc[rc.Length - 1].Margin = new Thickness(ins_margin_left, margin_top - 80, 0, 0);
+            rc[rc.Length - 1].Margin = new Thickness(del_margin_left, margin_top - 80, 0, 0);
             rc[rc.Length - 1].Fill = Brushes.DarkGray;
             lable[rc.Length - 1].Content = SqList.delPosition;
             lable[rc.Length - 1].Foreground = Brushes.Red;
-            lable[rc.Length - 1].Margin = new Thickness(ins_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 80, 0, 0);
+            lable[rc.Length - 1].Margin = new Thickness(del_margin_left + (rc[rc.Length - 1].Width - lable[lable.Length - 1].Width) / 2, margin_top - 80, 0, 0);
 
             m_maindemon.canse_demon.Children.Add(rc[rc.Length - 1]);
             m_maindemon.canse_demon.Children.Add(lable[lable.Length - 1]);
-            index[index.Length - 1] = m_maindemon.canse_demon.Children.IndexOf(rc[rc.Length - 1]);//存储插入数据矩形位置
+
         }
 
         private void drawSqlistInsert()
@@ -443,14 +437,11 @@ namespace SqListCAI
             int length = SqList.length;
             Rectangle[] rc = new Rectangle[length + 2];//矩形
             Label[] lable = new Label[length + 2];//标签，放原始内容
-            index = new int[rc.Length];
             for (int i = 0; i < rc.Length; i++)//初始化需要画的数组矩形和标签元素的相同属性
             {
                 rc[i] = new Rectangle();
                 lable[i] = new Label();
                 init_recKey_labelKey(rc[i], lable[i]);
-
-                index[i] = 0;//初始化位置索引
             }
             //绘制原始数据
             for (int i = 0; i < rc.Length - 1; i++)
@@ -469,9 +460,7 @@ namespace SqListCAI
 
                 m_maindemon.canse_demon.Children.Add(rc[i]);
                 m_maindemon.canse_demon.Children.Add(lable[i]);
-                index[i] = m_maindemon.canse_demon.Children.IndexOf(rc[i]);//存储矩形在canse_demon中的位置
-                                                                           //相应lable位置在其后
-                                                                           //保存插入位置的矩形
+
                 if (SqList.insPosition == (i + 1))
                 {
                     ins_margin_left = rc_margin_left;
@@ -486,7 +475,6 @@ namespace SqListCAI
 
             m_maindemon.canse_demon.Children.Add(rc[rc.Length - 1]);
             m_maindemon.canse_demon.Children.Add(lable[lable.Length - 1]);
-            index[index.Length - 1] = m_maindemon.canse_demon.Children.IndexOf(rc[rc.Length - 1]);//存储插入数据矩形位置
         }
 
         public static DataTable data_ins = new DataTable("DataTable_Ins");
@@ -513,7 +501,7 @@ namespace SqListCAI
                         data_ins.Columns.Add(new DataColumn("NAME", typeof(string)));//第一列
                         data_ins.Columns.Add(new DataColumn("VALUE", typeof(string)));//第二列
                     }
-                    m_maindemon.listView_value.DataContext = GetDataTable_Ins(SqListCodes.INSERT_VALUE, 3,null,0).DefaultView;
+                    this.m_maindemon.listView_value.DataContext = GetDataTable_Ins(SqListCodes.INSERT_VALUE, 3,null,0).DefaultView;
                     break;
                 case 2:
                     if(data_del.Columns.Count == 0)
@@ -789,28 +777,28 @@ namespace SqListCAI
         {
             if (updateFlag == 0)//修改P的当前指向，最开始指向头结点
             {
-                data_linkDel.Rows[LinkedList.length + 2]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 2;
+                data_linkDel.Rows[LinkedList.srcData.Length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 2;
             }
             if (updateFlag == 1)//修改j变量值
             {
-                data_linkDel.Rows[LinkedList.length + 3]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 3;
+                data_linkDel.Rows[LinkedList.srcData.Length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 3;
             }
             if (updateFlag == 2)//修改删除结点Q
             {
-                data_linkDel.Rows[LinkedList.length + 6]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 6;
+                data_linkDel.Rows[LinkedList.srcData.Length + 6]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 6;
             }
             if (updateFlag == 3)//修改删除元素返回值
             {
-                data_linkDel.Rows[LinkedList.length + 5]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 5;
+                data_linkDel.Rows[LinkedList.srcData.Length + 5]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 5;
             }
             if (updateFlag == 4)//显示最开始数据
             {
                 data_linkDel.Rows.Add(str[0], "指向头结点");    //添加头结点
-                int length = LinkedList.length;
+                int length = LinkedList.srcData.Length;
                 for (int i = 0; i < length; i++)          //添加源数据
                 {
                     string name = str[1] + "[" + i + "]";
@@ -832,23 +820,23 @@ namespace SqListCAI
         {
             if(updateFlag == 0)//修改P的当前指向，最开始指向头结点
             {
-                data_linkIns.Rows[LinkedList.length+2]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 2;
+                data_linkIns.Rows[LinkedList.srcData.Length + 2]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 2;
             }
             if(updateFlag == 1)//修改j变量值
             {
-                data_linkIns.Rows[LinkedList.length + 3]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 3;
+                data_linkIns.Rows[LinkedList.srcData.Length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 3;
             }
             if (updateFlag == 2)//修改新结点S
             {
-                data_linkIns.Rows[LinkedList.length + 6]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 6;
+                data_linkIns.Rows[LinkedList.srcData.Length + 6]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 6;
             }
             if (updateFlag == 4)//显示最开始数据
             {
                 data_linkIns.Rows.Add(str[0], "指向头结点");    //添加头结点
-                int length = LinkedList.length;
+                int length = LinkedList.srcData.Length;
                 for (int i = 0; i < length; i++)          //添加源数据
                 {
                     string name = str[1] + "[" + i + "]";
@@ -875,18 +863,23 @@ namespace SqListCAI
             }
             if(updateFlag == 1)//改变p的指向
             {
-                data_linkCre.Rows[LinkedList.length + 2]["VALUE"] = "当前指向值为"+updateValue+"的结点";
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 2;
+                data_linkCre.Rows[LinkedList.srcData.Length + 2]["VALUE"] = "当前指向值为"+updateValue+"的结点";
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 2;
             }
             if(updateFlag == 2)//改变索引值i
             {
-                data_linkCre.Rows[LinkedList.length + 3]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = LinkedList.length + 3;
+                data_linkCre.Rows[LinkedList.srcData.Length + 3]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 3;
+            }
+            if (updateFlag == 3)//改变中间节点r的指向
+            {
+                data_linkCre.Rows[LinkedList.srcData.Length + 4]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = LinkedList.srcData.Length + 4;
             }
             if (updateFlag == 4)//显示最开始的数据
             {
                 data_linkCre.Rows.Add(str[0], "未知");    //添加头结点
-                int length = LinkedList.length;
+                int length = LinkedList.srcData.Length;
                 for (int i = 0; i < length; i++)          //添加源数据
                 {
                     string name = str[1] + "[" + i + "]";
@@ -896,6 +889,7 @@ namespace SqListCAI
                 data_linkCre.Rows.Add(str[2], length);     //添加长度
                 data_linkCre.Rows.Add(str[3], "当前指向？");//添加指向值为？的结点（是当前插入的结点）
                 data_linkCre.Rows.Add(str[4], "未知");     //添加索引变量
+                data_linkCre.Rows.Add(str[5], "未知");     //添加中间节点r
             }
             return data_linkCre;
         }
@@ -943,11 +937,6 @@ namespace SqListCAI
         }
         public DataTable GetDataTable_Ins(string[] str,int updateFlag,string updateValue,int movePosition)
         {
-            //设置主键
-            //ID.AutoIncrement = true; //自动递增ID号 
-            //DataColumn[] keys = new DataColumn[1];
-            //keys[0] = NAME;
-            //data.PrimaryKey = keys;
             if(updateFlag == 0)//右移
             {
                 data_ins.Rows[movePosition+1]["VALUE"] = updateValue;
@@ -955,13 +944,13 @@ namespace SqListCAI
             }
             if(updateFlag == 1)//修改P
             {
-                data_ins.Rows[SqList.length+5]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = SqList.length + 5;
+                data_ins.Rows[movePosition]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition;
             }
             if(updateFlag == 2)//修改长度
             {
-                data_ins.Rows[SqList.length]["VALUE"] = updateValue;
-                m_maindemon.listView_value.SelectedIndex = SqList.length;
+                data_ins.Rows[movePosition]["VALUE"] = updateValue;
+                m_maindemon.listView_value.SelectedIndex = movePosition;
             }
             if(updateFlag == 3)//显示最开始的数据
             {

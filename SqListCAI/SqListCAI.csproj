@@ -84,7 +84,7 @@
     <Compile Include="Dialogs\SetDialog.xaml.cs">
       <DependentUpon>SetDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Explain.cs" />
+    <Compile Include="Utils\SourceCodes\Explain.cs" />
     <Compile Include="Entities\LinkedList.cs" />
     <Compile Include="Entities\Search.cs" />
     <Compile Include="Entities\Sort.cs" />
@@ -167,6 +167,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -236,30 +237,6 @@
     <Resource Include="Images\hide.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="app4.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app3.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app1.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app2.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app5.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app6.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app7.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="app8.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -298,9 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\example.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\dialog_swf.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\examples.png" />

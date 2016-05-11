@@ -17,7 +17,7 @@ namespace SqListCAI.Utils
             try
             {
                 FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                //toWhere = sr.ReadToEnd();//读取完整的文件，如果用这个方法，就可以不用下面的while循环
+                
                 data = new byte[fs.Length];
                 fs.Read(data, 0, data.Length);
                 int offset = 0;

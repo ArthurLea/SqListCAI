@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Margin="2,2,2,0">
             <Border.BorderBrush>
-                <SolidColorBrush Color="SkyBlue"  Opacity="2" />
+                <SolidColorBrush Color="SkyBlue"  Opacity="2"/>
             </Border.BorderBrush>
             <Border.BorderThickness >
                 <Thickness>1</Thickness>
@@ -59,9 +59,9 @@
                 <Thickness>1</Thickness>
             </Border.BorderThickness>
             <Grid>
-                <Button x:Name="button_ok" Content="确认生成" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
-                <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
-                <Button x:Name="button_cancle" Content="重置" Click="button_reset_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="253,16,0,0" VerticalAlignment="Top" Width="71" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2"/>
+                <Button x:Name="button_ok" Content="确认生成" Click="button_ok_Click" FontSize="16" Foreground="Green" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                <Button x:Name="button_radom" Content="随机生成" Click="button_radom_Click" FontSize="16" Foreground="DarkOrange"  HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                <Button x:Name="button_cancle" Content="重置" Click="button_reset_Click" FontSize="16" Foreground="Red"  HorizontalAlignment="Left" Margin="253,16,0,0" VerticalAlignment="Top" Width="71" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
             </Grid>
         </Border>
     </Grid>

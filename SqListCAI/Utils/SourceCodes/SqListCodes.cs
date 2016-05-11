@@ -29,7 +29,7 @@ namespace SqListCAI.Utils.SourceCodes
         {
             "L",//顺序表
             "i",//插入位置
-            "insData",//插入数据
+            "e",//插入数据
             "MAXSIZE",//最大长度
             "p"//当前移动位置
         };
